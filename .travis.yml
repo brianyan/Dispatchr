@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 2.2
+env:
+- DB=sqlite
+- DB=postgresql
+# services:
+#   - redis-server
+script:
+    - RAILS_ENV=test bundle exec rake db:schema:load --trace
+    - bundle exec rake db:test:prepare
+    - bundle exec rspec spec/
+before_script:
+  - cp config/database.travis.yml config/database.yml # TODO make database.travis.yml (http://stackoverflow.com/questions/9321153/rails-database-setup-on-travis-ci)
+  - psql -c 'create database strano_test' -U postgres
