@@ -12,5 +12,4 @@ script:
     - bundle exec rspec spec/
 before_script:
   - cd dispatchr-ruby
-  - cp config/database.travis.yml config/database.yml
   - psql -c 'create database dispatchr-ruby_test' -U postgres
