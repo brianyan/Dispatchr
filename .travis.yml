@@ -6,10 +6,9 @@ env:
 # services:
 #   - redis-server
 script:
-    - cd dispatchr-ruby
-    - RAILS_ENV=test bundle exec rake db:schema:load --trace
-    - bundle exec rake db:test:prepare
-    - bundle exec rspec spec/
+  - RAILS_ENV=test bundle exec rake db:schema:load --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec spec/
 before_script:
   - cd dispatchr-ruby
   - psql -c 'create database dispatchr_test' -U postgres
