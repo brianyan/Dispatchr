@@ -1,4 +1,5 @@
 language: ruby
+cache: bundler
 rvm:
   - 2.2.2
 env:
@@ -13,3 +14,5 @@ script:
 before_script:
   - cd dispatchr-ruby
   - psql -c 'create database dispatchr_test' -U postgres
+notifications:
+  email: false
