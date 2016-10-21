@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: dispatchr-ruby_production_development
+
+test:
+  <<: *default
+  database: dispatchr-ruby_production_test
+
+production:
+  <<: *default
+  database: dispatchr-ruby_production_developement
