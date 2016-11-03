@@ -10,33 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103220516) do
+ActiveRecord::Schema.define(version: 20161103230459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
+    t.string   "address"
+    t.integer  "user_id"
+    t.integer  "store_id"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_addresses_on_store_id", using: :btree
+    t.index ["user_id"], name: "index_addresses_on_user_id", using: :btree
+  end
+
+  create_table "item_stores", force: :cascade do |t|
+    t.integer  "item_id"
+    t.integer  "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_stores_on_item_id", using: :btree
+    t.index ["store_id"], name: "index_item_stores_on_store_id", using: :btree
   end
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "request_item_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["request_item_id"], name: "index_items_on_request_item_id", using: :btree
   end
 
   create_table "request_items", force: :cascade do |t|
+    t.integer  "request_id"
     t.decimal  "max_price"
     t.string   "quantity_description"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.index ["request_id"], name: "index_request_items_on_request_id", using: :btree
   end
 
   create_table "requests", force: :cascade do |t|
+    t.integer  "user_id"
     t.datetime "expiration_date"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["user_id"], name: "index_requests_on_user_id", using: :btree
   end
 
   create_table "stores", force: :cascade do |t|
