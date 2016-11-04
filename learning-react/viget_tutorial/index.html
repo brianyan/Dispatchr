@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Learning React</title>
+    <link rel="stylesheet" href="lib/style.css" />
+  </head>
+  <body>
+    <section id="entry-point"></section>
+
+
+    <!-- Wifi might be spotty, so we've downloaded these to `./lib` -->
+    <!-- <script src="lib/react.js">
+    </script>
+    <script src="lib/react-dom.js"></script> -->
+
+    <!-- Alternatively: -->
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+    <script type="text/babel">
+
+      var notes = [
+        { id:1, content: 'Learn React'},
+        { id:2, content: 'Get Lunch'},
+        { id:3, content: 'Learn React Native'}
+      ]
+      var Note = React.createClass({
+        render() {
+          return (
+            <li> {this.props.content}
+              <button type = "button" ref = "button" onClick = {this.onDeleteClick}> Remove </button>
+            </li>
+          )
+        },
+        onDeleteClick(event) {
+          event.preventDefault()
+          this.props.onDelete(this.props.id)
+        }
+      })
+
+      var NotesList = React.createClass({
+        renderNote(note){
+          return <Note key = {note.id} id = {note.id} content={note.content} onDelete = {this.props.onDelete}/>
+        },
+        render(){
+          return <ul> {this.props.notes.map(this.renderNote)}</ul>
+        }
+      })
+
+
+      var NotesForm = React.createClass({
+        render: function(){
+          return (
+            <form ref = "form" onSubmit = {this.handleSubmission}>
+              <input type = "text" ref = "content"/>
+              <input type = "submit" value = "Add Note"/>
+            </form>
+          )
+        },
+          handleSubmission: function (event) {
+            event.preventDefault()
+            this.props.onSubmit(this.refs.content)
+            this.refs.form.reset()
+          }
+      })
+
+      var App = React.createClass({
+        getInitialState: function(){
+          notes: [
+            { id:1, content: 'Learn React'},
+            { id:2, content: 'Get Lunch'},
+            { id:3, content: 'Learn React Native'}
+          ]
+        },
+        render: function() {
+          return (
+            <section>
+              <h1> You have {this.state.notes.length} notes </h1>
+              <NotesList notes = {this.state.notes} onDelete = {this.noteWasDestroyed}/>
+              <NotesForm onSubmit = {this.formWasSubmitted}/>
+            </section>
+          )
+        },
+        formWasSubmitted: function(content){
+          var note = {
+            id: Date.now().toString(),
+            content: content
+          }
+          this.setState({
+            notes: this.state.notes.concat(note)
+          })
+        },
+        noteWasDestroyed: function(id) {
+          this.setState({
+            notes: this.state.notes.filter(function (note){
+              return note.id !== id
+            })
+          })
+        }
+      })
+
+
+      //
+      // var App = React.createClass({
+      //   render() {
+      //     var {notes} = this.props
+      //     return (
+      //       <section>
+      //         <h1> You have {notes.length}</h1>
+      //         <NotesList notes = {notes}/>
+      //         </section>
+      //     )
+          // return React.createElement('section', {},
+          //   React.createElement('h1', {}, 'You have ', notes.length, ' notes'),
+          //   React.createElement(NotesList, {notes:notes})
+          // )
+      //   }
+      // })
+      //
+      // var notesListItems = notes.map(function (message) {
+      //   return React.createElement('li', {key:message.id}, message.content)
+      // })
+      //
+      // var notesList = React.createElement('section', {},
+      //   React.createElement('hi', {}, 'You have ', notes.length, ' reminders'),
+      //   React.createElement('ul', {}, notesListItems)
+      // )
+      ReactDOM.render(<App notes= {notes}/>, document.getElementById('entry-point'))
+    </script>
+    <!-- <script type="text/javascript">
+    // var hello = React.createElement('p', null, "Hello World!");
+    // ReactDOM.render(hello,document.getElementByID('entry-point'));
+    </script> -->
+  </body>
+</html>
