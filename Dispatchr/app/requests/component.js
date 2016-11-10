@@ -9,16 +9,16 @@ class RequestsList extends Component {
     return (
       <TouchableOpacity onPress={this.props.getRequests}>
         <Text>Hi</Text>
-        <Text>{JSON.stringify(this.props)}</Text>
+        <Text>{JSON.stringify(this.props.requests)}</Text>
       </TouchableOpacity>
     );
   }
 }
 
 export default connect(state => ({
-    state: state.requestsReducer
+    requests: state.requestsReducer
   }),
-  (dispatch) => ({
-    actions: bindActionCreators(requestsActions, dispatch)
-  })
+  {
+    getRequests: requestsActions.getRequests,
+  }
 )(RequestsList);

@@ -3,12 +3,28 @@ import { Scene, Router, Reducer } from 'react-native-router-flux';
 import Requests from './app/requests';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga'
 import reducers from './app/reducers';
+import rootSaga from './sagas';
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const reducer = combineReducers(reducers);
-const store = createStoreWithMiddleware(reducer);
+
+const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
+
+const loggerMiddleware = createLogger({
+  predicate: (getState, action) => isDebuggingInChrome,
+  collapsed: true,
+  duration: true,
+  diff: true,
+});
+
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(
+  reducer,
+  applyMiddleware(loggerMiddleware, sagaMiddleware)
+)
+sagaMiddleware.run(rootSaga)
 
 // define this based on the styles/dimensions you use
 const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
