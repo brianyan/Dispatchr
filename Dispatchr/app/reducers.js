@@ -1,5 +1,5 @@
-import requestsReducer from './requests/reducer';
+import { reducer as requestItemsReducer } from './request_items';
 
 export default {
-  requestsReducer
+  requestItemsReducer
 };

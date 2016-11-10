@@ -1,33 +1,10 @@
 import React, { Component } from 'react';
 import { Scene, Router, Reducer } from 'react-native-router-flux';
-import Requests from './app/requests';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import * as RequestItems from './app/request_items';
 import { Provider } from 'react-redux';
-import createLogger from 'redux-logger';
-import createSagaMiddleware from 'redux-saga'
-import reducers from './app/reducers';
-import rootSaga from './sagas';
+import { configureStore } from './configureStore';
 
-const reducer = combineReducers(reducers);
-
-const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
-
-const loggerMiddleware = createLogger({
-  predicate: (getState, action) => isDebuggingInChrome,
-  collapsed: true,
-  duration: true,
-  diff: true,
-});
-
-const sagaMiddleware = createSagaMiddleware()
-const store = createStore(
-  reducer,
-  applyMiddleware(loggerMiddleware, sagaMiddleware)
-)
-sagaMiddleware.run(rootSaga)
-
-// define this based on the styles/dimensions you use
-const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
+const getSceneStyle = (props, computedProps) => {
   const style = {
     flex: 1,
     backgroundColor: '#fff',
@@ -46,10 +23,10 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={configureStore()}>
         <Router getSceneStyle={getSceneStyle}>
           <Scene key="root">
-            <Scene key={Requests.name} component={Requests.component} title='Requests'/>
+            <Scene key={RequestItems.name} component={RequestItems.component} title='Items'/>
           </Scene>
         </Router>
       </Provider>
