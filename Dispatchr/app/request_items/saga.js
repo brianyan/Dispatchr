@@ -3,8 +3,8 @@ import { call, put } from 'redux-saga/effects';
 import * as types from './actionTypes';
 
 function* requestItemRequested() {
-  const response = yield call(fetch, 'http://localhost:3000/request_items');
-  yield put({ type: types.REQUEST_ITEMS_RECEIVED, payload: response })
+  const response = yield call(fetch, 'https://www.google.com');
+  yield put({ type: types.REQUEST_ITEMS_RECEIVED, payload: 'hello world' })
 }
 
 export default function* root() {
