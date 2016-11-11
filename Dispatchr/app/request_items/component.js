@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, ListView, TouchableHighlight, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  ListView,
+  TouchableHighlight,
+  RefreshControl,
+  StyleSheet } from 'react-native';
 import * as requestsActions from './actions';
 import { connect } from 'react-redux';
 
@@ -8,6 +14,7 @@ class RequestItemsList extends Component {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      refreshing: false,
       dataSource: ds,
     };
 
@@ -16,6 +23,7 @@ class RequestItemsList extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
+      refreshing: false,
       dataSource: this.state.dataSource.cloneWithRows(nextProps.request_items)
     })
   }
@@ -23,10 +31,19 @@ class RequestItemsList extends Component {
   render() {
     return (
       <ListView
+        refreshControl={<RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />}
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
       />
     );
+  }
+
+  _onRefresh() {
+    this.setState({refreshing: true});
+    this.props.getRequestItems();
   }
 
   _renderRow(rowData, sectionId, rowId, highlightRow) {
