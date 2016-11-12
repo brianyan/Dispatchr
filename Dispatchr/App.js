@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Scene, Router, Reducer } from 'react-native-router-flux';
-import Home from './components/home';
+import * as RequestItems from './app/request_items';
+import { Provider } from 'react-redux';
+import { configureStore } from './configureStore';
 
-
-// define this based on the styles/dimensions you use
-const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
+const getSceneStyle = (props, computedProps) => {
   const style = {
     flex: 1,
     backgroundColor: '#fff',
@@ -20,22 +20,17 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
   return style;
 };
 
-// TODO: Refactor reducer into a new class https://github.com/aksonov/react-native-router-flux/blob/master/docs/REDUX_FLUX.md
-const reducerCreate = params => {
-  const defaultReducer = new Reducer(params);
-  return (state, action) => {
-    console.log('ACTION:', action);
-    return defaultReducer(state, action);
-  };
-};
-
 class App extends Component {
   render() {
-    return <Router createReducer={reducerCreate} getSceneStyle={getSceneStyle}>
-      <Scene key="root">
-        <Scene key="home" component={Home} title="Home"/>
-      </Scene>
-    </Router>
+    return (
+      <Provider store={configureStore()}>
+        <Router getSceneStyle={getSceneStyle}>
+          <Scene key="root">
+            <Scene key={RequestItems.name} component={RequestItems.component} title='Items'/>
+          </Scene>
+        </Router>
+      </Provider>
+    );
   }
 }
 
