@@ -17,14 +17,10 @@ ActiveRecord::Schema.define(version: 20161103230459) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address"
-    t.integer  "user_id"
-    t.integer  "store_id"
     t.decimal  "latitude"
     t.decimal  "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["store_id"], name: "index_addresses_on_store_id", using: :btree
-    t.index ["user_id"], name: "index_addresses_on_user_id", using: :btree
   end
 
   create_table "item_stores", force: :cascade do |t|
@@ -38,18 +34,18 @@ ActiveRecord::Schema.define(version: 20161103230459) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.integer  "request_item_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["request_item_id"], name: "index_items_on_request_item_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "request_items", force: :cascade do |t|
     t.integer  "request_id"
+    t.integer  "item_id"
     t.decimal  "max_price"
     t.string   "quantity_description"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.index ["item_id"], name: "index_request_items_on_item_id", using: :btree
     t.index ["request_id"], name: "index_request_items_on_request_id", using: :btree
   end
 
@@ -63,16 +59,20 @@ ActiveRecord::Schema.define(version: 20161103230459) do
 
   create_table "stores", force: :cascade do |t|
     t.string   "name"
+    t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_stores_on_address_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "username"
     t.string   "email"
+    t.integer  "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_users_on_address_id", using: :btree
   end
 
 end
