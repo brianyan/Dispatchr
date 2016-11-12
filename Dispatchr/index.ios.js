@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import {
   AppRegistry
 } from 'react-native';
-import App from './App';
+import { Provider } from 'react-redux';
+import { store } from './configureStore';
+import App from './app/containers/App';
 
-export default class Dispatchr extends Component {
+class Dispatchr extends Component {
   render() {
     return (
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     );
   }
 }

@@ -1,14 +1,12 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import createLogger from 'redux-logger';
-import createSagaMiddleware from 'redux-saga'
-import reducers from './app/reducers';
-import rootSaga from './sagas';
+import reducer from './app/reducers'
 
-export const configureStore = () => {
-  const reducer = combineReducers(reducers);
-
+function configureStore() {
+  // Logger should only be used when developing
   const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 
+  // Set up logger
   const loggerMiddleware = createLogger({
     predicate: (getState, action) => isDebuggingInChrome,
     collapsed: true,
@@ -16,12 +14,13 @@ export const configureStore = () => {
     diff: true,
   });
 
-  const sagaMiddleware = createSagaMiddleware()
-  const store = createStore(
-    reducer,
-    applyMiddleware(loggerMiddleware, sagaMiddleware)
-  )
-  sagaMiddleware.run(rootSaga)
+  const enhancer = compose(
+    applyMiddleware(
+      loggerMiddleware,
+    )
+  );
 
-  return store;
+  return createStore(reducer, enhancer);
 };
+
+export const store = configureStore({});
