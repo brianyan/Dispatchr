@@ -23,7 +23,7 @@ class RequestItemsGlobalList extends Component {
   render() {
     return (
       <View>
-        <TouchableHighlight onPress = {() =>  {this.getRequestItems()}  }>
+        <TouchableHighlight onPress = {() =>  {this.getRequestItems()} }>
           <Text>Press me!</Text>
         </TouchableHighlight>
       </View>
@@ -49,7 +49,7 @@ var styles = StyleSheet.create({
   },
 });
 
-/* Takes all action creators and centralizes dispatching actions. */
+/* Connects to the actions, so we can do stuff! Boilerplate!!! */
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
