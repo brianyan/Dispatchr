@@ -37,6 +37,7 @@ class RequestItemsList extends Component {
           />}
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
+        renderSeparator={this._renderSeparator}
       />
     );
   }
@@ -62,9 +63,22 @@ class RequestItemsList extends Component {
       </TouchableHighlight>
     );
   }
+
+  _renderSeparator(sectionId, rowId) {
+    return (
+      <View key={rowId} style={styles.separator} />
+    );
+  }
 }
 
+
+
 var styles = StyleSheet.create({
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#8E8E8E',
+  },
   row: {
     flexDirection: 'row',
     justifyContent: 'center',
