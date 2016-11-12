@@ -20,18 +20,16 @@ const getSceneStyle = (props, computedProps) => {
   return style;
 };
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <Provider store={configureStore()}>
         <Router getSceneStyle={getSceneStyle}>
           <Scene key="root">
-            <Scene key={RequestItems.name} component={RequestItems.component} title='Items'/>
+            <Scene key={RequestItems.name} component={RequestItems.component} title='Items' initial={true}/>
           </Scene>
         </Router>
       </Provider>
     );
   }
 }
-
-export default App;
