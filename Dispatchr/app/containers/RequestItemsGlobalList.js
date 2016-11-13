@@ -22,7 +22,7 @@ class RequestItemsGlobalList extends Component {
     this.props.getRequestItems();
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     this.setState({
       refreshing: false,
       dataSource: this.state.dataSource.cloneWithRows(this.props.requestedItems)
