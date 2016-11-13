@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
+import renderIf from '../lib/renderif'
 import {
   View,
   Text,
@@ -18,6 +19,7 @@ class RequestItemsGlobalList extends Component {
     this.state = {
       refreshing: false,
       dataSource: ds,
+      showFetchButton: true
     };
     this.props.getRequestItems();
   }
@@ -25,16 +27,20 @@ class RequestItemsGlobalList extends Component {
   componentWillReceiveProps() {
     this.setState({
       refreshing: false,
-      dataSource: this.state.dataSource.cloneWithRows(this.props.requestedItems)
+      dataSource: this.state.dataSource.cloneWithRows(this.props.requestedItems),
+      showFetchButton: this.props.requestedItems.length == 0
     })
   }
 
   render() {
     return (
       <View>
-      <TouchableHighlight onPress = {() =>  {this.props.getRequestItems()} }>
-        <Text>Press me!</Text>
-      </TouchableHighlight>
+        {renderIf(this.state.showFetchButton)(
+          <TouchableHighlight onPress = {() =>  {this.props.getRequestItems()} }>
+            <Text>Refresh List!</Text>
+          </TouchableHighlight>
+       )}
+
       <ListView
         refreshControl={<RefreshControl
             refreshing={this.state.refreshing}
