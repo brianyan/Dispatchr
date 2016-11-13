@@ -37,7 +37,9 @@ class RequestItemsGlobalList extends Component {
       <View style={{flex: 1}}>
         {renderIf(this.state.showFetchButton)(
           <TouchableHighlight onPress = {() =>  {this.props.getRequestItems()} }>
-            <Text>Refresh List!</Text>
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Press me to Refresh!</Text>
+            </View>
           </TouchableHighlight>
        )}
 
@@ -95,6 +97,16 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     backgroundColor: '#F6F6F6',
+  },
+  button: {
+    height: 50,
+    backgroundColor: 'steelblue',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonText: {
+    fontSize: 20,
+    textAlign: 'center'
   },
   text: {
     flex: 1,
