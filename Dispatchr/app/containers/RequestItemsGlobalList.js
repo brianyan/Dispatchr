@@ -21,7 +21,6 @@ class RequestItemsGlobalList extends Component {
       dataSource: ds,
       showFetchButton: true
     };
-    this.props.getRequestItems();
   }
 
   componentWillReceiveProps() {
