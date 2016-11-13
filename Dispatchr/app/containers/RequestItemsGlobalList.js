@@ -9,7 +9,8 @@ import {
   ListView,
   TouchableHighlight,
   RefreshControl,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
 class RequestItemsGlobalList extends Component {
@@ -21,6 +22,7 @@ class RequestItemsGlobalList extends Component {
       dataSource: ds,
       showFetchButton: true
     };
+    this.props.getRequestItems();
   }
 
   componentWillReceiveProps() {
@@ -42,16 +44,19 @@ class RequestItemsGlobalList extends Component {
           </TouchableHighlight>
        )}
 
-      <ListView style={{flex:1}}
-        refreshControl={<RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh.bind(this)}
-          />}
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
-        renderSeparator={this._renderSeparator}
-        enableEmptySections={true}
-      />
+       {renderIf(!this.state.showFetchButton)(
+        <ListView style={{flex:1}}
+          refreshControl={<RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />}
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow}
+          renderSeparator={this._renderSeparator}
+          renderFooter={this._renderFooter}
+          enableEmptySections={true}
+        />
+        )}
     </View>
     );
   }
@@ -83,6 +88,15 @@ class RequestItemsGlobalList extends Component {
      <View key={rowId} style={styles.separator} />
    );
  }
+
+ _renderFooter(){
+   <View style={styles.footerContainer}>
+    <TouchableOpacity style={styles.button} onPress={() => console.log('load more')}>
+      <Text style={styles.text}>Load More</Text>
+    </TouchableOpacity>
+    </View>
+ }
+
 }
 
 var styles = StyleSheet.create({
@@ -97,15 +111,23 @@ var styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#F6F6F6',
   },
-  button: {
-    height: 50,
-    backgroundColor: 'steelblue',
+  footerContainer: {
+    flex: 1,
+    padding: 8,
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
+  },
+  button: {
+      borderColor: '#8E8E8E',
+      borderWidth: StyleSheet.hairlineWidth,
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      borderRadius: 5,
   },
   buttonText: {
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#8E8E8E'
   },
   text: {
     flex: 1,
