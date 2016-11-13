@@ -4,7 +4,7 @@ import * as types from '../actions/types';
 
 function* requestItemRequested() {
   const response = yield call(fetch, 'https://www.google.com');
-  yield put({ type: types.REQUEST_ITEMS_RECEIVED, payload: 'hello world' })
+  yield put({ type: types.REQUEST_ITEMS_RECEIVED, payload: ['hello world'] })
 }
 
 export default function* root() {

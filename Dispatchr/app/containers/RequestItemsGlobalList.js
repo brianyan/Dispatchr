@@ -12,6 +12,16 @@ import {
 } from 'react-native';
 
 class RequestItemsGlobalList extends Component {
+  constructor(props){
+    super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      refreshing: false,
+      dataSource: ds,
+    };
+    this.props.getRequestItems();
+  }
+
   render() {
     return (
       <View>
