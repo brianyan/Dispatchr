@@ -34,14 +34,14 @@ class RequestItemsGlobalList extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         {renderIf(this.state.showFetchButton)(
           <TouchableHighlight onPress = {() =>  {this.props.getRequestItems()} }>
             <Text>Refresh List!</Text>
           </TouchableHighlight>
        )}
 
-      <ListView
+      <ListView style={{flex:1}}
         refreshControl={<RefreshControl
             refreshing={this.state.refreshing}
             onRefresh={this._onRefresh.bind(this)}
@@ -49,6 +49,7 @@ class RequestItemsGlobalList extends Component {
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
         renderSeparator={this._renderSeparator}
+        enableEmptySections={true}
       />
     </View>
     );
