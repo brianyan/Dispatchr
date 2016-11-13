@@ -12,24 +12,15 @@ import {
 } from 'react-native';
 
 class RequestItemsGlobalList extends Component {
-  constructor(props) {
-    super(props);
-  };
-
-  getRequestItems(){
-    this.props.getRequestItems();
-  }
-
   render() {
     return (
       <View>
-        <TouchableHighlight onPress = {() =>  {this.getRequestItems()} }>
+        <TouchableHighlight onPress = {() =>  {this.props.getRequestItems()} }>
           <Text>Press me!</Text>
         </TouchableHighlight>
       </View>
     );
   }
-
 }
 
 var styles = StyleSheet.create({
@@ -54,4 +45,10 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect(() => { return {} }, mapDispatchToProps)(RequestItemsGlobalList);
+function mapStateToProps(state) {
+  return {
+    requestedItems: state.requestedItems
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RequestItemsGlobalList);
