@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Scene, Router, Reducer } from 'react-native-router-flux';
-import * as RequestItems from './app/request_items';
-import { Provider } from 'react-redux';
-import { configureStore } from './configureStore';
+import RequestItemsGlobalList from './RequestItemsGlobalList'
 
+/* Stylesheet */
 const getSceneStyle = (props, computedProps) => {
   const style = {
     flex: 1,
@@ -20,16 +19,16 @@ const getSceneStyle = (props, computedProps) => {
   return style;
 };
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
-      <Provider store={configureStore()}>
-        <Router getSceneStyle={getSceneStyle}>
-          <Scene key="root">
-            <Scene key={RequestItems.name} component={RequestItems.component} title='Items' initial={true}/>
-          </Scene>
-        </Router>
-      </Provider>
+      <Router getSceneStyle={getSceneStyle}>
+        <Scene key="root">
+          <Scene key={"RequestItemsGlobalList"} component={RequestItemsGlobalList} title='Global Request List' initial={true}/>
+        </Scene>
+      </Router>
     );
   }
 }
+
+export default App;
