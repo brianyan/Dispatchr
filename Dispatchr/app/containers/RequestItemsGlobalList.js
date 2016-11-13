@@ -22,15 +22,59 @@ class RequestItemsGlobalList extends Component {
     this.props.getRequestItems();
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      refreshing: false,
+      dataSource: this.state.dataSource.cloneWithRows(this.props.requestedItems)
+    })
+  }
+
   render() {
     return (
       <View>
-        <TouchableHighlight onPress = {() =>  {this.props.getRequestItems()} }>
-          <Text>Press me!</Text>
-        </TouchableHighlight>
-      </View>
+      <TouchableHighlight onPress = {() =>  {this.props.getRequestItems()} }>
+        <Text>Press me!</Text>
+      </TouchableHighlight>
+      <ListView
+        refreshControl={<RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />}
+        dataSource={this.state.dataSource}
+        renderRow={this._renderRow}
+        renderSeparator={this._renderSeparator}
+      />
+    </View>
     );
   }
+
+  _onRefresh() {
+   this.setState({refreshing: true});
+   this.props.getRequestItems();
+ }
+
+ _renderRow(rowData, sectionId, rowId, highlightRow) {
+   const rowAction = () => {
+     highlightRow(sectionId, rowId);
+   };
+   return (
+     <TouchableHighlight onPress={rowAction}>
+       <View>
+         <View style={styles.row}>
+           <Text style={styles.text}>
+             {rowData}
+           </Text>
+         </View>
+       </View>
+     </TouchableHighlight>
+   );
+ }
+
+ _renderSeparator(sectionId, rowId) {
+   return (
+     <View key={rowId} style={styles.separator} />
+   );
+ }
 }
 
 var styles = StyleSheet.create({
