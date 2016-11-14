@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
     render json: Item.all
   end
 
+  # GET
   def show
     if params[:id].present?
       item_id = params[:id]
@@ -20,6 +21,7 @@ class ItemsController < ApplicationController
     end
   end
 
+  # POST
   def create
     if params[:name].present?
       item_name = params[:name]
@@ -37,6 +39,7 @@ class ItemsController < ApplicationController
     end
   end
 
+  # PATCH/PUT
   def update
     if params[:id].present? && params[:name].present?
       item = Item.find(params[:id])
@@ -53,6 +56,7 @@ class ItemsController < ApplicationController
     end
   end
 
+  # DELETE
   def destroy
     if params[:id].present?
       item = Item.find(params[:id])
