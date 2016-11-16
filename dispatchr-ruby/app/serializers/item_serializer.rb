@@ -1,5 +1,5 @@
 class ItemSerializer < ActiveModel::Serializer
   attributes :id, :name
 
-  belongs_to :request_item
+  #has_many :request_item
 end

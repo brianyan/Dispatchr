@@ -1,8 +1,15 @@
 class ItemsController < ApplicationController
+  def bad_name
+    error_str = 'No item name entered or name is invalid. Please try a valid name and try again'
+    render json: error_str, status: :unprocessable_entity
+  end
+
+  # GET
   def index
     render json: Item.all
   end
 
+  # GET
   def show
     if params[:id].present?
       item_id = params[:id]
@@ -20,6 +27,7 @@ class ItemsController < ApplicationController
     end
   end
 
+  # POST
   def create
     if params[:name].present?
       item_name = params[:name]
@@ -32,11 +40,11 @@ class ItemsController < ApplicationController
       end
 
     else
-        error_str = 'No item name entered or name is invalid. Please try a valid name and try again'
-        render json: error_str, status: :unprocessable_entity
+        bad_name
     end
   end
 
+  # PATCH/PUT
   def update
     if params[:id].present? && params[:name].present?
       item = Item.find(params[:id])
@@ -44,15 +52,14 @@ class ItemsController < ApplicationController
       if item.save
         render json: item
       else
-        error_str = 'No item name entered or name is invalid. Please try a valid name and try again'
-        render json: error_str, status: :unprocessable_entity
+        bad_name
       end
     else
-      error_str = 'No item name entered or name is invalid. Please try a valid name and try again'
-      render json: error_str, status: :unprocessable_entity
+      bad_name
     end
   end
 
+  # DELETE
   def destroy
     if params[:id].present?
       item = Item.find(params[:id])
