@@ -25,8 +25,8 @@ class App extends Component {
     return (
       <Router getSceneStyle={getSceneStyle}>
         <Scene key="root">
-          <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
           <Scene key = {"RequestItemsGlobalList"} component={RequestItemsGlobalList} title='Global Request List' initial={true}/>
+          <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
         </Scene>
       </Router>
     );
