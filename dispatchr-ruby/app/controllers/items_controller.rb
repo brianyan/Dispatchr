@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  
   def bad_name
     error_str = 'No item name entered or name is invalid. Please try a valid name and try again'
     render json: error_str, status: :unprocessable_entity
