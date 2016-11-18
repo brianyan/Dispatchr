@@ -15,7 +15,7 @@ const getSceneStyle = (props, computedProps) => {
   };
   if (computedProps.isActive) {
     style.marginTop = computedProps.hideNavBar ? 0 : 64;
-    style.marginBottom = computedProps.hideTabBar ? 0 : 50;
+    // style.marginBottom = computedProps.hideTabBar ? 0 : 50;
   }
   return style;
 };
