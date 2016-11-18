@@ -13,7 +13,8 @@ import {
   TouchableHighlight,
   RefreshControl,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  LayoutAnimation
 } from 'react-native';
 
 class RequestItemsGlobalList extends Component {
@@ -23,13 +24,13 @@ class RequestItemsGlobalList extends Component {
     this.state = {
       refreshing: false,
       dataSource: ds,
-      showFetchButton: true
+      showFetchButton: true,
+      showActionButton: true
     };
     this.props.getRequestItems();
   }
 
   componentWillReceiveProps() {
-
     this.setState({
       refreshing: false,
       dataSource: this.state.dataSource.cloneWithRows(this.props.requestedItems),
@@ -54,6 +55,7 @@ class RequestItemsGlobalList extends Component {
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh.bind(this)}
             />}
+          onScroll={this._onScroll}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
@@ -62,14 +64,20 @@ class RequestItemsGlobalList extends Component {
         />
         )}
 
-        <ActionButton buttonColor="#0288D1">
-          <ActionButton.Item buttonColor='#00897B' title="New Request" onPress={() => console.log("New Requested Tapped")}>
-            <Icon name="md-create" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-        </ActionButton>
+        {this.state.showActionButton ? <ActionButton /> : null}
+        {renderIf(this.state.showActionButton)(
+        // <ActionButton buttonColor="#0288D1">
+        //   <ActionButton.Item buttonColor='#00897B' title="New Request" onPress={() => console.log("New Requested Tapped")}>
+        //     <Icon name="md-create" style={styles.actionButtonIcon} />
+        //   </ActionButton.Item>
+        // </ActionButton>
+        )}
     </View>
     );
   }
+
+  //Keep track of the current scroll position
+  _listViewOffset = 0;
 
   _onRefresh() {
    this.setState({refreshing: true});
@@ -99,6 +107,34 @@ class RequestItemsGlobalList extends Component {
      <View key={rowId} style={styles.separator} />
    );
  }
+
+ _onScroll = (event) => {
+  // Simple fade-in / fade-out animation
+  const CustomLayoutLinear = {
+    duration: 100,
+    create: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity },
+    update: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity },
+    delete: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity }
+  }
+
+  // Check if the user is scrolling up or down by confronting the new scroll position with your own one
+  const currentOffset = event.nativeEvent.contentOffset.y
+
+  const direction = (currentOffset > 0 && currentOffset > this._listViewOffset)
+    ? 'down'
+    : 'up'
+
+  // If the user is scrolling down (and the action-button is still visible) hide it
+  const showActionButton = direction === 'up'
+
+  if (showActionButton !== this.state.showActionButton) {
+    LayoutAnimation.configureNext(CustomLayoutLinear)
+    this.setState({ showActionButton })
+  }
+  // Update scroll position
+  this._listViewOffset = currentOffset
+}
+
 
  _renderFooter(){
    <View style={styles.footerContainer}>
