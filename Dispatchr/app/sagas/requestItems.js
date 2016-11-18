@@ -3,8 +3,11 @@ import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
 
 function* requestItemRequested() {
-  const response = yield call(fetch, 'https://www.google.com');
-  yield put({ type: types.REQUEST_ITEMS_RECEIVED, payload: ['request','request','request','request'] })
+  const response = yield call(fetch, 'https://dispatchr-api.herokuapp.com/items/', { method: 'GET'} );
+
+  // const json =  yield call([response,response.json]) // one option that works
+  const json =  yield call(response.json.bind(response)) // better option
+  yield put({ type: types.REQUEST_ITEMS_RECEIVED, payload: json})
 }
 
 export default function* root() {
