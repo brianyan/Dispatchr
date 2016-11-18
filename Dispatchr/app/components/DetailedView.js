@@ -6,7 +6,10 @@ export default class DetailedView extends Component {
     return (
       <View>
         <Text style = {styles.red}>
-          {this.props.rowData}
+          {this.props.rowData.id}
+        </Text>
+        <Text style = {styles.red}>
+          {this.props.rowData.name}
         </Text>
       </View>
     );
