@@ -64,13 +64,12 @@ class RequestItemsGlobalList extends Component {
         />
         )}
 
-        {this.state.showActionButton ? <ActionButton /> : null}
         {renderIf(this.state.showActionButton)(
-        // <ActionButton buttonColor="#0288D1">
-        //   <ActionButton.Item buttonColor='#00897B' title="New Request" onPress={() => console.log("New Requested Tapped")}>
-        //     <Icon name="md-create" style={styles.actionButtonIcon} />
-        //   </ActionButton.Item>
-        // </ActionButton>
+        <ActionButton buttonColor="#0288D1">
+          <ActionButton.Item title="New Request" onPress={() => console.log("New Requested Tapped")}>
+            <Icon name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
         )}
     </View>
     );
