@@ -54,7 +54,7 @@ class RequestsController < ApplicationController
 			request.expiration_date = params[:expiration_date]
 
 			if request.save
-				request json: request
+				render json: request
 			else
 				bad_params
 			end
