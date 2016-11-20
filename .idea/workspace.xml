@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="07964bdb-24de-4603-8ab1-c99657c6de57" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dispatchr-ruby/app/controllers/users_controller.rb" afterPath="$PROJECT_DIR$/dispatchr-ruby/app/controllers/users_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dispatchr-ruby/spec/controllers/users_controller_spec.rb" afterPath="$PROJECT_DIR$/dispatchr-ruby/spec/controllers/users_controller_spec.rb" />
     </list>
     <ignored path="Dispatchr.iws" />
@@ -34,21 +33,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="users_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dispatchr-ruby/app/controllers/users_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="922">
-              <caret line="65" column="59" selection-start-line="65" selection-start-column="59" selection-end-line="65" selection-end-column="59" />
+            <state relative-caret-position="232">
+              <caret line="45" column="120" selection-start-line="45" selection-start-column="120" selection-end-line="45" selection-end-column="120" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users_controller_spec.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="users_controller_spec.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dispatchr-ruby/spec/controllers/users_controller_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="622">
-              <caret line="106" column="56" selection-start-line="106" selection-start-column="56" selection-end-line="106" selection-end-column="56" />
+            <state relative-caret-position="270">
+              <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -135,8 +134,8 @@
         <option value="$PROJECT_DIR$/dispatchr-ruby/app/controllers/items_controller.rb" />
         <option value="$PROJECT_DIR$/dispatchr-ruby/app/models/user.rb" />
         <option value="$PROJECT_DIR$/dispatchr-ruby/Gemfile.lock" />
-        <option value="$PROJECT_DIR$/dispatchr-ruby/app/controllers/users_controller.rb" />
         <option value="$PROJECT_DIR$/dispatchr-ruby/spec/controllers/users_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/dispatchr-ruby/app/controllers/users_controller.rb" />
       </list>
     </option>
   </component>
@@ -568,12 +567,12 @@
       <workItem from="1478209066408" duration="6289000" />
       <workItem from="1478225717919" duration="5518000" />
       <workItem from="1479269105662" duration="7526000" />
-      <workItem from="1479605197254" duration="3221000" />
+      <workItem from="1479605197254" duration="3827000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22554000" />
+    <option name="totallyTimeSpent" value="23160000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
@@ -973,18 +972,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dispatchr-ruby/spec/controllers/users_controller_spec.rb">
+    <entry file="file://$PROJECT_DIR$/dispatchr-ruby/app/controllers/users_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="106" column="56" selection-start-line="106" selection-start-column="56" selection-end-line="106" selection-end-column="56" />
+        <state relative-caret-position="232">
+          <caret line="45" column="120" selection-start-line="45" selection-start-column="120" selection-end-line="45" selection-end-column="120" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dispatchr-ruby/app/controllers/users_controller.rb">
+    <entry file="file://$PROJECT_DIR$/dispatchr-ruby/spec/controllers/users_controller_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="922">
-          <caret line="65" column="59" selection-start-line="65" selection-start-column="59" selection-end-line="65" selection-end-column="59" />
+        <state relative-caret-position="270">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
           <folding />
         </state>
       </provider>
