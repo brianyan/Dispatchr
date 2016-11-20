@@ -7,43 +7,45 @@ class UsersController < ApplicationController
   def show
     if params[:id].present?
       user_id = params[:id]
-      user = Item.find(user_id)
+      user = User.find(user_id)
 
       if user.present?
-        render json: item
+        render json: user
       else
-        render json: item.errors, status: :unprocessable_entity
+        render json: user.errors, status: :unprocessable_entity
       end
 
     else
-      error_str = "No/Invalid item ID entered"
+      error_str = "No/Invalid user ID entered"
       render json: error_str, status: :unprocessable_entity
     end
   end
 
   def create
-    puts "ABOUT TO OUTPUT"
-    puts params
+    if params[:name].present? && params[:address].present? && params[:email].present? && params[:username].present?
+      address = Address.new(
+          address: params[:address][:address],
+          latitude: params[:address][:latitude],
+          longitude: params[:address][:longitude]
+      )
 
-    address = Address.new(
-      address: params[:address][:address],
-      latitude: params[:address][:latitude],
-      longitude: params[:address][:longitude]
-    )
+      user = User.new(
+          name: params[:name],
+          username: params[:username],
+          email: params[:email]
+      )
 
-    user = User.new(
-      name: params[:name],
-      username: params[:username],
-      email: params[:email]
-    )
+      user.address = address
 
-    user.address = address
-
-    if user.save
-      render json: user
+      if user.save
+        render json: user
+      else
+        render json: user.errors, status: :unprocessable_entity
+      end
     else
-      render json: user.errors, status: :unprocessable_entity
+      render json: "Non-existent or invalid params. Please fix this error and try again.", status: :unprocessable_entity
     end
+
 
   end
 
@@ -59,6 +61,9 @@ class UsersController < ApplicationController
       else
         render json: user.errors, status: :unprocessable_entity
       end
+    else
+      error_str = "No/Invalid user ID entered"
+      render json: error_str, status: :unprocessable_entity
     end
   end
 
