@@ -50,7 +50,7 @@ RSpec.describe UsersController, :type => :controller do
       it 'returns exception' do
         post :create, {username: 'test_username', email: 'test@test.com',
                        address: {address: '123 Main Rd, Goleta CA 93117 USA', latitude: 0, longtitude: 0}}
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(400)
       end
 
     end
