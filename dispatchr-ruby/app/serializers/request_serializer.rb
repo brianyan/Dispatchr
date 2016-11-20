@@ -1,3 +1,3 @@
 class RequestSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :user_id, :expiration_date
 end

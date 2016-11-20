@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import renderIf from '../lib/renderif'
+import { Actions } from 'react-native-router-flux'
 import {
   View,
   Text,
@@ -26,6 +27,7 @@ class RequestItemsGlobalList extends Component {
   }
 
   componentWillReceiveProps() {
+
     this.setState({
       refreshing: false,
       dataSource: this.state.dataSource.cloneWithRows(this.props.requestedItems),
@@ -68,14 +70,15 @@ class RequestItemsGlobalList extends Component {
 
  _renderRow(rowData, sectionId, rowId, highlightRow) {
    const rowAction = () => {
-     highlightRow(sectionId, rowId);
+    highlightRow(sectionId, rowId);
+     Actions.DetailedView({rowData});
    };
    return (
-     <TouchableHighlight onPress={rowAction}>
+    <TouchableHighlight onPress={rowAction}>
        <View>
          <View style={styles.row}>
            <Text style={styles.text}>
-             {rowData}
+             {rowData.name}
            </Text>
          </View>
        </View>
