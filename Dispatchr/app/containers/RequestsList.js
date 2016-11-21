@@ -33,7 +33,6 @@ class RequestsList extends Component {
       showFetchButton: true,
       showNewRequestButton: true
     };
-    this.props.getRequests();
   }
 
   componentWillReceiveProps() {
@@ -113,7 +112,7 @@ class RequestsList extends Component {
 
   _onRefresh() {
    this.setState({refreshing: true});
-   this.props.getRequestItems();
+   this.props.getRequests();
   }
 
   _renderRow(rowData, sectionId, rowId, highlightRow) {

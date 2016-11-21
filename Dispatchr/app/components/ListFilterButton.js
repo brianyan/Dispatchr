@@ -43,7 +43,9 @@ const styles = StyleSheet.create({
     content: {
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        borderColor: '#EAEAEA',
+        borderWidth: 1
     },
     buttonText: {
         fontSize: 20
