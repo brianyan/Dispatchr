@@ -44,10 +44,18 @@ class RequestsList extends Component {
     })
   }
 
+  _leftSideSelected() {
+    console.log("sfdsaf")
+  }
+
+  _rightSideSelected() {
+    console.log("asfd")
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
-        <ListFilterButton style={{flex: 1}}></ListFilterButton>
+        <ListFilterButton style={{flex: 1}} leftSideSelected={this._leftSideSelected} rightSideSelected={this._rightSideSelected}></ListFilterButton>
         {renderIf(this.state.showFetchButton)(
           <TouchableHighlight onPress = {() =>  {this.props.getRequests()} }>
             <View style={styles.button}>
@@ -190,7 +198,7 @@ class RequestsList extends Component {
        <View>
          <View style={styles.row}>
            <Text style={styles.text}>
-             {rowData}
+             {rowData.name}
            </Text>
          </View>
        </View>
