@@ -1,9 +1,5 @@
 class RequestsController < ApplicationController
 
-  def bad_params
-    error_str = 'One or more parameters are missing'
-    render json: error_str, status: :unprocessable_entity
-  end
 
 	#GET
 	def index
@@ -12,56 +8,46 @@ class RequestsController < ApplicationController
 
 	#GET
 	def show
-		if params[:id].present?
-			request_id = params[:id]
-			request = Request.find(request_id)
-
-			if request.present?
-				render json: request
-			else
-				render json: request.errors, status: :unprocessable_entity
-			end
-
-		else #need to check if this is right (rendering a string as json)
-			error = "Invalid request ID entered"
-			render json: error, status: :unprocessable_entity
-		end
+		request = Request.find(params[:id])
+		render json: request
 	end
 
 	#POST
 	def create
-		if params[:user_id].present? && params[:expiration_date].present?
-			user_id = params[:user_id]
-			exp_date = params[:expiration_date]
-			request = Request.new(user_id: user_id, expiration_date: exp_date)
-
-			if request.save
-				render json: request
-			else
-				render json: request.errors, status: :unprocessable_entity
-			end
-
+		request = Request.new(
+					user_id: params[:user_id],
+					expiration_date: params[:expiration_date]
+			)
+		if request.save
+			render json: request
 		else
-			bad_params
+			render json: request.errors, status: :bad_request
 		end
+
 	end
 
 	#PATCH/PUT
-	def update
-		if params[:id].present? && params[:expiration_date].present? && params[:user_id].present?
-			
-			request = Request.find(params[:id])
-			request.expiration_date = params[:expiration_date]
+	def update	
+		request = Request.find(params[:id])
+		request.expiration_date = params[:expiration_date].present? ? params[:expiration_date] : request.expiration_date
+		request.user_id = params[:user_id].present? ? params[:user_id] : request.user_id
 
-			if request.save
-				request json: request
-			else
-				bad_params
-			end
+		if request.save
+			render json: request
 		else
-			bad_params
+			render json: request.errors, status: :unprocessable_entity
 		end
+
 	end
 
+	#DELETE
+	def destroy
+		request = Request.find(params[:id])
+		render status: 200, json: request.destroy
+	end
+
+	def request_params
+		params.require(:request).permit(:user_id, :expiration_date)
+	end
 
 end
