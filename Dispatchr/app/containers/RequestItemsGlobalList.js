@@ -6,7 +6,8 @@ import renderIf from '../lib/renderif'
 import { Actions } from 'react-native-router-flux'
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
+import TextField from 'react-native-md-textinput';
+import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 
 import {
   View,
@@ -16,7 +17,8 @@ import {
   RefreshControl,
   StyleSheet,
   TouchableOpacity,
-  LayoutAnimation
+  LayoutAnimation,
+  ScrollView
 } from 'react-native';
 
 class RequestItemsGlobalList extends Component {
@@ -69,12 +71,20 @@ class RequestItemsGlobalList extends Component {
         <PopupDialog
           ref={(popupDialog) => { this.popupDialog = popupDialog; }}
           dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
+          dialogTitle={<DialogTitle title="New Request" />}
           width={340}
           height={450}
           overlayOpacity={0.75}
         >
           <View>
-            <Text>Hello</Text>
+            <ScrollView>
+              <TextField label={'Name'} highlightColor={'#00BCD4'} />
+              <TextField
+                label={'Qty.'}
+                highlightColor={'#00BCD4'}
+                keyboardType={'numeric'}
+              />
+            </ScrollView>
           </View>
         </PopupDialog>
 
