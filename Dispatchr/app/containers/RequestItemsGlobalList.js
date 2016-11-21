@@ -8,6 +8,7 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TextField from 'react-native-md-textinput';
 import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
+import Button from 'apsl-react-native-button';
 
 import {
   View,
@@ -77,24 +78,22 @@ class RequestItemsGlobalList extends Component {
           overlayOpacity={0.75}
         >
           <View>
-            <ScrollView>
               <TextField label={'Name'} highlightColor={'#00BCD4'} />
               <TextField
                 label={'Qty.'}
                 highlightColor={'#00BCD4'}
                 keyboardType={'numeric'}
               />
-            </ScrollView>
+              <Button style={styles.requestButtonSave} textStyle={{color: 'white'}}>
+                Save + Add
+              </Button>
+              <Button style={styles.requestButtonSave} textStyle={{color: 'white'}}>
+                Save
+              </Button>
           </View>
         </PopupDialog>
 
-        {renderIf(this.state.showActionButton)(
-        <ActionButton buttonColor="#0288D1">
-          <ActionButton.Item title="New Request" onPress={() => this.popupDialog.openDialog()}>
-            <Icon name="md-create" style={styles.actionButtonIcon} />
-          </ActionButton.Item>
-        </ActionButton>
-        )}
+        {this.state.showActionButton ? <ActionButton buttonColor="#0288D1" onPress={() => this._createNewRequest()} /> : null}
     </View>
     );
   }
@@ -158,6 +157,10 @@ class RequestItemsGlobalList extends Component {
   this._listViewOffset = currentOffset
 }
 
+_createNewRequest = () => {
+  this.popupDialog.openDialog();
+}
+
 
  _renderFooter(){
    <View style={styles.footerContainer}>
@@ -175,6 +178,11 @@ var styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
+  popup: {
+    width: 330,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   separator: {
     flex: 1,
     height: StyleSheet.hairlineWidth,
@@ -191,6 +199,12 @@ var styles = StyleSheet.create({
     padding: 8,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  requestButtonSave: {
+    borderColor: '#2980b9',
+    backgroundColor: '#3498db',
+    width: 100,
+    height: 25
   },
   button: {
       borderColor: '#8E8E8E',
