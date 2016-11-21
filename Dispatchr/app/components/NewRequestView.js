@@ -3,6 +3,9 @@ import TextField from 'react-native-md-textinput';
 import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 import Button from 'apsl-react-native-button';
 import { Text, View, StyleSheet} from 'react-native';
+import { connect } from 'react-redux';
+import { ActionCreators } from '../actions';
+import { bindActionCreators } from 'redux';
 
 export default class NewRequestView extends Component {
   render() {
@@ -55,3 +58,9 @@ const styles = StyleSheet.create({
     height: 25
   },
 });
+
+
+/* Connects to the actions, so we can do stuff! Boilerplate!!! */
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
