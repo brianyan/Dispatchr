@@ -84,10 +84,10 @@ class RequestItemsGlobalList extends Component {
                 highlightColor={'#00BCD4'}
                 keyboardType={'numeric'}
               />
-              <Button style={styles.requestButtonSave} textStyle={{color: 'white'}}>
+              <Button style={styles.requestButtonSave} onPress={()=>this._saveRequestAndAddNewItem()}textStyle={{color: 'white'}}>
                 Save + Add
               </Button>
-              <Button style={styles.requestButtonSave} textStyle={{color: 'white'}}>
+              <Button style={styles.requestButtonSave} onPress={() => this._saveNewRequest()} textStyle={{color: 'white'}}>
                 Save
               </Button>
           </View>
@@ -159,6 +159,14 @@ class RequestItemsGlobalList extends Component {
 
   _createNewRequest = () => {
     this.popupDialog.openDialog();
+  }
+
+  _saveNewRequest = () => {
+    console.log("Request Saved!");
+  }
+
+  _saveRequestAndAddNewItem = () => {
+    console.log("Added new item, and saved request");
   }
 
 
