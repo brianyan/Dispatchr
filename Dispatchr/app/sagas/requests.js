@@ -5,7 +5,7 @@ import * as types from '../actions/types';
 function* requestsRequested() {
   const response = yield call(fetch, 'https://dispatchr-api.herokuapp.com/items/', { method: 'GET'} );
   const json =  yield call(response.json.bind(response)) // better option
-  yield put({ type: types.REQUEST_ITEMS_RECEIVED, payload: json})
+  yield put({ type: types.REQUEST_RECEIVED, payload: json})
 }
 
 export default function* root() {
