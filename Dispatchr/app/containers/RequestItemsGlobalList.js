@@ -30,7 +30,7 @@ class RequestItemsGlobalList extends Component {
       refreshing: false,
       dataSource: ds,
       showFetchButton: true,
-      showActionButton: true
+      showNewRequestButton: true
     };
     this.props.getRequestItems();
   }
@@ -93,7 +93,7 @@ class RequestItemsGlobalList extends Component {
           </View>
         </PopupDialog>
 
-        {this.state.showActionButton ? <ActionButton buttonColor="#0288D1" onPress={() => this._createNewRequest()} /> : null}
+        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => this._createNewRequest()} /> : null}
     </View>
     );
   }
@@ -104,71 +104,71 @@ class RequestItemsGlobalList extends Component {
   _onRefresh() {
    this.setState({refreshing: true});
    this.props.getRequestItems();
- }
+  }
 
- _renderRow(rowData, sectionId, rowId, highlightRow) {
+  _renderRow(rowData, sectionId, rowId, highlightRow) {
     const rowAction = () => {
       highlightRow(sectionId, rowId);
       Actions.DetailedView({rowData});
     };
-   return (
-    <TouchableHighlight onPress={rowAction}>
-       <View>
-         <View style={styles.row}>
-           <Text style={styles.text}>
-             {rowData.name}
-           </Text>
+    return (
+      <TouchableHighlight onPress={rowAction}>
+         <View>
+           <View style={styles.row}>
+             <Text style={styles.text}>
+               {rowData.name}
+             </Text>
+           </View>
          </View>
-       </View>
-     </TouchableHighlight>
-   );
- }
-
- _renderSeparator(sectionId, rowId) {
-   return (
-     <View key={rowId} style={styles.separator} />
-   );
- }
-
- _onScroll = (event) => {
-  // Simple fade-in / fade-out animation
-  const CustomLayoutLinear = {
-    duration: 100,
-    create: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity },
-    update: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity },
-    delete: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity }
+       </TouchableHighlight>
+    );
   }
 
-  // Check if the user is scrolling up or down by confronting the new scroll position with your own one
-  const currentOffset = event.nativeEvent.contentOffset.y
-
-  const direction = (currentOffset > 0 && currentOffset > this._listViewOffset)
-    ? 'down'
-    : 'up'
-
-  // If the user is scrolling down (and the action-button is still visible) hide it
-  const showActionButton = direction === 'up'
-
-  if (showActionButton !== this.state.showActionButton) {
-    LayoutAnimation.configureNext(CustomLayoutLinear)
-    this.setState({ showActionButton })
+  _renderSeparator(sectionId, rowId) {
+    return (
+      <View key={rowId} style={styles.separator} />
+    );
   }
-  // Update scroll position
-  this._listViewOffset = currentOffset
-}
 
-_createNewRequest = () => {
-  this.popupDialog.openDialog();
-}
+  _onScroll = (event) => {
+    // Simple fade-in / fade-out animation
+    const CustomLayoutLinear = {
+      duration: 100,
+      create: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity },
+      update: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity },
+      delete: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity }
+    }
+
+    // Check if the user is scrolling up or down by confronting the new scroll position with your own one
+    const currentOffset = event.nativeEvent.contentOffset.y
+
+    const direction = (currentOffset > 0 && currentOffset > this._listViewOffset)
+      ? 'down'
+      : 'up'
+
+    // If the user is scrolling down (and the action-button is still visible) hide it
+    const showNewRequestButton = direction === 'up'
+
+    if (showNewRequestButton !== this.state.showNewRequestButton) {
+      LayoutAnimation.configureNext(CustomLayoutLinear)
+      this.setState({ showNewRequestButton })
+    }
+    // Update scroll position
+    this._listViewOffset = currentOffset
+  }
+
+  _createNewRequest = () => {
+    this.popupDialog.openDialog();
+  }
 
 
- _renderFooter(){
+  _renderFooter(){
    <View style={styles.footerContainer}>
     <TouchableOpacity style={styles.button} onPress={() => console.log('load more')}>
       <Text style={styles.text}>Load More</Text>
     </TouchableOpacity>
     </View>
- }
+  }
 
 }
 
