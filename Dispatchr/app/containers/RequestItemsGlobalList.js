@@ -6,9 +6,7 @@ import renderIf from '../lib/renderif'
 import { Actions } from 'react-native-router-flux'
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import TextField from 'react-native-md-textinput';
-import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
-import Button from 'apsl-react-native-button';
+import NewRequestView from '../components/NewRequestView.js';
 
 import {
   View,
@@ -69,31 +67,9 @@ class RequestItemsGlobalList extends Component {
         />
         )}
 
-        <PopupDialog
-          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-          dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
-          dialogTitle={<DialogTitle title="New Request" />}
-          width={340}
-          height={450}
-          overlayOpacity={0.75}
-        >
-          <View>
-              <TextField label={'Name'} highlightColor={'#00BCD4'} />
-              <TextField
-                label={'Qty.'}
-                highlightColor={'#00BCD4'}
-                keyboardType={'numeric'}
-              />
-              <Button style={styles.requestButtonSave} onPress={()=>this._saveRequestAndAddNewItem()}textStyle={{color: 'white'}}>
-                Save + Add
-              </Button>
-              <Button style={styles.requestButtonSave} onPress={() => this._saveNewRequest()} textStyle={{color: 'white'}}>
-                Save
-              </Button>
-          </View>
-        </PopupDialog>
+        <NewRequestView />
 
-        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => this._createNewRequest()} /> : null}
+        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => console.log("Open Popup")} /> : null}
     </View>
     );
   }
@@ -156,19 +132,6 @@ class RequestItemsGlobalList extends Component {
     // Update scroll position
     this._listViewOffset = currentOffset
   }
-
-  _createNewRequest = () => {
-    this.popupDialog.openDialog();
-  }
-
-  _saveNewRequest = () => {
-    console.log("Request Saved!");
-  }
-
-  _saveRequestAndAddNewItem = () => {
-    console.log("Added new item, and saved request");
-  }
-
 
   _renderFooter(){
    <View style={styles.footerContainer}>
