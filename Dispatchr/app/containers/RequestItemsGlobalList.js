@@ -67,6 +67,8 @@ class RequestItemsGlobalList extends Component {
         />
         )}
 
+        <NewRequestView />
+
         {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => this.props.newRequest()} /> : null}
     </View>
     );

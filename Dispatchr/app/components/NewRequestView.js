@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 
-export default class NewRequestView extends Component {
+class NewRequestView extends Component {
   render() {
     return (
       <PopupDialog
@@ -17,6 +17,7 @@ export default class NewRequestView extends Component {
           width={340}
           height={450}
           overlayOpacity={0.75}
+          open={this.props.showPopupDialog}
         >
           <View>
               <TextField label={'Name'} highlightColor={'#00BCD4'} />
@@ -34,10 +35,6 @@ export default class NewRequestView extends Component {
           </View>
         </PopupDialog>
     );
-  }
-
-  createNewRequest = () => {
-    this.popupDialog.openDialog();
   }
 
   _saveNewRequest = () => {
@@ -64,3 +61,12 @@ const styles = StyleSheet.create({
 function mapDispatchToProps(dispatch){
   return bindActionCreators(ActionCreators, dispatch);
 }
+
+function mapStateToProps(state) {
+  return {
+      showPopupDialog: state.showPopupDialog
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRequestView);
+
