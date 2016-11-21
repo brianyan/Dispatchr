@@ -4,8 +4,11 @@ import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import renderIf from '../lib/renderif'
 import { Actions } from 'react-native-router-flux'
+import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
-import NewRequestView from '../components/NewRequestView';
+import TextField from 'react-native-md-textinput';
+import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
+import Button from 'apsl-react-native-button';
 
 import {
   View,
@@ -27,6 +30,7 @@ class RequestItemsGlobalList extends Component {
       refreshing: false,
       dataSource: ds,
       showFetchButton: true,
+      showNewRequestButton: true
     };
     this.props.getRequestItems();
   }
@@ -56,6 +60,7 @@ class RequestItemsGlobalList extends Component {
               refreshing={this.state.refreshing}
               onRefresh={this._onRefresh.bind(this)}
             />}
+          onScroll={this._onScroll}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           renderSeparator={this._renderSeparator}
@@ -64,8 +69,31 @@ class RequestItemsGlobalList extends Component {
         />
         )}
 
-        <NewRequestView />
+        <PopupDialog
+          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+          dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
+          dialogTitle={<DialogTitle title="New Request" />}
+          width={340}
+          height={450}
+          overlayOpacity={0.75}
+        >
+          <View>
+              <TextField label={'Name'} highlightColor={'#00BCD4'} />
+              <TextField
+                label={'Qty.'}
+                highlightColor={'#00BCD4'}
+                keyboardType={'numeric'}
+              />
+              <Button style={styles.requestButtonSave} onPress={()=>this._saveRequestAndAddNewItem()}textStyle={{color: 'white'}}>
+                Save + Add
+              </Button>
+              <Button style={styles.requestButtonSave} onPress={() => this._saveNewRequest()} textStyle={{color: 'white'}}>
+                Save
+              </Button>
+          </View>
+        </PopupDialog>
 
+        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => this._createNewRequest()} /> : null}
     </View>
     );
   }
@@ -101,6 +129,46 @@ class RequestItemsGlobalList extends Component {
       <View key={rowId} style={styles.separator} />
     );
   }
+
+  _onScroll = (event) => {
+    // Simple fade-in / fade-out animation
+    const CustomLayoutLinear = {
+      duration: 100,
+      create: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity },
+      update: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity },
+      delete: { type: LayoutAnimation.Types.linear, property: LayoutAnimation.Properties.opacity }
+    }
+
+    // Check if the user is scrolling up or down by confronting the new scroll position with your own one
+    const currentOffset = event.nativeEvent.contentOffset.y
+
+    const direction = (currentOffset > 0 && currentOffset > this._listViewOffset)
+      ? 'down'
+      : 'up'
+
+    // If the user is scrolling down (and the action-button is still visible) hide it
+    const showNewRequestButton = direction === 'up'
+
+    if (showNewRequestButton !== this.state.showNewRequestButton) {
+      LayoutAnimation.configureNext(CustomLayoutLinear)
+      this.setState({ showNewRequestButton })
+    }
+    // Update scroll position
+    this._listViewOffset = currentOffset
+  }
+
+  _createNewRequest = () => {
+    this.popupDialog.openDialog();
+  }
+
+  _saveNewRequest = () => {
+    console.log("Request Saved!");
+  }
+
+  _saveRequestAndAddNewItem = () => {
+    console.log("Added new item, and saved request");
+  }
+
 
   _renderFooter(){
    <View style={styles.footerContainer}>
