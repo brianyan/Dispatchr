@@ -6,6 +6,8 @@ import renderIf from '../lib/renderif'
 import { Actions } from 'react-native-router-flux'
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
+
 import {
   View,
   Text,
@@ -64,9 +66,21 @@ class RequestItemsGlobalList extends Component {
         />
         )}
 
+        <PopupDialog
+          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+          dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
+          width={340}
+          height={450}
+          overlayOpacity={0.75}
+        >
+          <View>
+            <Text>Hello</Text>
+          </View>
+        </PopupDialog>
+
         {renderIf(this.state.showActionButton)(
         <ActionButton buttonColor="#0288D1">
-          <ActionButton.Item title="New Request" onPress={() => console.log("New Requested Tapped")}>
+          <ActionButton.Item title="New Request" onPress={() => this.popupDialog.openDialog()}>
             <Icon name="md-create" style={styles.actionButtonIcon} />
           </ActionButton.Item>
         </ActionButton>
@@ -84,10 +98,10 @@ class RequestItemsGlobalList extends Component {
  }
 
  _renderRow(rowData, sectionId, rowId, highlightRow) {
-   const rowAction = () => {
-    highlightRow(sectionId, rowId);
-     Actions.DetailedView({rowData});
-   };
+    const rowAction = () => {
+      highlightRow(sectionId, rowId);
+      Actions.DetailedView({rowData});
+    };
    return (
     <TouchableHighlight onPress={rowAction}>
        <View>
