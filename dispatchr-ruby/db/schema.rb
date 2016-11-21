@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20161103230459) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", default: '2016-11-13 15:36:04', null: false
-    t.datetime "updated_at", default: '2016-11-13 15:36:04', null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "request_items", force: :cascade do |t|

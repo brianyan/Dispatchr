@@ -78,7 +78,7 @@ class RequestItemsGlobalList extends Component {
        <View>
          <View style={styles.row}>
            <Text style={styles.text}>
-             {rowData}
+             {rowData.name}
            </Text>
          </View>
        </View>
