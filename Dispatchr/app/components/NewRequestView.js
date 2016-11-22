@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import TextField from 'react-native-md-textinput';
 import Button from 'apsl-react-native-button';
 import { Text, View, StyleSheet} from 'react-native';
-import { connect } from 'react-redux';
-import { ActionCreators } from '../actions';
-import { bindActionCreators } from 'redux';
-import ActionButton from 'react-native-action-button';
+import { Field, reduxForm } from 'redux-form';
+
 
 
 export default class NewRequestView extends Component {
