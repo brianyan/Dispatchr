@@ -58,6 +58,6 @@ class RequestItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_item_params
       #this enforces strong parameters
-      params.fetch(:request_item, {}).permit(:request_id, :max_price, :quantity_description, :item)
+      params.require(:request_item).permit(:request_id, :max_price, :quantity_description, :item)
     end
 end
