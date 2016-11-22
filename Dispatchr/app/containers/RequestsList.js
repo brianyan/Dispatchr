@@ -7,7 +7,6 @@ import { Actions } from 'react-native-router-flux'
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TextField from 'react-native-md-textinput';
-import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 import Button from 'apsl-react-native-button';
 
 import {
@@ -78,7 +77,7 @@ class RequestsList extends Component {
         />
         )}
 
-        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => console.log("request hit")} /> : null}
+        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => Actions.NewRequestView() } /> : null}
     </View>
     );
   }
