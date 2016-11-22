@@ -4,7 +4,6 @@ class RequestItemsController < ApplicationController
   # GET /request_items
   # GET /request_items.json
   def index
-    # @request_items = RequestItem.all
     render json: RequestItem.all
   end
 
@@ -18,24 +17,28 @@ class RequestItemsController < ApplicationController
   # POST /request_items.json
   def create
     @request_item = RequestItem.new(request_item_params)
-    @request_item.item = Item.new(name: params[:item][:name])
+    @request_item.item = Item.new(name: params[:request_item][:item][:name])
 
     if @request_item.save
-      #render :show, status: :created, location: @request_item
       render json: @request_item 
     else
-      render json: @request_item.errors, status: :unprocessable_entity
+      render json: @request_item.errors, status: :bad_request
     end
   end
 
   # PATCH/PUT /request_items/1
   # PATCH/PUT /request_items/1.json
   def update
-    @request_item.item = params[:item].present? ? Item.new(name: params[:item][:name]) : @request_item.item
+
+    #update the item of request_item
+    if (params[:request_item].present?)
+      @request_item.item = params[:request_item][:item].present? ? Item.new(name: params[:request_item][:item][:name]) : @request_item.item
+    end
+    #update all other parameters
     if @request_item.update(request_item_params)
-      render :show, status: :ok, location: @request_item
+      render json: @request_item
     else
-      render json: @request_item.errors, status: :unprocessable_entity
+      render json: @request_item.errors, status: :bad_request
     end
 
   end
@@ -54,7 +57,7 @@ class RequestItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_item_params
-      params.fetch(:request_item, {})
-      params.require(:request_item).permit(:id, :request_id, :max_price, :quantity_description, :item)
+      #this enforces strong parameters
+      params.fetch(:request_item, {}).permit(:request_id, :max_price, :quantity_description, :item)
     end
 end
