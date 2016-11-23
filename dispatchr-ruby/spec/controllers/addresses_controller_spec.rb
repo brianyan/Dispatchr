@@ -88,7 +88,7 @@ RSpec.describe AddressesController, :type => :controller do
   describe 'DELETE #destroy' do
     context 'when id does not exist' do
       it 'raises error' do
-        expect {put '/addresses/-1'}.to raise_error
+        expect {delete '/addresses/-1'}.to raise_error
       end
     end
 
