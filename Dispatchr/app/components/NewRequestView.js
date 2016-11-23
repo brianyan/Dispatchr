@@ -7,23 +7,33 @@ export default class NewRequestView extends Component {
     return (
       <View style={{flex: 1}}>
           <View style={styles.expirationButton}>
-            <Text style={{fontSize: 16}}>Date Needed</Text>
+            <Text style={{fontSize: 16, color: '#77c2e5' }}>Date Needed</Text>
             <DatePicker
-              style={{width: 200}}
-              date={'2016-05-01'}
+              style={{width: 100}}
+              date={'2016-11-01'}
               mode="date"
               placeholder="placeholder"
               format="YYYY-MM-DD"
-              minDate="2016-05-01"
-              maxDate="2016-06-01"
+              minDate="2016-11-01"
+              maxDate="2017-11-01"
               confirmBtnText="Confirm"
+              showIcon={false}
               cancelBtnText="Cancel"
               onDateChange={(date) => {console.log('data changed')}}
+              customStyles={{
+                dateInput: {
+                  borderWidth: 0,
+                },
+                 dateText: {
+                  fontSize: 16,
+                },
+                // ... You can check the source to find the other keys.
+              }}
             />
           </View>
           <Text style={{flex: 1}}> Hello! </Text>
           <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { console.log("Needed by...") } }>
-            <Text style={styles.buttonText}>Publish my Request</Text>
+            <Text style={{fontSize: 16}}>Publish my Request</Text>
           </TouchableHighlight>
       </View>
     );
@@ -36,8 +46,8 @@ var styles = StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 15,
   },
   publishRequestButton: {
     flex: 0,
