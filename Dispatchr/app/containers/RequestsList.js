@@ -21,8 +21,9 @@ import {
   LayoutAnimation,
   ScrollView
 } from 'react-native';
+import ListFilterButton from '../components/ListFilterButton';
 
-class RequestItemsGlobalList extends Component {
+class RequestsList extends Component {
   constructor(props){
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -32,22 +33,30 @@ class RequestItemsGlobalList extends Component {
       showFetchButton: true,
       showNewRequestButton: true
     };
-    this.props.getRequestItems();
   }
 
   componentWillReceiveProps() {
     this.setState({
       refreshing: false,
-      dataSource: this.state.dataSource.cloneWithRows(this.props.requestedItems),
-      showFetchButton: this.props.requestedItems.length == 0
+      dataSource: this.state.dataSource.cloneWithRows(this.props.requests),
+      showFetchButton: this.props.requests.length == 0
     })
+  }
+
+  _leftSideSelected() {
+    console.log("sfdsaf")
+  }
+
+  _rightSideSelected() {
+    console.log("asfd")
   }
 
   render() {
     return (
       <View style={{flex: 1}}>
+        <ListFilterButton style={{flex: 1}} leftSideSelected={this._leftSideSelected} rightSideSelected={this._rightSideSelected}></ListFilterButton>
         {renderIf(this.state.showFetchButton)(
-          <TouchableHighlight onPress = {() =>  {this.props.getRequestItems()} }>
+          <TouchableHighlight onPress = {() =>  {this.props.getRequests()} }>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Press me to Refresh!</Text>
             </View>
@@ -103,7 +112,7 @@ class RequestItemsGlobalList extends Component {
 
   _onRefresh() {
    this.setState({refreshing: true});
-   this.props.getRequestItems();
+   this.props.getRequests();
   }
 
   _renderRow(rowData, sectionId, rowId, highlightRow) {
@@ -178,6 +187,39 @@ class RequestItemsGlobalList extends Component {
     </View>
   }
 
+ _renderRow(rowData, sectionId, rowId, highlightRow) {
+   const rowAction = () => {
+    highlightRow(sectionId, rowId);
+     Actions.DetailedView({rowData});
+   };
+   return (
+    <TouchableHighlight onPress={rowAction}>
+       <View>
+         <View style={styles.row}>
+           <Text style={styles.text}>
+             {rowData.name}
+           </Text>
+         </View>
+       </View>
+     </TouchableHighlight>
+   );
+ }
+
+ _renderSeparator(sectionId, rowId) {
+   return (
+     <View key={rowId} style={styles.separator} />
+   );
+ }
+
+ _renderFooter(){
+    return (
+      <View style={styles.footerContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => console.log('load more')}>
+          <Text style={styles.text}>Load More</Text>
+        </TouchableOpacity>
+      </View>
+    );
+ }
 }
 
 var styles = StyleSheet.create({
@@ -238,8 +280,8 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state) {
   return {
-    requestedItems: state.requestedItems
+    requests: state.requests
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RequestItemsGlobalList);
+export default connect(mapStateToProps, mapDispatchToProps)(RequestsList);
