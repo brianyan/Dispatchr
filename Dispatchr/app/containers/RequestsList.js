@@ -190,11 +190,6 @@ var styles = StyleSheet.create({
     height: 22,
     color: 'white',
   },
-  popup: {
-    width: 330,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   separator: {
     flex: 1,
     height: StyleSheet.hairlineWidth,

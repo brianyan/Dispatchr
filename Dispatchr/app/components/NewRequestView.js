@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 import DatePicker from 'react-native-datepicker';
+import NewRequestList from './NewRequestList'
 
 export default class NewRequestView extends Component {
   constructor(props){
     super(props)
-    this.state = { date: "2016-11-01" }
+
+    var today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth()+1;
+    var year = today.getFullYear();
+
+    if(day<10) {
+        day='0'+day
+    } 
+    if(month<10) {
+        month='0'+month
+    } 
+    
+    today = year + '-' + month + '-' + day;
+    this.state = { date: today }
   }
 
   render() {
@@ -19,8 +34,6 @@ export default class NewRequestView extends Component {
               mode="date"
               placeholder="placeholder"
               format="YYYY-MM-DD"
-              minDate="2016-11-01"
-              maxDate="2017-11-01"
               confirmBtnText="Confirm"
               showIcon={false}
               cancelBtnText="Cancel"
@@ -35,7 +48,7 @@ export default class NewRequestView extends Component {
               }}
             />
           </View>
-          <Text style={{flex: 1}}> Hello! </Text>
+          <NewRequestList />
           <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { console.log("Needed by...") } }>
             <Text style={{fontSize: 16}}>Publish my Request</Text>
           </TouchableHighlight>
