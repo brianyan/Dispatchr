@@ -63,7 +63,6 @@ RSpec.describe RequestItemsController, :type => :controller do
       it 'updates all other parameters included in request' do
         create_request_item
         request_item = RequestItem.last
-        #put :update, {request_item: {id: request_item.id, request_id: 1, max_price: 50, quantity_description: "1", item: { name: "apples" }}}
         put :update, {:id => request_item.id, request_item: {max_price: 50, item: { name: "apples" }}}
         request_item.reload
         expect(request_item.max_price).to eq(50) #updated
