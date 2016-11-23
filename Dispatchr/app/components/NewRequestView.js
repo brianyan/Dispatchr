@@ -3,6 +3,11 @@ import { Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
 export default class NewRequestView extends Component {
+  constructor(props){
+    super(props)
+    this.state = { date: "2016-11-01" }
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -10,7 +15,7 @@ export default class NewRequestView extends Component {
             <Text style={{fontSize: 16, color: '#77c2e5' }}>Date Needed</Text>
             <DatePicker
               style={{width: 100}}
-              date={'2016-11-01'}
+              date={this.state.date}
               mode="date"
               placeholder="placeholder"
               format="YYYY-MM-DD"
@@ -19,7 +24,7 @@ export default class NewRequestView extends Component {
               confirmBtnText="Confirm"
               showIcon={false}
               cancelBtnText="Cancel"
-              onDateChange={(date) => {console.log('data changed')}}
+              onDateChange={(date) => {this.setState({date: date})}}
               customStyles={{
                 dateInput: {
                   borderWidth: 0,
@@ -27,7 +32,6 @@ export default class NewRequestView extends Component {
                  dateText: {
                   fontSize: 16,
                 },
-                // ... You can check the source to find the other keys.
               }}
             />
           </View>
