@@ -48,11 +48,13 @@ export default class NewRequestList extends Component {
   }
 
   _renderFooter(){
-   <View style={styles.footerContainer}>
-    <TouchableOpacity style={styles.button} onPress={() => console.log('adding request')}>
-      <Text style={styles.text}>Add a request!</Text>
-    </TouchableOpacity>
-    </View>
+    return( 
+    <View style={styles.footerContainer}>
+      <TouchableOpacity style={styles.button} onPress={() => console.log('adding request')}>
+        <Text style={styles.text}>Add a request!</Text>
+      </TouchableOpacity>
+      </View>
+    )
   }
 }
 
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
   },
   button: {
       borderColor: '#8E8E8E',
-      borderWidth: StyleSheet.hairlineWidth,
+      borderWidth: 1,
       paddingHorizontal: 20,
       paddingVertical: 10,
       borderRadius: 5,
