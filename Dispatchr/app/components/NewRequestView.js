@@ -6,10 +6,14 @@ export default class NewRequestView extends Component {
     return (
       <View style={{flex: 1}}>
           <TouchableHighlight style={styles.buttonWrapper} onPress = {() =>  { console.log("Needed by...") } }>
-            <View style={styles.button}>
+            <View style={styles.neededByButton}>
               <Text style={styles.buttonText}>Date Needed</Text>
               <Text style={styles.buttonText}>11/2/16</Text>
             </View>
+          </TouchableHighlight>
+          <Text style={{flex: 1}}> Hello! </Text>
+          <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { console.log("Needed by...") } }>
+            <Text style={styles.buttonText}>Publish my Request</Text>
           </TouchableHighlight>
       </View>
     );
@@ -19,10 +23,9 @@ export default class NewRequestView extends Component {
 var styles = StyleSheet.create({
   buttonWrapper: {
     height: 50, 
-    borderBottomColor: '#47315a', 
     borderBottomWidth: 1,
   },
-  button: {
+  neededByButton: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       paddingHorizontal: 20,
@@ -30,5 +33,13 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
+  },
+  publishRequestButton: {
+    flex: 0,
+    color: 'orange',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    height: 50
   },
 });
