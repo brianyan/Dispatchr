@@ -90,7 +90,7 @@ class RequestsList extends Component {
    this.setState({refreshing: true});
    this.props.getRequests();
   }
-  
+
    _renderSeparator(sectionId, rowId) {
     return (
       <View key={rowId} style={styles.separator} />

@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 
 
-class NewRequestList extends Component {
+class ItemList extends Component {
   constructor(props) {
     super(props);
 
@@ -111,4 +111,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewRequestList);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
