@@ -35,14 +35,6 @@ class RequestsList extends Component {
     this.props.getRequests();
   }
 
-  componentWillReceiveProps() {
-    this.setState({
-      refreshing: false,
-      dataSource: this.state.dataSource.cloneWithRows(this.props.requests),
-      showFetchButton: this.props.requests.length == 0
-    })
-  }
-
   componentWillReceiveProps (nextProps) {
     if (nextProps.requests !== this.props.requests) {
       this.setState({
