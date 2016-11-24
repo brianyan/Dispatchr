@@ -47,7 +47,7 @@ class ItemList extends Component {
          <View>
            <View style={styles.rowContainer}>
              <Text style={styles.text}>
-               {rowData.itemName}
+               {rowData.itemName} - Qty. {rowData.quantity}
              </Text>
            </View>
          </View>
