@@ -46,7 +46,7 @@ class NewRequestList extends Component {
          <View>
            <View style={styles.rowContainer}>
              <Text style={styles.text}>
-               {rowData}
+               {rowData.itemName}
              </Text>
            </View>
          </View>

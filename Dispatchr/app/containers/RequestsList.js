@@ -90,26 +90,8 @@ class RequestsList extends Component {
    this.setState({refreshing: true});
    this.props.getRequests();
   }
-
-  _renderRow(rowData, sectionId, rowId, highlightRow) {
-    const rowAction = () => {
-      highlightRow(sectionId, rowId);
-      Actions.DetailedView({rowData});
-    };
-    return (
-      <TouchableHighlight onPress={rowAction}>
-         <View>
-           <View style={styles.row}>
-             <Text style={styles.text}>
-               {rowData.name}
-             </Text>
-           </View>
-         </View>
-       </TouchableHighlight>
-    );
-  }
-
-  _renderSeparator(sectionId, rowId) {
+  
+   _renderSeparator(sectionId, rowId) {
     return (
       <View key={rowId} style={styles.separator} />
     );

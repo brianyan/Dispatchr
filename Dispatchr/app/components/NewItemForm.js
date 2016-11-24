@@ -32,8 +32,7 @@ class NewItemForm extends Component {
     // call getValue() to get the values of the form
     var value = this.refs.form.getValue();
     if (value) { // if validation fails, value will be null
-      console.log(value);
-      this.props.addItem();
+      this.props.addItem(value);
     }
   }
 
