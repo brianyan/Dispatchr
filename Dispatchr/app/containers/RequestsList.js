@@ -32,6 +32,7 @@ class RequestsList extends Component {
       showFetchButton: true,
       showNewRequestButton: true
     };
+    this.props.getRequests();
   }
 
   componentWillReceiveProps() {
@@ -43,11 +44,11 @@ class RequestsList extends Component {
   }
 
   _leftSideSelected() {
-    console.log("sfdsaf")
+    console.log("left")
   }
 
   _rightSideSelected() {
-    console.log("asfd")
+    console.log("right")
   }
 
   render() {

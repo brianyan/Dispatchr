@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Text, TextInput,  View, StyleSheet, TouchableHighlight} from 'react-native';
+import { connect } from 'react-redux';
+import { ActionCreators } from '../actions';
+import { bindActionCreators } from 'redux';
 
 // Form setup
 var t = require('tcomb-form-native');
@@ -24,12 +27,13 @@ var options = {
   }
 }; // optional rendering options (see documentation)
 
-export default class NewItemForm extends Component {
+class NewItemForm extends Component {
   onPress() {
     // call getValue() to get the values of the form
     var value = this.refs.form.getValue();
     if (value) { // if validation fails, value will be null
-      console.log(value); // value here is an instance of Person
+      console.log(value);
+      this.props.addItem();
     }
   }
 
@@ -77,3 +81,16 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+/* Connects to the actions, so we can do stuff! Boilerplate!!! */
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    items: state.items
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewItemForm);

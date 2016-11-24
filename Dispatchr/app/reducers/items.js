@@ -3,6 +3,7 @@ import * as types from '../actions/types'
 
 export const items = createReducer([], {
   [types.ADD_ITEM](state, action) {
-    return [];
+    let newState = state.concat(action.payload)
+    return newState;
   },
 });

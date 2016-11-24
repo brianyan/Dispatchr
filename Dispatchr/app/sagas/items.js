@@ -1,9 +1,11 @@
 import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
+import {Actions} from 'react-native-router-flux'
+
 
 function* addItem() {
-  // yield put({ type: types.NEW_REQUEST_SHOW })
+  yield call(Actions.pop);
 }
 
 export default function* root() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 import DatePicker from 'react-native-datepicker';
-import NewRequestList from './NewRequestList'
+import ItemList from './ItemList'
 
 export default class NewRequestView extends Component {
   constructor(props){
@@ -48,7 +48,7 @@ export default class NewRequestView extends Component {
               }}
             />
           </View>
-          <NewRequestList />
+          <ItemList />
           <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { console.log("Needed by...") } }>
             <Text style={{fontSize: 16}}>Publish my Request</Text>
           </TouchableHighlight>

@@ -3,3 +3,4 @@ export const REQUEST_REQUESTED = 'REQUEST_REQUESTED';
 export const REQUEST_RECEIVED = 'REQUEST_RECEIVED';
 export const ADD_ITEM = 'ADD_ITEM';
 export const EDIT_ITEM = 'EDIT_ITEM';
+export const SHOW_ITEM_LIST = 'SHOW_ITEM_LIST';
