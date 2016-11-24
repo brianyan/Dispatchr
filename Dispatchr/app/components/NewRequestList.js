@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ListView, TouchableHighlight, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux';
+import { ActionCreators } from '../actions';
+import { bindActionCreators } from 'redux';
 
 
 
-export default class NewRequestList extends Component {
+class NewRequestList extends Component {
   constructor(props) {
     super(props);
 
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+      dataSource: ds,
     };
   }
+
+  componentWillReceiveProps() {
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRows(this.props.items),
+    })
+  }
+
   render() {
     return (
       <ListView
@@ -89,3 +99,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#8E8E8E',
   },
 });
+
+/* Connects to the actions, so we can do stuff! Boilerplate!!! */
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    items: state.items
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRequestList);
