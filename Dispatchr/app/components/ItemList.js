@@ -17,10 +17,12 @@ class ItemList extends Component {
     };
   }
 
-  componentWillReceiveProps() {
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(this.props.items),
-    })
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.elements !== this.props.items) {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.items)
+      })
+    }
   }
 
   render() {
@@ -31,7 +33,6 @@ class ItemList extends Component {
         renderRow={this._renderRow}
         renderSeparator={this._renderSeparator}
         renderFooter={this._renderFooter}
-
       />
     );
   }
