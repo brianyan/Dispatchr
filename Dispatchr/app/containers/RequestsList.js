@@ -43,6 +43,17 @@ class RequestsList extends Component {
     })
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.requests !== this.props.requests) {
+      this.setState({
+        refreshing: false,
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.requests),
+        showFetchButton: nextProps.requests.length == 0
+      })
+    }
+  }
+  
+
   _leftSideSelected() {
     console.log("left")
   }

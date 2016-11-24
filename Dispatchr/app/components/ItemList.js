@@ -18,7 +18,7 @@ class ItemList extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.elements !== this.props.items) {
+    if (nextProps.items !== this.props.items) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(nextProps.items)
       })
