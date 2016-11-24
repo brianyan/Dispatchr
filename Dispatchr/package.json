@@ -21,7 +21,8 @@
     "redux-form": "^6.2.0",
     "redux-logger": "^2.7.4",
     "redux-saga": "^0.12.1",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "whatwg-fetch": "^1.1.1"
   },
   "jest": {
     "preset": "jest-react-native"
