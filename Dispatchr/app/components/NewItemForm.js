@@ -1,47 +1,79 @@
 import React, { Component } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import TextField from 'react-native-md-textinput';
 import { Text, TextInput,  View, StyleSheet, TouchableHighlight} from 'react-native';
 
-class ItemNameInput extends Component {
-  render() {
-    return (
-      <View>
-        <TextField label={'Name'} highlightColor={'#00BCD4'} />
-      </View>
-    )
-  }
-}
+// Form setup
+var t = require('tcomb-form-native');
+var Form = t.form.Form;
 
-class QuantityInput extends Component {
+// here we are: define your domain model
+var Item = t.struct({
+  itemName: t.String,
+  quantity: t.Number,
+});
+
+var options = {
+  fields: {
+    itemName: {
+      label: 'Item Name',
+      placeholder: 'What do you need?'
+    },
+    quantity: {
+      placeholder: 'How much do you need?',
+      error: 'Only numbers please!'
+    }
+  }
+}; // optional rendering options (see documentation)
+
+export default class NewItemForm extends Component {
+  onPress() {
+    // call getValue() to get the values of the form
+    var value = this.refs.form.getValue();
+    if (value) { // if validation fails, value will be null
+      console.log(value); // value here is an instance of Person
+    }
+  }
+
   render() {
     return (
-      <View>
-        <TextField
-            label={'Qty.'}
-            highlightColor={'#00BCD4'}
-            keyboardType={'numeric'}
+      <View style={styles.container}>
+        {/* display */}
+        <Form
+          ref="form"
+          type={Item}
+          options={options}
         />
-      </View>
-    )
-  }
-}
-
-class NewItemForm extends Component {
-  render() {
-    const { handleSubmit } = this.props;
-    return (
-      <View>
-          <Field name="ItemName" component={ItemNameInput}  />
-          <Field name="Quantity" component={QuantityInput}  />
+        <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>Save</Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
 
-// Decorate the form component
-NewItemForm = reduxForm({
-  form: 'newRequest' // a unique name for this form
-})(NewItemForm);
-
-export default NewItemForm;
+var styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#ffffff',
+  },
+  title: {
+    fontSize: 30,
+    alignSelf: 'center',
+    marginBottom: 30
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  }
+});
