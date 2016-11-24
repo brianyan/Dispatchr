@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ListView, TouchableHighlight, TouchableOpacity} from 'react-native';
+import { Actions } from 'react-native-router-flux'
+
 
 
 export default class NewRequestList extends Component {
@@ -27,6 +29,7 @@ export default class NewRequestList extends Component {
   _renderRow(rowData, sectionId, rowId, highlightRow) {
     const rowAction = () => {
       highlightRow(sectionId, rowId);
+      Actions.EditItemForm({rowData});
     };
     return (
       <TouchableHighlight onPress={rowAction}>
@@ -49,10 +52,10 @@ export default class NewRequestList extends Component {
 
   _renderFooter(){
     return( 
-    <View style={styles.footerContainer}>
-      <TouchableOpacity style={styles.button} onPress={() => console.log('adding request')}>
-        <Text style={styles.text}>Add a request!</Text>
-      </TouchableOpacity>
+      <View style={styles.footerContainer}>
+        <TouchableOpacity style={styles.button} onPress={() => Actions.NewItemForm() }>
+          <Text style={styles.text}>Add an item!</Text>
+        </TouchableOpacity>
       </View>
     )
   }

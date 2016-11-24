@@ -27,7 +27,7 @@ class QuantityInput extends Component {
   }
 }
 
-class NewRequestForm extends Component {
+class NewItemForm extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -40,8 +40,8 @@ class NewRequestForm extends Component {
 }
 
 // Decorate the form component
-NewRequestForm = reduxForm({
+NewItemForm = reduxForm({
   form: 'newRequest' // a unique name for this form
-})(NewRequestForm);
+})(NewItemForm);
 
-export default NewRequestForm;
+export default NewItemForm;
