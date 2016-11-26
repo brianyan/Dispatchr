@@ -178,15 +178,6 @@ class RequestsList extends Component {
     console.log("Added new item, and saved request");
   }
 
-
-  _renderFooter(){
-   <View style={styles.footerContainer}>
-    <TouchableOpacity style={styles.button} onPress={() => console.log('load more')}>
-      <Text style={styles.text}>Load More</Text>
-    </TouchableOpacity>
-    </View>
-  }
-
  _renderRow(rowData, sectionId, rowId, highlightRow) {
    const rowAction = () => {
     highlightRow(sectionId, rowId);
