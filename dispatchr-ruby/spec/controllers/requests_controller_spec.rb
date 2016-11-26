@@ -56,7 +56,7 @@ RSpec.describe RequestsController, :type => :controller do
 	describe 'PATCH/PUT #update' do
 		context 'when id does not exist' do
 			it 'raises error' do
-				expect {put '/items/-1'}.to raise_error
+				expect {put '/requests/-1'}.to raise_error
 			end
 		end
 
@@ -86,7 +86,7 @@ RSpec.describe RequestsController, :type => :controller do
 	describe 'DELETE #destroy' do
 		context 'when id does not exist' do
 			it 'raises error' do
-				expect {delete 'items/-1'}.to raise_error
+				expect {delete '/requests/-1'}.to raise_error
 			end
 		end
 		context 'when id exists' do
