@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Scene, Router, Reducer } from 'react-native-router-flux';
-import RequestItemsGlobalList from './RequestItemsGlobalList';
 import DetailedView from '../components/DetailedView';
+import RequestsList from './RequestsList'
 
 /* Stylesheet */
 const getSceneStyle = (props, computedProps) => {
@@ -15,7 +15,7 @@ const getSceneStyle = (props, computedProps) => {
   };
   if (computedProps.isActive) {
     style.marginTop = computedProps.hideNavBar ? 0 : 64;
-    style.marginBottom = computedProps.hideTabBar ? 0 : 50;
+    // style.marginBottom = computedProps.hideTabBar ? 0 : 50;
   }
   return style;
 };
@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <Router getSceneStyle={getSceneStyle}>
         <Scene key="root">
-          <Scene key = {"RequestItemsGlobalList"} component={RequestItemsGlobalList} title='Global Request List' initial={true}/>
+          <Scene key={"RequestsList"} component={RequestsList} title='Requests' initial={true}/>
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
         </Scene>
       </Router>

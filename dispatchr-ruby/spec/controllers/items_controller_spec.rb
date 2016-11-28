@@ -52,7 +52,7 @@ RSpec.describe ItemsController, :type => :controller do
 			it 'returns 422 unprocessible entity error' do
 				post :create, {name: 'test'}
 				item = Item.last
-				put :create, {id: item.id, bad: 'bad name'}
+				put :update, {id: item.id, bad: 'bad name'}
 				expect(response).to have_http_status(422)
 			end
 		end 
@@ -61,7 +61,7 @@ RSpec.describe ItemsController, :type => :controller do
 			it 'returns 200 status and updates name' do
 				post :create, {name: 'test'}
 				item = Item.last
-				put :create, {id: item.id, name: 'newName'}
+				put :update, {id: item.id, name: 'newName'}
 				item = Item.last
 				expect(item.name).to eq('newName')
 				expect(response).to have_http_status(200)

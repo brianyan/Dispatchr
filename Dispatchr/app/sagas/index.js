@@ -1,7 +1,11 @@
 import { fork } from 'redux-saga/effects';
+import requests from './requests';
+import newRequests from './newRequests.js';
 
-import requestItems from './requestItems';
 
 export default function* root() {
-  yield fork(requestItems);
+  yield [
+    fork(requests),
+    fork(newRequests),
+  ]
 }
