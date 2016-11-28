@@ -44,7 +44,7 @@ class RequestsList extends Component {
       })
     }
   }
-  
+
 
   _leftSideSelected() {
     console.log("left")
@@ -125,14 +125,6 @@ class RequestsList extends Component {
     }
     // Update scroll position
     this._listViewOffset = currentOffset
-  }
-
-  _renderFooter(){
-   <View style={styles.footerContainer}>
-    <TouchableOpacity style={styles.button} onPress={() => console.log('load more')}>
-      <Text style={styles.text}>Load More</Text>
-    </TouchableOpacity>
-    </View>
   }
 
  _renderRow(rowData, sectionId, rowId, highlightRow) {
