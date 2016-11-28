@@ -7,7 +7,6 @@ import { Actions } from 'react-native-router-flux'
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TextField from 'react-native-md-textinput';
-import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
 import Button from 'apsl-react-native-button';
 
 import {
@@ -33,22 +32,26 @@ class RequestsList extends Component {
       showFetchButton: true,
       showNewRequestButton: true
     };
+    this.props.getRequests();
   }
 
-  componentWillReceiveProps() {
-    this.setState({
-      refreshing: false,
-      dataSource: this.state.dataSource.cloneWithRows(this.props.requests),
-      showFetchButton: this.props.requests.length == 0
-    })
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.requests !== this.props.requests) {
+      this.setState({
+        refreshing: false,
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.requests),
+        showFetchButton: nextProps.requests.length == 0
+      })
+    }
   }
+
 
   _leftSideSelected() {
-    console.log("sfdsaf")
+    console.log("left")
   }
 
   _rightSideSelected() {
-    console.log("asfd")
+    console.log("right")
   }
 
   render() {
@@ -78,31 +81,7 @@ class RequestsList extends Component {
         />
         )}
 
-        <PopupDialog
-          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-          dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
-          dialogTitle={<DialogTitle title="New Request" />}
-          width={340}
-          height={450}
-          overlayOpacity={0.75}
-        >
-          <View>
-              <TextField label={'Name'} highlightColor={'#00BCD4'} />
-              <TextField
-                label={'Qty.'}
-                highlightColor={'#00BCD4'}
-                keyboardType={'numeric'}
-              />
-              <Button style={styles.requestButtonSave} onPress={()=>this._saveRequestAndAddNewItem()}textStyle={{color: 'white'}}>
-                Save + Add
-              </Button>
-              <Button style={styles.requestButtonSave} onPress={() => this._saveNewRequest()} textStyle={{color: 'white'}}>
-                Save
-              </Button>
-          </View>
-        </PopupDialog>
-
-        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => this._createNewRequest()} /> : null}
+        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => Actions.NewRequestView() } /> : null}
     </View>
     );
   }
@@ -115,25 +94,7 @@ class RequestsList extends Component {
    this.props.getRequests();
   }
 
-  _renderRow(rowData, sectionId, rowId, highlightRow) {
-    const rowAction = () => {
-      highlightRow(sectionId, rowId);
-      Actions.DetailedView({rowData});
-    };
-    return (
-      <TouchableHighlight onPress={rowAction}>
-         <View>
-           <View style={styles.row}>
-             <Text style={styles.text}>
-               {rowData.name}
-             </Text>
-           </View>
-         </View>
-       </TouchableHighlight>
-    );
-  }
-
-  _renderSeparator(sectionId, rowId) {
+   _renderSeparator(sectionId, rowId) {
     return (
       <View key={rowId} style={styles.separator} />
     );
@@ -164,18 +125,6 @@ class RequestsList extends Component {
     }
     // Update scroll position
     this._listViewOffset = currentOffset
-  }
-
-  _createNewRequest = () => {
-    this.popupDialog.openDialog();
-  }
-
-  _saveNewRequest = () => {
-    console.log("Request Saved!");
-  }
-
-  _saveRequestAndAddNewItem = () => {
-    console.log("Added new item, and saved request");
   }
 
  _renderRow(rowData, sectionId, rowId, highlightRow) {
@@ -218,11 +167,6 @@ var styles = StyleSheet.create({
     fontSize: 20,
     height: 22,
     color: 'white',
-  },
-  popup: {
-    width: 330,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   separator: {
     flex: 1,
