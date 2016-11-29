@@ -1,53 +1,49 @@
 class RequestsController < ApplicationController
+	before_action :set_request, only: [:show, :update, :destroy]
 
-
-	#GET
+	#GET /requests
 	def index
 		render json: Request.all
 	end
 
-	#GET
+	#GET /requests/1
 	def show
-		request = Request.find(params[:id])
-		render json: request
+		render json: @request
 	end
 
-	#POST
+	#POST /requests
 	def create
-		request = Request.new(
-					user_id: params[:user_id],
-					expiration_date: params[:expiration_date]
-			)
-		if request.save
-			render json: request
+		@request = Request.new(request_params)
+		
+		if @request.save
+			render json: @request
 		else
-			render json: request.errors, status: :bad_request
+			render json: @request.errors, status: :bad_request
 		end
 
 	end
 
-	#PATCH/PUT
+	#PATCH/PUT /requests/1
 	def update	
-		request = Request.find(params[:id])
-		request.expiration_date = params[:expiration_date].present? ? params[:expiration_date] : request.expiration_date
-		request.user_id = params[:user_id].present? ? params[:user_id] : request.user_id
-
-		if request.save
-			render json: request
+		if @request.update(request_params)
+			render json: @request
 		else
-			render json: request.errors, status: :unprocessable_entity
-		end
-
+			render json: @request.errors, status: :bad_request
 	end
 
-	#DELETE
+	#DELETE /requests/1
 	def destroy
-		request = Request.find(params[:id])
 		render status: 200, json: request.destroy
 	end
 
-	def request_params
-		params.require(:request).permit(:user_id, :expiration_date)
-	end
+	private
+
+		def set_request
+				@request = Request.find(params[:id])
+		end
+
+		def request_params
+			params.require(:request).permit(:user_id, :expiration_date)
+		end
 
 end
