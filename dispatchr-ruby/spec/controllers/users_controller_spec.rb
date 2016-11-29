@@ -1,10 +1,12 @@
 require 'rails_helper'
+require 'pp'
+require 'pry'
 
 RSpec.describe UsersController, :type => :controller do
 
   def create_valid_user
     post :create, {name: 'test_name', username: 'test_username', email: 'test@test.com',
-                   address: {address: '123 Main Rd, Goleta CA 93117 USA', latitude: 0, longtitude: 0}}
+                   address: {address: '123 Main Rd, Goleta CA 93117 USA', latitude: 0, longitude: 0}}
   end
 
   describe 'GET #show' do

@@ -1,3 +1,5 @@
+require 'pry'
+
 class UsersController < ApplicationController
 
   def index
@@ -10,7 +12,6 @@ class UsersController < ApplicationController
   end
 
   def create
-
     address = Address.new(
         address: params[:address][:address],
         latitude: params[:address][:latitude],
@@ -39,7 +40,19 @@ class UsersController < ApplicationController
     user.name = params[:name].present? ? params[:name] : user.name
     user.username = params[:username].present? ? params[:username] : user.username
     user.email = params[:email].present? ? params[:email] : user.email
+    # user.address = params[:address].present? ? params[:address] : user.address
 
+
+    if params[:address].present?
+      new_address = Address.new(
+          address: params[:address][:address],
+          latitude: params[:address][:latitude],
+          longitude: params[:address][:longitude]
+      )
+      user.address.destroy
+      user.address = new_address
+    end
+    
     if user.save
       render json: user
     else
