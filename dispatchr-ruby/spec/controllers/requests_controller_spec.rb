@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe RequestsController, :type => :controller do
 
 	def create_request
-		post :create, {user_id: 1, expiration_date: '28-11-16'}
+		post :create, { request:{user_id: 1, expiration_date: '28-11-16'} }
 	end
 
 	describe 'GET #show' do
@@ -19,6 +19,19 @@ RSpec.describe RequestsController, :type => :controller do
 		context 'when id is invalid' do
 			it 'raises error' do
 				expect {get :show, {id: -1}}.to raise_error
+			end
+		end
+	end
+
+	describe 'GET #search_user' do
+		context 'when user_id is valid' do
+			it 'returns all matching user_id entries' do
+				(0..2).each do |i|
+					create_request
+				end
+				get :search_user, user_id: 1
+				parsed_response = JSON.parse(response.body)
+				expect(parsed_response.length).to eq(3)
 			end
 		end
 	end
@@ -40,14 +53,14 @@ RSpec.describe RequestsController, :type => :controller do
 
 		context 'when there is no user_id' do
 			it 'returns 400 bad request' do
-				post :create, {expiration_date: '0'}
+				post :create, {request: {expiration_date: '0'}}
 				expect(response).to	have_http_status(400)
 			end
 		end
 
 		context 'when there is no expiration_date' do
 			it 'returns 400 bad request' do
-				post :create, {user_id: 1}
+				post :create, {request: {user_id: 1}}
 				expect(response).to	have_http_status(400)
 			end
 		end
@@ -64,7 +77,7 @@ RSpec.describe RequestsController, :type => :controller do
 			it 'returns the same item' do
 				create_request
 				request = Request.last
-				put :update, {id: request.id, user_id: 5}
+				put :update, {:id => request.id, request: {id: request.id, user_id: 5}}
 				updated_request = Request.last
 				expect(updated_request.user_id).to eq(5)
 				expect(updated_request.expiration_date).to eq(request.expiration_date)
@@ -75,7 +88,7 @@ RSpec.describe RequestsController, :type => :controller do
 			it 'updates parameters and returns 200 status' do
 				create_request
 				request = Request.last
-				put :update, {id: request.id, user_id: 5, expiration_date: '29-11-16'}
+				put :update, {:id => request.id, request: {id: request.id, user_id: 5, expiration_date: '29-11-16'}}
 				updated_request = Request.last
 				expect(updated_request.user_id).to eq(5)
 				expect(updated_request.expiration_date).to eq("0029-11-16T00:00:00.000Z")
@@ -93,7 +106,7 @@ RSpec.describe RequestsController, :type => :controller do
 			it 'deletes the entry and returns 200 status' do
 				create_request
 				request = Request.last
-				delete :destroy, {id: request.id}
+				delete :destroy, {:id => request.id, request: {id: request.id}}
 				expect(response).to have_http_status(200)
 				expect {get :show, {id: request.id}}.to raise_error
 			end

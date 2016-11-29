@@ -11,14 +11,21 @@ class RequestsController < ApplicationController
 		render json: @request
 	end
 
-	def test
+	#GET /requests/user/?user_id=1
+	def search_user
+		#get user_id from URL
 		url = request.original_url
-		# Rails.logger uri
 		uri = URI.parse(url)
 		params = CGI.parse(uri.query)
-		@request = Request.find_by(user_id: "#{params['user_id'].first}")
 
-		render json: @request
+		#find all Requests where user_id matches
+		arr = []
+		Request.where(user_id: "#{params['user_id'].first}").find_each do |req|
+			arr.push(req)
+		end
+
+		#render as json
+		render json: arr
 	end
 
 	#POST /requests
@@ -44,7 +51,7 @@ class RequestsController < ApplicationController
 
 	#DELETE /requests/1
 	def destroy
-		render status: 200, json: request.destroy
+		render status: 200, json: @request.destroy
 	end
 
 	private
