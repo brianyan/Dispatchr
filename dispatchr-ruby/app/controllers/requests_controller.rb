@@ -13,19 +13,19 @@ class RequestsController < ApplicationController
 
 	#GET /requests/user/?user_id=1
 	def search_user
-		#get user_id from URL
-		url = request.original_url
-		uri = URI.parse(url)
-		params = CGI.parse(uri.query)
-
-		#find all Requests where user_id matches
-		arr = []
-		Request.where(user_id: "#{params['user_id'].first}").find_each do |req|
-			arr.push(req)
+		
+		user_reqs = []
+		if params[:user_id].present?
+			#find all Requests where user_id matches
+			Request.where(user_id: "#{params[:user_id].first}").find_each do |req|
+				user_reqs.push(req)
+			end
+			render json: user_reqs
+		else
+			render status: 404, json: @request
 		end
-
-		#render as json
-		render json: arr
+		
+		
 	end
 
 	#POST /requests
