@@ -11,6 +11,16 @@ class RequestsController < ApplicationController
 		render json: @request
 	end
 
+	def test
+		url = request.original_url
+		# Rails.logger uri
+		uri = URI.parse(url)
+		params = CGI.parse(uri.query)
+		@request = Request.find_by(user_id: "#{params['user_id'].first}")
+
+		render json: @request
+	end
+
 	#POST /requests
 	def create
 		@request = Request.new(request_params)
@@ -29,6 +39,7 @@ class RequestsController < ApplicationController
 			render json: @request
 		else
 			render json: @request.errors, status: :bad_request
+		end
 	end
 
 	#DELETE /requests/1
@@ -37,7 +48,6 @@ class RequestsController < ApplicationController
 	end
 
 	private
-
 		def set_request
 				@request = Request.find(params[:id])
 		end
