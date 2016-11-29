@@ -1,67 +1,77 @@
 import React, { Component } from 'react';
-import TextField from 'react-native-md-textinput';
-import PopupDialog, { SlideAnimation, DialogTitle } from 'react-native-popup-dialog';
-import Button from 'apsl-react-native-button';
-import { Text, View, StyleSheet} from 'react-native';
-import { connect } from 'react-redux';
-import { ActionCreators } from '../actions';
-import { bindActionCreators } from 'redux';
-import ActionButton from 'react-native-action-button';
-
+import { Text, View, StyleSheet, TouchableHighlight} from 'react-native';
+import DatePicker from 'react-native-datepicker';
+import ItemList from './ItemList'
 
 export default class NewRequestView extends Component {
+  constructor(props){
+    super(props)
+
+    var today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth()+1;
+    var year = today.getFullYear();
+
+    if(day<10) {
+        day='0'+day
+    } 
+    if(month<10) {
+        month='0'+month
+    } 
+    
+    today = year + '-' + month + '-' + day;
+    this.state = { date: today }
+  }
+
   render() {
     return (
-      <View>
-        <PopupDialog
-            ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-            dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom' }) }
-            dialogTitle={<DialogTitle title="New Request" />}
-            width={340}
-            height={450}
-            overlayOpacity={0.75}
-          >
-            <View>
-                <TextField label={'Name'} highlightColor={'#00BCD4'} />
-                <TextField
-                  label={'Qty.'}
-                  highlightColor={'#00BCD4'}
-                  keyboardType={'numeric'}
-                />
-                <Button style={styles.requestButtonSave} onPress={()=>this._saveRequestAndAddNewItem()}textStyle={{color: 'white'}}>
-                  Save + Add
-                </Button>
-                <Button style={styles.requestButtonSave} onPress={() => this._saveNewRequest()} textStyle={{color: 'white'}}>
-                  Save
-                </Button>
-            </View>
-          </PopupDialog>
-
-          <ActionButton buttonColor="#0288D1" onPress={() => this._showPopup()} />
-        </View>
+      <View style={{flex: 1}}>
+          <View style={styles.expirationButton}>
+            <Text style={{fontSize: 16, color: '#77c2e5' }}>Date Needed</Text>
+            <DatePicker
+              style={{width: 100}}
+              date={this.state.date}
+              mode="date"
+              placeholder="placeholder"
+              format="YYYY-MM-DD"
+              confirmBtnText="Confirm"
+              showIcon={false}
+              cancelBtnText="Cancel"
+              onDateChange={(date) => {this.setState({date: date})}}
+              customStyles={{
+                dateInput: {
+                  borderWidth: 0,
+                },
+                 dateText: {
+                  fontSize: 16,
+                },
+              }}
+            />
+          </View>
+          <ItemList />
+          <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { console.log("Needed by...") } }>
+            <Text style={{fontSize: 16}}>Publish my Request</Text>
+          </TouchableHighlight>
+      </View>
     );
   }
-
-  _showPopup = () => {
-    console.log('hit');
-    this.popupDialog.openDialog();
-  }
-  _saveNewRequest = () => {
-    console.log("Request Saved!");
-  }
-
-  _saveRequestAndAddNewItem = () => {
-    console.log("Added new item, and saved request");
-  }
-
 }
 
-const styles = StyleSheet.create({
-  requestButtonSave: {
-    borderColor: '#2980b9',
-    backgroundColor: '#3498db',
-    width: 100,
-    height: 25
+var styles = StyleSheet.create({
+  expirationButton: {
+    height: 50, 
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  publishRequestButton: {
+    flex: 0,
+    backgroundColor : '#77c2e5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    height: 50
   },
 });
-

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Scene, Router, Reducer } from 'react-native-router-flux';
 import DetailedView from '../components/DetailedView';
 import RequestsList from './RequestsList'
+import NewRequestView from '../components/NewRequestView';
+import NewItemForm from '../components/NewItemForm';
+import EditItemForm from '../components/EditItemForm';
 
 /* Stylesheet */
 const getSceneStyle = (props, computedProps) => {
@@ -15,7 +18,6 @@ const getSceneStyle = (props, computedProps) => {
   };
   if (computedProps.isActive) {
     style.marginTop = computedProps.hideNavBar ? 0 : 64;
-    // style.marginBottom = computedProps.hideTabBar ? 0 : 50;
   }
   return style;
 };
@@ -25,8 +27,11 @@ class App extends Component {
     return (
       <Router getSceneStyle={getSceneStyle}>
         <Scene key="root">
-          <Scene key={"RequestsList"} component={RequestsList} title='Requests' initial={true}/>
+          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' initial={true}/>
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
+          <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
+          <Scene key = {"NewItemForm"} component = {NewItemForm} title = 'Add Item' />
+          <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
         </Scene>
       </Router>
     );
