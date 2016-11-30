@@ -6,7 +6,7 @@ export default class RequestListCell extends Component {
     return (
       <TouchableHighlight onPress={this.props.onSelect}>
         <View>
-          <Text>
+          <Text style={{fontWeight: 'bold'}}>
             {this.props.request.user.name}
           </Text>
           {this.props.request.request_items.map((requestItem) => {
