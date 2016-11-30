@@ -1,5 +1,3 @@
-
-
 class UsersController < ApplicationController
 
   def index
@@ -9,6 +7,19 @@ class UsersController < ApplicationController
   def show
     user = User.find(params[:id])
     render json: user
+  end
+
+  def login
+    if params[:username].present?
+      @user = User.find_by(username: params[:username])
+      if @user
+        render json: @user
+      else
+        render status: 404, json: @user  
+      end
+    else
+      render status: 404, json: @user
+    end
   end
 
   def create
@@ -31,8 +42,6 @@ class UsersController < ApplicationController
     else
       render json: user.errors, status: :bad_request
     end
-
-
   end
 
   def update
