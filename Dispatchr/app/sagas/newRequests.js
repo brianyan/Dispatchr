@@ -1,11 +1,26 @@
 import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
+import { Actions } from 'react-native-router-flux';
 
-function* newRequestPopup() {
-  // yield put({ type: types.NEW_REQUEST_SHOW })
+function* createRequest(requestData) {
+  var convertedDate = requestData.request.expirationDate.split('-');
+  convertedDate = convertedDate[2] + "-" + convertedDate[1] + "-" + convertedDate[0];
+  const requestItemJSON = JSON.stringify({request : {
+    expiration_date: convertedDate,
+    user_id: 1,
+    request_items: requestData.request.items
+  }});
+  const response = yield call(fetch, 'https://dispatchr-api.herokuapp.com/requests', { method: 'POST', headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  }, body: requestItemJSON } );
+  console.log(response);
+  const json =  yield call(response.json.bind(response)) // better option
+  console.log(json);
+  yield call(Actions.pop);
 }
 
 export default function* root() {
-  yield takeLatest(types.ADD_NEW_REQUEST, newRequestPopup);
+  yield takeLatest(types.ADD_NEW_REQUEST, createRequest);
 }
