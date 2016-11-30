@@ -14,11 +14,11 @@ export default class NewRequestView extends Component {
 
     if(day<10) {
         day='0'+day
-    } 
+    }
     if(month<10) {
         month='0'+month
-    } 
-    
+    }
+
     today = year + '-' + month + '-' + day;
     this.state = { date: today }
   }
@@ -50,7 +50,7 @@ export default class NewRequestView extends Component {
           </View>
           <ItemList />
           <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { console.log("Needed by...") } }>
-            <Text style={{fontSize: 16}}>Publish my Request</Text>
+            <Text style={styles.publishRequestButtonText}>Publish my Request</Text>
           </TouchableHighlight>
       </View>
     );
@@ -59,7 +59,7 @@ export default class NewRequestView extends Component {
 
 var styles = StyleSheet.create({
   expirationButton: {
-    height: 50, 
+    height: 50,
     borderBottomWidth: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -74,4 +74,9 @@ var styles = StyleSheet.create({
     borderTopWidth: 1,
     height: 50
   },
+  publishRequestButtonText: {
+    fontSize: 16,
+    color: 'white',
+    fontFamily: 'Helvetica Neue'
+  }
 });

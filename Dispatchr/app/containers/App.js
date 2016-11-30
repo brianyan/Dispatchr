@@ -6,6 +6,7 @@ import RequestsList from './RequestsList'
 import NewRequestView from '../components/NewRequestView';
 import NewItemForm from '../components/NewItemForm';
 import EditItemForm from '../components/EditItemForm';
+import {StyleSheet, StatusBar} from 'react-native';
 
 
 /* Stylesheet */
@@ -25,9 +26,13 @@ const getSceneStyle = (props, computedProps) => {
 };
 
 class App extends Component {
+
   render() {
+    StatusBar.setBarStyle('light-content', true);
+
     return (
-      <Router getSceneStyle={getSceneStyle}>
+      <Router navigationBarStyle = {styles.navBar} titleStyle = {styles.title} getSceneStyle={getSceneStyle} barButtonIconStyle = {styles.backButtonStyle}>
+
         <Scene key="root">
           <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE}/>
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
@@ -41,4 +46,17 @@ class App extends Component {
   }
 }
 
+var styles = StyleSheet.create({
+    navBar: {
+      backgroundColor: '#48BBEC',
+    },
+    title: {
+      color: 'white',
+      fontFamily: 'Helvetica Neue'
+    },
+    backButtonStyle: {
+      tintColor: 'white',
+    }
+
+});
 export default App;
