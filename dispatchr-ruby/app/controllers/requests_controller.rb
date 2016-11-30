@@ -13,24 +13,22 @@ class RequestsController < ApplicationController
 
 	#GET /requests/user/?user_id=1
 	def search_user
-		
+
 		if params[:user_id].present?
 			@requests = Request.where(user_id: params[:user_id])
 			render json: @requests
 		else
 			render status: 404, json: @request
 		end
-		
-		
+
+
 	end
 
 	#POST /requests
 	def create
 		@request = Request.new(request_params)
-		# @request.request_items = RequestItem.create_list(param[:request_items])
-		@request.request_items = RequestItem.new(request_id: @request.id, max_price: params[:request_items][:max_price], 
-								quantity_description: params[:request_items][:quantity_description], 
-								item: params[:request_items][:item])
+		puts request_params.to_json
+		@request.request_items = RequestItem.create_from_list(request_params[:request_items])
 		if @request.save
 			render json: @request
 		else
@@ -40,7 +38,7 @@ class RequestsController < ApplicationController
 	end
 
 	#PATCH/PUT /requests/1
-	def update	
+	def update
 		if @request.update(request_params)
 			render json: @request
 		else
@@ -59,7 +57,7 @@ class RequestsController < ApplicationController
 		end
 
 		def request_params
-			params.require(:request).permit(:user_id, :expiration_date, :request_items)
+			params.require(:request).permit(:user_id, :expiration_date, :request_items => [])
 		end
 
 end
