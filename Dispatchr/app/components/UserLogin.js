@@ -32,28 +32,6 @@ export default class UserLogin extends Component {
       <TouchableHighlight style={styles.button} onPress={this._loginAction.bind(this)}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableHighlight>
-        {/*// <Text style = {styles.red}>
-        //   LOGIN HERE
-        // </Text>
-        // <Hideo
-        //   iconClass={FontAwesomeIcon}
-        //   iconName={'envelope'}
-        //   iconColor={'white'}
-        //   // this is used as backgroundColor of icon container view.
-        //   iconBackgroundColor={'#f2a59d'}
-        //   inputStyle={{ color: '#464949' }}
-        // />
-        // <Text> Hello </Text>
-        // <Hideo
-        //   style = {styles.card2}
-        //   iconClass={FontAwesomeIcon}
-        //   iconName={'user-circle'}
-        //   iconColor={'white'}
-        //   // this is used as backgroundColor of icon container view.
-        //   iconBackgroundColor={'#f2a59d'}
-        //   inputStyle={{ color: '#464949' }}
-        // />
-        */}
       </View>
     );
   }
