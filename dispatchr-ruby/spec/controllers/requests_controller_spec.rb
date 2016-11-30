@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe RequestsController, :type => :controller do
 
 	def create_request
-		post :create, { request:{user_id: 1, expiration_date: '28-11-16'} }
+		post :create, { request:{user_id: 1, expiration_date: '28-11-16', request_items: [{name: "Candy", "max_price":10, "quantity_description":"3"}]} }
 	end
 
 	describe 'GET #show' do
@@ -48,20 +48,6 @@ RSpec.describe RequestsController, :type => :controller do
 				request = Request.last
 				expect(request.user_id).to eq(1)
 				expect(request.expiration_date).to eq("0028-11-16T00:00:00.000Z")
-			end
-		end
-
-		context 'when there is no user_id' do
-			it 'returns 400 bad request' do
-				post :create, {request: {expiration_date: '0'}}
-				expect(response).to	have_http_status(400)
-			end
-		end
-
-		context 'when there is no expiration_date' do
-			it 'returns 400 bad request' do
-				post :create, {request: {user_id: 1}}
-				expect(response).to	have_http_status(400)
 			end
 		end
 	end

@@ -4,5 +4,5 @@ class Request < ApplicationRecord
 
   validates :user_id, presence: true
   validates :expiration_date, presence: true
-  
+  validates :request_items, presence: true
 end
