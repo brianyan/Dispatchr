@@ -56,13 +56,6 @@ RSpec.describe RequestItemsController, :type => :controller do
         expect(request_item.item.name).to eq("bananas")
       end
     end
-
-    context 'when there is a missing parameter' do
-      it 'returns 400 bad request' do
-        create_bad_request_item
-        expect(response).to have_http_status(400)
-      end
-    end
   end
 
   describe 'PATCH/PUT #update' do
@@ -91,9 +84,9 @@ RSpec.describe RequestItemsController, :type => :controller do
         request_item = RequestItem.last
         put :update, {:id => request_item.id, request_item: {request_id: 2, max_price: 50, quantity_description: "100", item: { name: "test" }}}
         request_item.reload
-        expect(request_item.request_id).to eq(2) 
-        expect(request_item.max_price).to eq(50) 
-        expect(request_item.quantity_description).to eq("100") 
+        expect(request_item.request_id).to eq(2)
+        expect(request_item.max_price).to eq(50)
+        expect(request_item.quantity_description).to eq("100")
         expect(request_item.item.name).to eq("test")
       end
     end
