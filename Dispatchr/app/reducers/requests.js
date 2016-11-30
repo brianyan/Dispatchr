@@ -6,7 +6,6 @@ export const requests = createReducer([], {
     return state;
   },
   [types.REQUEST_RECEIVED](state, action) {
-    let newState = state.concat(action.payload);
-    return newState;
+    return action.payload;
   },
 });
