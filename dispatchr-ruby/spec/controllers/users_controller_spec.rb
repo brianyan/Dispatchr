@@ -26,6 +26,19 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
+  describe 'GET #login' do
+    context 'when username is valid' do
+      it 'returns matching user' do
+        create_valid_user
+        get :login, username: 'test_username'
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response['name']).to eq('test_name')
+        expect(parsed_response['username']).to eq('test_username')
+        expect(parsed_response['email']).to eq('test@test.com')
+      end
+    end
+  end
+
   describe 'POST #create' do
     context 'when user is successfully created' do
       it 'returns 200 status' do
