@@ -14,6 +14,7 @@ export default class DetailedView extends Component {
       ]
     )
   }
+
   _alertHide() {
     Alert.alert(
       'Request Declined',
@@ -29,10 +30,19 @@ export default class DetailedView extends Component {
       <View style = {{flex: 1}}>
         <View style = {styles.attributeWrapper}>
           <Text style = {styles.attributeText}>
-            {this.props.rowData.id}
+            Jordan wants...
           </Text>
           <Text style = {styles.attributeText}>
-            {this.props.rowData.name}
+            - Water (Qty: 1 gallon, Max Price: 5)
+          </Text>
+          <Text style = {styles.attributeText}>
+            - Chedder Cheese (Qty: 1 oz, Max Price: 2)
+          </Text>
+          <Text style = {styles.attributeText}>
+            - Underwear (Qty: 6 pairs, Max Price: 3)
+          </Text>
+          <Text style = {styles.attributeText}>
+            By 12/2/16
           </Text>
         </View>
         <View style={styles.content}>
