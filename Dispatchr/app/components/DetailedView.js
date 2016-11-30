@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Alert, TouchableHighlight} from 'react-native';
 import { Actions} from 'react-native-router-flux';
-var MapView = require('react-native-maps');
+// var MapView = require('react-native-maps');
 
 
 export default class DetailedView extends Component {
@@ -69,40 +69,3 @@ const styles = StyleSheet.create({
       marginBottom: 5
     }
 });
-
-// var styles = StyleSheet.create({
-//   HideButton: {
-//     backgroundColor : 'red',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     borderTopWidth: 1,
-//     height: 50,
-//     flex: 0
-//   },
-//   AcceptButton: {
-//     backgroundColor : 'green',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     borderTopWidth: 1,
-//     height: 50,
-//     flex: 0
-//   },
-//   buttonWrapper: {
-//     flexDirection: 'row',
-//     flex: 0,
-//   },
-//   attributeWrapper: {
-//     flexDirection: 'row',
-//     flex: 1,
-//   },
-//   attributeText: {
-//     fontSize: 18,
-//     fontFamily: "Helvetica Neue",
-//     color: '#48BBEC',
-//     alignSelf: 'center',
-//     marginTop: 10,
-//   },
-//   buttonText:{
-//     color: 'white'
-//   },
-// });
