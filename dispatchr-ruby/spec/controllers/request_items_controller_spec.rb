@@ -27,6 +27,19 @@ RSpec.describe RequestItemsController, :type => :controller do
     end
   end
 
+  describe 'GET #search_request' do
+    context 'when request_id is valid' do
+      it 'returns all matching request_id entries' do
+        (0..2).each do |i|
+          create_request_item
+        end
+        get :search_request, request_id: 1
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response.length).to eq(3)
+      end
+    end
+  end
+
   describe 'POST #create' do
     context 'when request is successfully created' do
       it 'returns 200 status' do
