@@ -27,7 +27,10 @@ class RequestsController < ApplicationController
 	#POST /requests
 	def create
 		@request = Request.new(request_params)
-		
+		# @request.request_items = RequestItem.create_list(param[:request_items])
+		@request.request_items = RequestItem.new(request_id: @request.id, max_price: params[:request_items][:max_price], 
+								quantity_description: params[:request_items][:quantity_description], 
+								item: params[:request_items][:item])
 		if @request.save
 			render json: @request
 		else
@@ -56,7 +59,7 @@ class RequestsController < ApplicationController
 		end
 
 		def request_params
-			params.require(:request).permit(:user_id, :expiration_date)
+			params.require(:request).permit(:user_id, :expiration_date, :request_items)
 		end
 
 end

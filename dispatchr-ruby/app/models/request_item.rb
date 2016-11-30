@@ -7,4 +7,5 @@ class RequestItem < ApplicationRecord
   validates :request_id, presence: true
   validates :max_price, presence: true
   validates :quantity_description, presence: true
+
 end
