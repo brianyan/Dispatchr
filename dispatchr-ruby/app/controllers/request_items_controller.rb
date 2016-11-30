@@ -13,6 +13,16 @@ class RequestItemsController < ApplicationController
     render json: @request_item
   end
 
+  def search_request
+
+    if params[:request_id].present?
+      @request_items = RequestItem.where(request_id: params[:request_id])
+      render json: @request_items
+    else
+      render status: 404, json: @request_item
+    end
+  end
+
   # POST /request_items
   # POST /request_items.json
   def create
