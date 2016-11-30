@@ -10,18 +10,23 @@ var Form = t.form.Form;
 
 // here we are: define your domain model
 var Item = t.struct({
-  itemName: t.String,
-  quantity: t.String,
+  name: t.String,
+  quantity_description: t.String,
+  max_price: t.Number
 });
 
 var options = {
   fields: {
-    itemName: {
+    name: {
       label: 'Item Name',
       placeholder: 'What do you need?'
     },
-    quantity: {
-      placeholder: 'How much do you need?'
+    quantity_description: {
+      placeholder: 'How much do you need?',
+    },
+    max_price: {
+      placeholder: 'How much are you willing to pay?',
+      error: 'Only numbers please!'
     }
   }
 }; // optional rendering options (see documentation)

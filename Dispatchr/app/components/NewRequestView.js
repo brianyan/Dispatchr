@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import ItemList from './ItemList'
+import { connect } from 'react-redux';
+import { ActionCreators } from '../actions';
+import { bindActionCreators } from 'redux';
 
-export default class NewRequestView extends Component {
+class NewRequestView extends Component {
   constructor(props){
-    super(props)
-
+    super(props);
     var today = new Date();
     var day = today.getDate();
     var month = today.getMonth()+1;
@@ -21,6 +23,13 @@ export default class NewRequestView extends Component {
 
     today = year + '-' + month + '-' + day;
     this.state = { date: today }
+  }
+
+  _newRequest() {
+    this.props.newRequest({
+      items: this.props.items,
+      expirationDate: this.state.date
+    });
   }
 
   render() {
@@ -48,8 +57,8 @@ export default class NewRequestView extends Component {
               }}
             />
           </View>
-          <ItemList />
-          <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { console.log("Needed by...") } }>
+          <ItemList onAddItem={this._itemAdded} />
+          <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { this._newRequest() } }>
             <Text style={styles.publishRequestButtonText}>Publish my Request</Text>
           </TouchableHighlight>
       </View>
@@ -80,3 +89,17 @@ var styles = StyleSheet.create({
     fontFamily: 'Helvetica Neue'
   }
 });
+
+/* Connects to the actions, so we can do stuff! Boilerplate!!! */
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    newRequest: state.newRequest,
+    items: state.items
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRequestView);

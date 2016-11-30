@@ -47,7 +47,7 @@ class ItemList extends Component {
          <View>
            <View style={styles.rowContainer}>
              <Text style={styles.text}>
-               {rowData.itemName} - Qty. {rowData.quantity}
+               {rowData.name} - Qty. {rowData.quantity_description}
              </Text>
            </View>
          </View>
@@ -62,9 +62,9 @@ class ItemList extends Component {
   }
 
   _renderFooter(){
-    return( 
+    return(
       <View style={styles.footerContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => Actions.NewItemForm() }>
+        <TouchableOpacity style={styles.button} onPress={() => Actions.NewItemForm()}>
           <Text style={styles.text}>Add an item!</Text>
         </TouchableOpacity>
       </View>

@@ -8,6 +8,7 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import TextField from 'react-native-md-textinput';
 import Button from 'apsl-react-native-button';
+import RequestListCell from '../components/RequestListCell';
 
 import {
   View,
@@ -30,9 +31,10 @@ class RequestsList extends Component {
       refreshing: false,
       dataSource: ds,
       showFetchButton: true,
-      showNewRequestButton: true
+      showNewRequestButton: true,
+      selection: 'Global'
     };
-    this.props.getRequests();
+    this.props.getRequests(this.state.selection);
   }
 
   componentWillReceiveProps (nextProps) {
@@ -47,19 +49,21 @@ class RequestsList extends Component {
 
 
   _leftSideSelected() {
-    console.log("left")
+    this.state.selection = 'Global';
+    this.props.getRequests(this.state.selection);
   }
 
   _rightSideSelected() {
-    console.log("right")
+    this.state.selection = 'User';
+    this.props.getRequests(this.state.selection);
   }
 
   render() {
     return (
       <View style={{flex: 1}}>
-        <ListFilterButton style={{flex: 1}} leftSideSelected={this._leftSideSelected} rightSideSelected={this._rightSideSelected}></ListFilterButton>
+        <ListFilterButton style={{flex: 1}} leftSideSelected={this._leftSideSelected.bind(this)} rightSideSelected={this._rightSideSelected.bind(this)}></ListFilterButton>
         {renderIf(this.state.showFetchButton)(
-          <TouchableHighlight onPress = {() =>  {this.props.getRequests()} }>
+          <TouchableHighlight onPress = {() =>  {this.props.getRequests(this.state.selection)} }>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Press me to Refresh!</Text>
             </View>
@@ -91,7 +95,7 @@ class RequestsList extends Component {
 
   _onRefresh() {
    this.setState({refreshing: true});
-   this.props.getRequests();
+   this.props.getRequests(this.state.selection);
   }
 
    _renderSeparator(sectionId, rowId) {
@@ -133,15 +137,7 @@ class RequestsList extends Component {
      Actions.DetailedView({rowData});
    };
    return (
-    <TouchableHighlight onPress={rowAction}>
-       <View>
-         <View style={styles.row}>
-           <Text style={styles.text}>
-             {rowData.name}
-           </Text>
-         </View>
-       </View>
-     </TouchableHighlight>
+     <RequestListCell request={rowData} onSelect={rowAction}/>
    );
  }
 
