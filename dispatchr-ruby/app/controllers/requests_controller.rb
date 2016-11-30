@@ -14,13 +14,9 @@ class RequestsController < ApplicationController
 	#GET /requests/user/?user_id=1
 	def search_user
 		
-		user_reqs = []
 		if params[:user_id].present?
-			#find all Requests where user_id matches
-			Request.where(user_id: "#{params[:user_id].first}").find_each do |req|
-				user_reqs.push(req)
-			end
-			render json: user_reqs
+			@requests = Request.where(user_id: params[:user_id])
+			render json: @requests
 		else
 			render status: 404, json: @request
 		end

@@ -15,12 +15,9 @@ class RequestItemsController < ApplicationController
 
   def search_request
 
-    request_items = []
     if params[:request_id].present?
-      RequestItem.where(request_id: params[:request_id].first).find_each do |reqItem|
-        request_items.push(reqItem)
-      end
-      render json: request_items
+      @request_items = RequestItem.where(request_id: params[:request_id])
+      render json: @request_items
     else
       render status: 404, json: @request_item
     end
