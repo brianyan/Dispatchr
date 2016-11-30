@@ -8,7 +8,7 @@ function* createRequest(requestData) {
   convertedDate = convertedDate[2] + "-" + convertedDate[1] + "-" + convertedDate[0];
   const requestItemJSON = JSON.stringify({request : {
     expiration_date: convertedDate,
-    user_id: 1,
+    user_id: 2,
     request_items: requestData.request.items
   }});
   const response = yield call(fetch, 'https://dispatchr-api.herokuapp.com/requests', { method: 'POST', headers: {

@@ -57,8 +57,8 @@ class NewRequestView extends Component {
               }}
             />
           </View>
+          <ItemList onAddItem={this._itemAdded} />
           <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { this._newRequest() } }>
-            <ItemList onAddItem={this._itemAdded}/>
             <Text style={styles.publishRequestButtonText}>Publish my Request</Text>
           </TouchableHighlight>
       </View>
