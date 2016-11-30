@@ -11,7 +11,7 @@ var Form = t.form.Form;
 // here we are: define your domain model
 var Item = t.struct({
   itemName: t.String,
-  quantity: t.Number,
+  quantity: t.String,
 });
 
 var options = {
@@ -21,8 +21,7 @@ var options = {
       placeholder: 'What do you need?'
     },
     quantity: {
-      placeholder: 'How much do you need?',
-      error: 'Only numbers please!'
+      placeholder: 'How much do you need?'
     }
   }
 }; // optional rendering options (see documentation)
@@ -41,7 +40,7 @@ class NewItemForm extends Component {
       <View style={styles.container}>
         {/* display */}
         <Form
-          ref="form"
+          ref = "form"
           type={Item}
           options={options}
         />
