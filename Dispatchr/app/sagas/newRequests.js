@@ -11,13 +11,16 @@ function* createRequest(requestData) {
     user_id: 2,
     request_items: requestData.request.items
   }});
-  const response = yield call(fetch, 'https://dispatchr-api.herokuapp.com/requests', { method: 'POST', headers: {
+  const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-  }, body: requestItemJSON } );
-  console.log(response);
+  };
+  const response = yield call(
+    fetch, 
+    'https://dispatchr-api.herokuapp.com/requests',
+    { method: 'POST', headers: headers, body: requestItemJSON }
+  );
   const json =  yield call(response.json.bind(response)) // better option
-  console.log(json);
   yield call(Actions.pop);
 }
 
