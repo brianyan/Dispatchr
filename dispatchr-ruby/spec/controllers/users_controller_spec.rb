@@ -1,6 +1,5 @@
 require 'rails_helper'
 require 'pp'
-require 'pry'
 
 RSpec.describe UsersController, :type => :controller do
 
