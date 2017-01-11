@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Scene, Router, Reducer, ActionConst } from 'react-native-router-flux';
 import DetailedView from '../components/DetailedView';
-import UserLogin from '../components/UserLogin';
+import AuthView from '../containers/AuthView/index';
 import RequestsList from './RequestsList'
 import NewRequestView from '../components/NewRequestView';
 import NewItemForm from '../components/NewItemForm';
 import EditItemForm from '../components/EditItemForm';
 import {StyleSheet, StatusBar} from 'react-native';
-
 
 /* Stylesheet */
 const getSceneStyle = (props, computedProps) => {
@@ -32,11 +31,10 @@ class App extends Component {
 
     return (
       <Router navigationBarStyle = {styles.navBar} titleStyle = {styles.title} getSceneStyle={getSceneStyle} barButtonIconStyle = {styles.backButtonStyle}>
-
         <Scene key="root">
           <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE}/>
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
-          <Scene key = {"UserLogin"} component = {UserLogin} title = 'User Login' initial={true} />
+          <Scene key = {"AuthView"} component = {AuthView} hideNavBar title = 'User Login' initial={true} />
           <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
           <Scene key = {"NewItemForm"} component = {NewItemForm} title = 'Add Item' />
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
