@@ -32,12 +32,15 @@ class UsersController < ApplicationController
     user = User.new(
         name: params[:name],
         username: params[:username],
-        email: params[:email]
+        email: params[:email],
+        password: params[:password]
+
     )
 
     user.address = address
 
     if user.save
+      session[:user_id] = user.id
       render json: user
     else
       render json: user.errors, status: :bad_request
