@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
 
 	#GET /requests
 	def index
-		render json: Request.all
+		render json: Request.order(created_at: :desc)
 	end
 
 	#GET /requests/1
@@ -15,7 +15,7 @@ class RequestsController < ApplicationController
 	def search_user
 
 		if params[:user_id].present?
-			@requests = Request.where(user_id: params[:user_id])
+			@requests = Request.where(user_id: params[:user_id]).order(created_at: :desc)
 			render json: @requests
 		else
 			render status: 404, json: @request
