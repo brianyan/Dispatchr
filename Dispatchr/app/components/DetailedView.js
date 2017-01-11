@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Alert, TouchableHighlight} from 'react-native';
 import { Actions} from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { ActionCreators } from '../actions';
+import { bindActionCreators } from 'redux';
 // var MapView = require('react-native-maps');
 
-
-export default class DetailedView extends Component {
+class DetailedView extends Component {
   _alertAccept() {
-    Alert.alert(
-      'Request Accepted',
-      "You're a hero!",
-      [
-        {text: 'OK', onPress: () => {Actions.pop()}},
-      ]
-    )
+    this.props.acceptRequest(this.props.request);
   }
 
   _alertHide() {
@@ -79,3 +75,15 @@ const styles = StyleSheet.create({
       marginBottom: 5
     }
 });
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    acceptRequest: state.acceptRequest
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailedView);
