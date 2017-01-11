@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 // var MapView = require('react-native-maps');
 
 class DetailedView extends Component {
-  _alertAccept() {
+  _acceptRequest() {
     this.props.acceptRequest(this.props.request);
   }
 
@@ -21,7 +21,6 @@ class DetailedView extends Component {
     )
   }
   render() {
-
     return (
       <View style = {{flex: 1}}>
         <View style = {styles.attributeWrapper}>
@@ -42,7 +41,7 @@ class DetailedView extends Component {
           </Text>
         </View>
         <View style={styles.content}>
-          <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertAccept() }}>
+          <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._acceptRequest() }}>
             <Text> Accept </Text>
           </TouchableHighlight>
           <View style={styles.divider}></View>
