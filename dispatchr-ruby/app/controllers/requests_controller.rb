@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
 	before_action :set_request, only: [:show, :update, :destroy]
+	before_filter :authorize
 
 	#GET /requests
 	def index
@@ -20,8 +21,6 @@ class RequestsController < ApplicationController
 		else
 			render status: 404, json: @request
 		end
-
-
 	end
 
 	#POST /requests

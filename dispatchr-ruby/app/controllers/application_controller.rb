@@ -1,3 +1,13 @@
 class ApplicationController < ActionController::API
     include ActionController::Serialization
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :current_user
+
+  def authorize
+    render status: :unauthorized, json: {} unless current_user
+  end
+
 end
