@@ -4,11 +4,16 @@ import { Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
-// var MapView = require('react-native-maps');
+
+var options = {
+    weekday: "long", year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+};
 
 class DetailedView extends Component {
   _acceptRequest() {
     this.props.acceptRequest(this.props.request);
+    console.log(this.props.request)
   }
 
   _alertHide() {
@@ -20,24 +25,24 @@ class DetailedView extends Component {
       ]
     )
   }
+  _renderDate() {
+    var date_string = this.props.request.expiration_date
+    var date = new Date(date_string)
+    return date.toLocaleTimeString("en-us", options)
+  }
   render() {
+    console.log(this.props.request)
     return (
       <View style = {{flex: 1}}>
         <View style = {styles.attributeWrapper}>
           <Text style = {styles.attributeText}>
-            Jordan wants...
+            {this.props.request.user.name}
           </Text>
+          {this.props.request.request_items.map((requestItem) => {
+            return <Text>{requestItem.item.name}{"\n"} {requestItem.max_price} {"\n"} Qty {requestItem.quantity_description} {"\n"} </Text>
+          })}
           <Text style = {styles.attributeText}>
-            - Water (Qty: 1 gallon, Max Price: 5)
-          </Text>
-          <Text style = {styles.attributeText}>
-            - Chedder Cheese (Qty: 1 oz, Max Price: 2)
-          </Text>
-          <Text style = {styles.attributeText}>
-            - Underwear (Qty: 6 pairs, Max Price: 3)
-          </Text>
-          <Text style = {styles.attributeText}>
-            By 12/2/16
+            {this._renderDate()}
           </Text>
         </View>
         <View style={styles.content}>
