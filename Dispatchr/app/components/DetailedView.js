@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Alert, TouchableHighlight} from 'react-native';
+import { ScrollView, Text, View, StyleSheet, Alert, TouchableHighlight} from 'react-native';
 import { Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
-
-var options = {
-    weekday: "long", year: "numeric", month: "short",
-    day: "numeric", hour: "2-digit", minute: "2-digit"
-};
+import DetailedViewRequestProfile from './DetailedViewRequestProfile';
 
 class DetailedView extends Component {
   _acceptRequest() {
@@ -25,34 +21,26 @@ class DetailedView extends Component {
       ]
     )
   }
-  _renderDate() {
-    var date_string = this.props.request.expiration_date
-    var date = new Date(date_string)
-    return date.toLocaleTimeString("en-us", options)
-  }
+
   render() {
-    console.log(this.props.request)
     return (
       <View style = {{flex: 1}}>
         <View style = {styles.attributeWrapper}>
-          <Text style = {styles.attributeText}>
-            {this.props.request.user.name}
-          </Text>
-          {this.props.request.request_items.map((requestItem) => {
-            return <Text>{requestItem.item.name}{"\n"} {requestItem.max_price} {"\n"} Qty {requestItem.quantity_description} {"\n"} </Text>
-          })}
-          <Text style = {styles.attributeText}>
-            {this._renderDate()}
-          </Text>
-        </View>
-        <View style={styles.content}>
-          <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._acceptRequest() }}>
-            <Text> Accept </Text>
-          </TouchableHighlight>
-          <View style={styles.divider}></View>
-          <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
-            <Text> Hide </Text>
-          </TouchableHighlight>
+          <DetailedViewRequestProfile request = {this.props.request}></DetailedViewRequestProfile>
+          <ScrollView>
+            {this.props.request.request_items.map((requestItem) => {
+              return <Text>{requestItem.item.name}{"\n"} {requestItem.max_price} {"\n"} Qty {requestItem.quantity_description} {"\n"} </Text>
+            })}
+            </ScrollView>
+          </View>
+          <View style={styles.content}>
+            <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._acceptRequest() }}>
+              <Text> Accept </Text>
+            </TouchableHighlight>
+            <View style={styles.divider}></View>
+            <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
+              <Text> Hide </Text>
+            </TouchableHighlight>
         </View>
       </View>
     );
