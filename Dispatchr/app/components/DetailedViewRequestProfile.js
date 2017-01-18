@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Text, TouchableHighlight, View, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 var moment = require('moment');
 
 var options = {
@@ -11,7 +12,9 @@ export default class DetailedViewRequestProfile extends Component {
   _renderDate() {
     var date_string = this.props.request.expiration_date
     var date = new Date(date_string)
-    // console.log("date", date)
+    console.log("date", date)
+    console.log(date_string);
+    console.log(moment(date_string).format('MMM Mo YYYY'));;
     // console.log(this.props.request.expiration_date)
     // console.log(date.toLocaleTimeString("en-us", options))
     //
@@ -37,6 +40,10 @@ export default class DetailedViewRequestProfile extends Component {
             </Text>
           </Text>
         </View>
+        <View style = {{flexDirection: 'row'}}>
+            <Icon name="ios-chatboxes" marginLeft = {20} size={25} color="black" />
+            <Icon name="ios-call" marginLeft = {20} size={25} color="black" />
+        </View>
       </View>
     )
   }
@@ -60,14 +67,12 @@ const styles = StyleSheet.create({
   viewContainer: {
     borderBottomWidth: 1,
     height: 75,
-    flex: 1,
     flexDirection: 'row',
-    marginTop:25,
+    marginTop:10,
   },
   imageRound: {
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 25,
     height: 50,
     borderRadius: 25,
     width: 50

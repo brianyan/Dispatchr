@@ -6,6 +6,7 @@ import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import DetailedViewRequestProfile from './DetailedViewRequestProfile';
 
+
 class DetailedView extends Component {
   _acceptRequest() {
     this.props.acceptRequest(this.props.request);
@@ -25,14 +26,12 @@ class DetailedView extends Component {
   render() {
     return (
       <View style = {{flex: 1}}>
-        <View style = {styles.attributeWrapper}>
           <DetailedViewRequestProfile request = {this.props.request}></DetailedViewRequestProfile>
           <ScrollView>
             {this.props.request.request_items.map((requestItem) => {
-              return <Text>{requestItem.item.name}{"\n"} {requestItem.max_price} {"\n"} Qty {requestItem.quantity_description} {"\n"} </Text>
+              return <View style = {styles.seperator}><Text>{requestItem.quantity_description} {requestItem.item.name} {/*}{requestItem.max_price}*/} {"\n"}</Text></View>
             })}
             </ScrollView>
-          </View>
           <View style={styles.content}>
             <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._acceptRequest() }}>
               <Text> Accept </Text>
@@ -41,7 +40,7 @@ class DetailedView extends Component {
             <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
               <Text> Hide </Text>
             </TouchableHighlight>
-        </View>
+          </View>
       </View>
     );
   }
@@ -55,6 +54,10 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         borderColor: '#EAEAEA',
         borderWidth: 1,
+    },
+    seperator: {
+      borderBottomWidth: 1,
+      borderColor: "gray",
     },
     buttonText: {
         fontSize: 20
