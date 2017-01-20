@@ -134,7 +134,7 @@ class RequestsList extends Component {
  _renderRow(rowData, sectionId, rowId, highlightRow) {
    const rowAction = () => {
     highlightRow(sectionId, rowId);
-     Actions.DetailedView({rowData});
+     Actions.DetailedView({rowData});  
    };
    return (
      <RequestListCell request={rowData} onSelect={rowAction}/>
