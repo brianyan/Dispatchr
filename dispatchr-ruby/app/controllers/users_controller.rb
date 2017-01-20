@@ -9,44 +9,6 @@ class UsersController < ApplicationController
     render json: user
   end
 
-  def login
-    if params[:username].present?
-      @user = User.find_by(username: params[:username])
-      if @user
-        render json: @user
-      else
-        render status: 404, json: @user  
-      end
-    else
-      render status: 404, json: @user
-    end
-  end
-
-  def create
-    address = Address.new(
-        address: params[:address][:address],
-        latitude: params[:address][:latitude],
-        longitude: params[:address][:longitude]
-    )
-
-    user = User.new(
-        name: params[:name],
-        username: params[:username],
-        email: params[:email],
-        password: params[:password]
-
-    )
-
-    user.address = address
-
-    if user.save
-      session[:user_id] = user.id
-      render json: user
-    else
-      render json: user.errors, status: :bad_request
-    end
-  end
-
   def update
     user = User.find(params[:id])
     user.name = params[:name].present? ? params[:name] : user.name
@@ -64,7 +26,7 @@ class UsersController < ApplicationController
       user.address.destroy
       user.address = new_address
     end
-    
+
     if user.save
       render json: user
     else

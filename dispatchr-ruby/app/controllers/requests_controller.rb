@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
 	before_action :set_request, only: [:show, :update, :destroy]
-	before_filter :authorize
+	before_filter :authenticate_request!
 
 	#GET /requests
 	def index

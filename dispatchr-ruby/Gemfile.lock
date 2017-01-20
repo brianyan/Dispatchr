@@ -66,6 +66,7 @@ GEM
     json (1.8.3)
     jsonapi (0.1.1.beta2)
       json (~> 1.8)
+    jwt (1.5.4)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -164,6 +165,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   jbuilder (~> 2.5)
+  jwt
   listen (~> 3.0.5)
   pg (~> 0.18)
   puma (~> 3.0)
