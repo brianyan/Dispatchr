@@ -3,6 +3,7 @@ import { Scene, Router, Reducer, ActionConst } from 'react-native-router-flux';
 import DetailedView from '../components/DetailedView';
 import UserLogin from '../components/UserLogin';
 import RequestsList from './RequestsList'
+import ChatView from './Chat'
 import NewRequestView from '../components/NewRequestView';
 import NewItemForm from '../components/NewItemForm';
 import EditItemForm from '../components/EditItemForm';
@@ -40,6 +41,7 @@ class App extends Component {
           <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
           <Scene key = {"NewItemForm"} component = {NewItemForm} title = 'Add Item' />
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
+          <Scene key = {"ChatView"} component = {ChatView} title = 'Chat' />
         </Scene>
       </Router>
     );
