@@ -131,13 +131,13 @@ class RequestsList extends Component {
     this._listViewOffset = currentOffset
   }
 
- _renderRow(rowData, sectionId, rowId, highlightRow) {
+ _renderRow(request, sectionId, rowId, highlightRow) {
    const rowAction = () => {
     highlightRow(sectionId, rowId);
-     Actions.DetailedView({rowData});  
+     Actions.DetailedView({request});
    };
    return (
-     <RequestListCell request={rowData} onSelect={rowAction}/>
+     <RequestListCell request={request} onSelect={rowAction}/>
    );
  }
 

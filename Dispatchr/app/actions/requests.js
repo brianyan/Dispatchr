@@ -6,3 +6,10 @@ export function getRequests(selection) {
     selection
   }
 }
+
+export function acceptRequest(request) {
+  return {
+    type: types.REQUEST_ACCEPTED,
+    request
+  };
+}

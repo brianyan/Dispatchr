@@ -1,6 +1,8 @@
 import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
+import { Alert } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 function* requestsRequested(data) {
   url = 'https://dispatchr-api.herokuapp.com/requests';
@@ -12,6 +14,22 @@ function* requestsRequested(data) {
   yield put({ type: types.REQUEST_RECEIVED, payload: json})
 }
 
+function* requestAccepted(data) {
+  // url = 'https://dispatchr-api.herokuapp.com/requests/' + data.id;
+  // const response = yield call(fetch, url, { method: 'POST' });
+  // const json = yield call(response.json.bind(response));
+  Alert.alert(
+    'Request Accepted',
+    "You're a hero!",
+    [
+      {text: 'OK', onPress: () => {Actions.pop()}},
+    ]
+  )
+}
+
 export default function* root() {
-  yield takeLatest(types.REQUEST_REQUESTED, requestsRequested);
+  yield [
+    takeLatest(types.REQUEST_REQUESTED, requestsRequested),
+    takeLatest(types.REQUEST_ACCEPTED, requestAccepted)
+  ];
 }

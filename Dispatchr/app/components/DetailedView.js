@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Alert, TouchableHighlight} from 'react-native';
+import { ScrollView, Text, View, StyleSheet, Alert, TouchableHighlight} from 'react-native';
 import { Actions} from 'react-native-router-flux';
-// var MapView = require('react-native-maps');
+import { connect } from 'react-redux';
+import { ActionCreators } from '../actions';
+import { bindActionCreators } from 'redux';
+import DetailedViewRequestProfile from './DetailedViewRequestProfile';
 
 
-export default class DetailedView extends Component {
-  _alertAccept() {
-    Alert.alert(
-      'Request Accepted',
-      "You're a hero!",
-      [
-        {text: 'OK', onPress: () => {Actions.pop()}},
-      ]
-    )
+class DetailedView extends Component {
+  _acceptRequest() {
+    this.props.acceptRequest(this.props.request);
+    console.log(this.props.request)
   }
 
   _alertHide() {
@@ -24,36 +22,25 @@ export default class DetailedView extends Component {
       ]
     )
   }
-  render() {
 
+  render() {
     return (
       <View style = {{flex: 1}}>
-        <View style = {styles.attributeWrapper}>
-          <Text style = {styles.attributeText}>
-            Jordan wants...
-          </Text>
-          <Text style = {styles.attributeText}>
-            - Water (Qty: 1 gallon, Max Price: 5)
-          </Text>
-          <Text style = {styles.attributeText}>
-            - Chedder Cheese (Qty: 1 oz, Max Price: 2)
-          </Text>
-          <Text style = {styles.attributeText}>
-            - Underwear (Qty: 6 pairs, Max Price: 3)
-          </Text>
-          <Text style = {styles.attributeText}>
-            By 12/2/16
-          </Text>
-        </View>
-        <View style={styles.content}>
-          <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertAccept() }}>
-            <Text> Accept </Text>
-          </TouchableHighlight>
-          <View style={styles.divider}></View>
-          <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
-            <Text> Hide </Text>
-          </TouchableHighlight>
-        </View>
+          <DetailedViewRequestProfile request = {this.props.request}></DetailedViewRequestProfile>
+          <ScrollView>
+            {this.props.request.request_items.map((requestItem) => {
+              return <View style = {styles.seperator}><Text>{requestItem.quantity_description} {requestItem.item.name} {/*}{requestItem.max_price}*/} {"\n"}</Text></View>
+            })}
+            </ScrollView>
+          <View style={styles.content}>
+            <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._acceptRequest() }}>
+              <Text> Accept </Text>
+            </TouchableHighlight>
+            <View style={styles.divider}></View>
+            <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
+              <Text> Hide </Text>
+            </TouchableHighlight>
+          </View>
       </View>
     );
   }
@@ -68,6 +55,10 @@ const styles = StyleSheet.create({
         borderColor: '#EAEAEA',
         borderWidth: 1,
     },
+    seperator: {
+      borderBottomWidth: 1,
+      borderColor: "gray",
+    },
     buttonText: {
         fontSize: 20
     },
@@ -79,3 +70,15 @@ const styles = StyleSheet.create({
       marginBottom: 5
     }
 });
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+    acceptRequest: state.acceptRequest
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailedView);
