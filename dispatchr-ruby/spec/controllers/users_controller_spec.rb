@@ -4,8 +4,8 @@ require 'pp'
 RSpec.describe UsersController, :type => :controller do
 
   def create_valid_user
-    post :create, {name: 'test_name', username: 'test_username', email: 'test@test.com',
-                   address: {address: '123 Main Rd, Goleta CA 93117 USA', latitude: 0, longitude: 0}}
+    post :create, {name: 'test_name', username: 'test_username', password: 'test_pass', email: 'test@test.com',
+                    address: {address: '123 Main Rd, Goleta CA 93117 USA', latitude: 0, longitude: 0}}
   end
 
   describe 'GET #show' do
@@ -23,50 +23,6 @@ RSpec.describe UsersController, :type => :controller do
         get :show, {id: user.id}
         expect(response).to have_http_status(200)
       end
-    end
-  end
-
-  describe 'GET #login' do
-    context 'when username is valid' do
-      it 'returns matching user' do
-        create_valid_user
-        get :login, username: 'test_username'
-        parsed_response = JSON.parse(response.body)
-        expect(parsed_response['name']).to eq('test_name')
-        expect(parsed_response['username']).to eq('test_username')
-        expect(parsed_response['email']).to eq('test@test.com')
-      end
-    end
-  end
-
-  describe 'POST #create' do
-    context 'when user is successfully created' do
-      it 'returns 200 status' do
-        create_valid_user
-        expect(response).to have_http_status(200)
-      end
-      it 'has the correct name' do
-        create_valid_user
-        user = User.last
-        expect(user.name).to eq('test_name')
-      end
-
-      it 'has the correct address' do
-        create_valid_user
-        user = User.last
-        expect(user.address.address).to eq('123 Main Rd, Goleta CA 93117 USA')
-      end
-
-    end
-
-    context 'when there is a missing attribute' do
-
-      it 'returns exception' do
-        post :create, {username: 'test_username', email: 'test@test.com',
-                       address: {address: '123 Main Rd, Goleta CA 93117 USA', latitude: 0, longtitude: 0}}
-        expect(response).to have_http_status(400)
-      end
-
     end
   end
 

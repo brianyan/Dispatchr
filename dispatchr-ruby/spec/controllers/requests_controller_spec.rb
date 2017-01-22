@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe RequestsController, :type => :controller do
+	
+	before(:each) do
+ 	 	controller.stub(:authenticate_request! => true)
+	end
 
 	def create_request
 		post :create, { request:{user_id: 1, expiration_date: '28-11-16', request_items: [{name: "Candy", "max_price":10, "quantity_description":"3"}]} }
