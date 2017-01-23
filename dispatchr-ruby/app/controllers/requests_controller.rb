@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-	before_action :set_request, only: [:show, :update, :destroy, :accept_request]
+	before_action :set_request, only: [:show, :update, :destroy, :accept_request, :complete_request]
 	before_filter :authenticate_request!
 
 	#GET /requests
@@ -27,6 +27,16 @@ class RequestsController < ApplicationController
 	def accept_request
 		@request.hero_id = @current_user.id
 		@request.status = 1
+		if @request.save
+			render json: @request
+		else
+			render json: @request.errors, status: :bad_request
+		end
+	end
+
+	#POST /requests/complete/1
+	def complete_request
+		@request.status = 2
 		if @request.save
 			render json: @request
 		else

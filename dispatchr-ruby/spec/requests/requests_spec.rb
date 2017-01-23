@@ -14,36 +14,33 @@ RSpec.describe "Requests", :type => :request do
 			{'HTTP_AUTHORIZATION'=>auth_token}
 	end
 
-  	describe "GET /requests" do
-    	it "works! (now write some real specs)" do
+  	describe "POST #accept_request" do
+    	it "returns 200 status and updates hero_id and status" do
      		create_valid_user_and_login
      		token = Authentication::JsonWebToken.encode(User.last.id)
      		create_request(token)
      		request = Request.last
      		post '/requests/accept/', {:id => request.id}, {'HTTP_AUTHORIZATION'=>token}
      		expect(response).to have_http_status(200)
+
+     		updated_request = Request.last
+     		expect(updated_request.hero_id).to eq(User.last.id)
+     		expect(updated_request.status).to eq(1)     
     	end
   	end
 
-	# describe 'POST #accept_request' do
-	# 	context 'when valid id is passed' do
-	# 		it 'returns 200 status' do
-	# 			create_request
-	# 			request = Request.last
-	# 			create_valid_user_and_login
-	# 			post :accept_request, {:id => request.id}
-	# 			expect(response).to have_http_status(200)
-	# 		end
+  	describe "POST #complete_request" do
+  		it "returns 200 status and updates status" do
+     		create_valid_user_and_login
+     		token = Authentication::JsonWebToken.encode(User.last.id)
+     		create_request(token)
+     		request = Request.last
+     		post '/requests/complete/', {:id => request.id}, {'HTTP_AUTHORIZATION'=>token}
+     		expect(response).to have_http_status(200)
 
-	# 	it 'updates the hero_id and status' do
-	# 			create_request
-	# 			request = Request.last
-	# 			create_valid_user_and_login
-	# 			post :accept_request, {:id => request.id}
-	# 			updated_request = Request.last
-	# 			expect(updated_request.hero_id).to eq(1)
-	# 			expect(updated_request.status).to eq(1)
-	# 		end
-		# end
-	# end
+     		updated_request = Request.last
+     		expect(updated_request.status).to eq(2)     
+    	end
+  	end	
+
 end

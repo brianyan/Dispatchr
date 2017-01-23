@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
   post '/sign_up' => 'registrations#create'
   match '/requests/accept/' => 'requests#accept_request', :via => :post
+  match '/requests/complete/' => 'requests#complete_request', :via => :post
 end
