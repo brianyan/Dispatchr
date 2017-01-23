@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
   post '/sign_up' => 'registrations#create'
+  match '/requests/accept/' => 'requests#accept_request', :via => :post
 end

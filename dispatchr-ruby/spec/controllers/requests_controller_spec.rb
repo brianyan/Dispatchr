@@ -56,6 +56,7 @@ RSpec.describe RequestsController, :type => :controller do
 		end
 	end
 
+
 	describe 'PATCH/PUT #update' do
 		context 'when id does not exist' do
 			it 'raises error' do
