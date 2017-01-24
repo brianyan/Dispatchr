@@ -8,4 +8,7 @@ export const requests = createReducer([], {
   [types.REQUEST_RECEIVED](state, action) {
     return action.payload;
   },
+  [types.REQUEST_ACCEPTED](state, action) {
+    return state;
+  }
 });
