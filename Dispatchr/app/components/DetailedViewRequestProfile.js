@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Image, Text, TouchableHighlight, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Actions } from 'react-native-router-flux'
+
 var moment = require('moment');
 
 var options = {
@@ -23,6 +25,13 @@ export default class DetailedViewRequestProfile extends Component {
     // return date.toLocaleTimeString("en-us", options)
   }
 
+  _onChatPress(){
+    Actions.ChatView();
+  }
+
+  _onPhonePress(){
+  }
+
   render() {
     return (
       <View style={styles.viewContainer}>
@@ -41,8 +50,12 @@ export default class DetailedViewRequestProfile extends Component {
           </Text>
         </View>
         <View style = {{flexDirection: 'row'}}>
+          <TouchableHighlight onPress={this._onChatPress}>
             <Icon name="ios-chatboxes" marginLeft = {20} size={25} color="black" />
+          </TouchableHighlight>
+          <TouchableHighlight onPress={this._onPhonePress}>
             <Icon name="ios-call" marginLeft = {20} size={25} color="black" />
+          </TouchableHighlight>
         </View>
       </View>
     )

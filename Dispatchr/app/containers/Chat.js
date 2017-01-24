@@ -1,10 +1,12 @@
 import { GiftedChat } from 'react-native-gifted-chat';
 import React, { Component } from 'react';
 
-class ChatView extends Component {
+export default class ChatView extends Component {
   constructor(props) {
     super(props);
-    this.state = {messages: []};
+    this.state = {
+      messages: []
+    };
     this.onSend = this.onSend.bind(this);
   }
   componentWillMount() {
