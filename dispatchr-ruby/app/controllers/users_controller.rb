@@ -9,6 +9,11 @@ class UsersController < ApplicationController
     render json: user
   end
 
+  def show_by_email
+    user = User.find_by_email(params[:email])
+    render json: user
+  end
+
   def login
     if params[:username].present?
       @user = User.find_by(username: params[:username])
