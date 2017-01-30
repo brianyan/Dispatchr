@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import renderIf from '../lib/renderif'
 import { Actions } from 'react-native-router-flux'
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import TextField from 'react-native-md-textinput';
 import Button from 'apsl-react-native-button';
 import RequestListCell from '../components/RequestListCell';
@@ -25,6 +25,11 @@ import {
 } from 'react-native';
 
 
+const showProfile = () => {
+  console.log("sdfklaj");
+  Actions.ProfileView()
+}
+
 class RequestsList extends Component {
   constructor(props){
     super(props);
@@ -41,6 +46,14 @@ class RequestsList extends Component {
     this.props.getUserInfo();
   }
 
+  componentWillMount () {
+    Actions.refresh({
+      rightTitle: "Profile",
+      rightButtonTextStyle: {color: 'white'},
+      onRight: showProfile
+    })
+  }
+
   componentWillReceiveProps (nextProps) {
     if (nextProps.requests !== this.props.requests) {
       this.setState({
@@ -50,7 +63,6 @@ class RequestsList extends Component {
       })
     }
   }
-
 
   _leftSideSelected() {
     this.state.selection = 'Global';
