@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     render json: user
   end
 
-  '/users/reputation/:id/:score'
+ # '/users/reputation/:id/:score'
   def update_reputation
     if (params[:score].to_f < 0 or params[:score].to_f > 5)
       render json: @user.errors, status: :bad_request
