@@ -26,6 +26,21 @@ RSpec.describe "Users", :type => :request do
 		end
   	end
 
+  	describe 'POST #update_reputation' do
+  		it 'correctly updates average reputation' do
+  			create_valid_user
+  			user = User.last
+  			post "/users/reputation/#{user.id}/5"
+  			user = User.last
+  			expect(user.reputation).to eq(5.0)
+  			expect(user.numReviews).to eq(1)
+  			post "/users/reputation/#{user.id}/3"
+  			user = User.last
+  			expect(user.reputation).to eq(4.0)
+  			expect(user.numReviews).to eq(2)
+  		end
+  	end
+
   	describe 'PATCH/PUT #update' do
     	context 'when id does not exist' do
       		it 'raises error' do
