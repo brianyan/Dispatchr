@@ -20,7 +20,7 @@ RSpec.describe "Requests", :type => :request do
      		token = Authentication::JsonWebToken.encode(User.last.id)
      		create_request(token)
      		request = Request.last
-     		post '/requests/accept/', {:id => request.id}, {'HTTP_AUTHORIZATION'=>token}
+     		post "/requests/accept/#{request.id}", {}, {'HTTP_AUTHORIZATION'=>token}
      		expect(response).to have_http_status(200)
 
      		updated_request = Request.last
@@ -35,7 +35,7 @@ RSpec.describe "Requests", :type => :request do
      		token = Authentication::JsonWebToken.encode(User.last.id)
      		create_request(token)
      		request = Request.last
-     		post '/requests/complete/', {:id => request.id}, {'HTTP_AUTHORIZATION'=>token}
+     		post "/requests/complete/#{request.id}", {}, {'HTTP_AUTHORIZATION'=>token}
      		expect(response).to have_http_status(200)
 
      		updated_request = Request.last

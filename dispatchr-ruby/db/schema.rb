@@ -70,11 +70,11 @@ ActiveRecord::Schema.define(version: 20170123082225) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "username"
+    t.string   "password_digest"
     t.string   "email"
     t.integer  "address_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "password_digest"
     t.index ["address_id"], name: "index_users_on_address_id", using: :btree
   end
 

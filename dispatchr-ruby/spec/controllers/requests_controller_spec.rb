@@ -33,7 +33,7 @@ RSpec.describe RequestsController, :type => :controller do
 				(0..2).each do |i|
 					create_request
 				end
-				get :search_user, user_id: 1
+				get :search_user, id: 1
 				parsed_response = JSON.parse(response.body)
 				expect(parsed_response.length).to eq(3)
 			end

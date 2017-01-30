@@ -12,11 +12,11 @@ class RequestsController < ApplicationController
 		render json: @request
 	end
 
-	#GET /requests/user/?user_id=1
+	#GET /requests/user/1
 	def search_user
 
-		if params[:user_id].present?
-			@requests = Request.where(user_id: params[:user_id]).order(created_at: :desc)
+		if params[:id].present?
+			@requests = Request.where(user_id: params[:id]).order(created_at: :desc)
 			render json: @requests
 		else
 			render status: 404, json: @request
@@ -51,6 +51,8 @@ class RequestsController < ApplicationController
 		@request.user_id = request_params[:user_id]
 		@request.expiration_date = request_params[:expiration_date]
 		@request.request_items = request_items
+		@request.hero_id = nil
+		@request.status = 0
 		if @request.save
 			render json: @request
 		else
