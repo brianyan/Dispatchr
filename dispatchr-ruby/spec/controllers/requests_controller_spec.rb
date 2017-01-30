@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe RequestsController, :type => :controller do
+	
+	before(:each) do
+ 	 	controller.stub(:authenticate_request! => true)
+	end
 
 	def create_request
 		post :create, { request:{user_id: 1, expiration_date: '28-11-16', request_items: [{name: "Candy", "max_price":10, "quantity_description":"3"}]} }
@@ -29,7 +33,7 @@ RSpec.describe RequestsController, :type => :controller do
 				(0..2).each do |i|
 					create_request
 				end
-				get :search_user, user_id: 1
+				get :search_user, id: 1
 				parsed_response = JSON.parse(response.body)
 				expect(parsed_response.length).to eq(3)
 			end
@@ -51,6 +55,7 @@ RSpec.describe RequestsController, :type => :controller do
 			end
 		end
 	end
+
 
 	describe 'PATCH/PUT #update' do
 		context 'when id does not exist' do
