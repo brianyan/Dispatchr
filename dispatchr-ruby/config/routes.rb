@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
   post '/sign_up' => 'registrations#create'
-  post '/requests/accept/:id' => 'requests#accept_request' 
+  post '/requests/accept/:id' => 'requests#accept_request'
   post '/requests/complete/:id' => 'requests#complete_request'
   post '/users/reputation/:id/:score' => 'users#update_reputation'
   get '/notifications/get/:user_id' => 'notifications#get_notifications'
   resources :items, :requests, :users, :request_items, :addresses, :notifications
+  get '/users/:id', to: 'users#show'
 end

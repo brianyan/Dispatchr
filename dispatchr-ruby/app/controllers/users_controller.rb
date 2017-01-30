@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       if @user
         render json: @user
       else
-        render status: 404, json: @user  
+        render status: 404, json: @user
       end
     else
       render status: 404, json: @user
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     if (params[:score].to_f < 0 or params[:score].to_f > 5)
       render json: @user.errors, status: :bad_request
     end
-    
+
     user = User.find(params[:id])
     newRep = User.calculate_reputation(user.reputation, user.numReviews, params[:score].to_f)
     user.reputation = newRep

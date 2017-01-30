@@ -11,6 +11,7 @@ import Button from 'apsl-react-native-button';
 import RequestListCell from '../components/RequestListCell';
 import ListFilterButton from '../components/ListFilterButton';
 import { firebaseApp } from '../../firebaseWrapper.js';
+import { AsyncStorage } from 'react-native';
 
 import {
   View,
@@ -25,11 +26,6 @@ import {
 } from 'react-native';
 
 
-const showProfile = () => {
-  console.log("sdfklaj");
-  Actions.ProfileView()
-}
-
 class RequestsList extends Component {
   constructor(props){
     super(props);
@@ -42,15 +38,13 @@ class RequestsList extends Component {
       selection: 'Global'
     };
     this.props.getRequests(this.state.selection);
-    // getting the currentUser
-    this.props.getUserInfo();
   }
 
   componentWillMount () {
     Actions.refresh({
       rightTitle: "Profile",
       rightButtonTextStyle: {color: 'white'},
-      onRight: showProfile
+      onRight: this.props.showCurrentUserProfile
     })
   }
 

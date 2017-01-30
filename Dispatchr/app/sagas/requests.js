@@ -9,7 +9,7 @@ import BASE_URL from '../config/url';
 function* requestsRequested(data) {
   const currentUserId = yield call(AsyncStorage.getItem, 'currentUserId');
   const authToken = yield call(AsyncStorage.getItem, 'authToken');
-  
+
   url = BASE_URL + '/requests';
   if (data.selection == 'User'){
     url += '/user/' + currentUserId;
