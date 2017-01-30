@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post '/sign_up' => 'registrations#create'
   post '/requests/accept/:id' => 'requests#accept_request' 
   post '/requests/complete/:id' => 'requests#complete_request'
+  post '/users/reputation/:id/:score' => 'users#update_reputation'
 end

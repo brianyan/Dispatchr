@@ -8,4 +8,9 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :username, presence: true
   validates :address, presence: true
+
+  def self.calculate_reputation(rep, numRevs, score)
+  	newRep = ((rep * numRevs) + score)/(numRevs+1)
+  	newRep
+  end
 end

@@ -20,6 +20,8 @@ RSpec.describe "Users", :type => :request do
 		        user = User.last
 		        get '/users/', {id: user.id}
 		        expect(response).to have_http_status(200)
+		        expect(user.reputation).to eq(0.0)
+		        expect(user.numReviews).to eq(0)
 	  		end
 		end
   	end
