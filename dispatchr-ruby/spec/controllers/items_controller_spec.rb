@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ItemsController, :type => :controller do
 
+	before(:each) do
+ 	 	controller.stub(:authenticate_request! => true)
+	end
+
 	describe 'GET #show' do
 		context 'when id is invalid' do
 			it 'raises error' do
