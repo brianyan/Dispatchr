@@ -30,27 +30,20 @@ class UsersController < ApplicationController
     else
       render status: 404, json: @user
     end
-  end
-
-  def create
-    address = Address.new(
-        address: params[:address][:address],
-        latitude: params[:address][:latitude],
-        longitude: params[:address][:longitude]
-    )
-
-    user = User.new(
-        name: params[:name],
-        username: params[:username],
-        email: params[:email]
-    )
-
-    user.address = address
-
+ # '/users/reputation/:id/:score'
+  def update_reputation
+    if (params[:score].to_f < 0 or params[:score].to_f > 5)
+      render json: @user.errors, status: :bad_request
+    end
+    
+    user = User.find(params[:id])
+    newRep = User.calculate_reputation(user.reputation, user.numReviews, params[:score].to_f)
+    user.reputation = newRep
+    user.numReviews = user.numReviews+1
     if user.save
       render json: user
     else
-      render json: user.errors, status: :bad_request
+      render json: user.errors, status: :unprocessable_entity
     end
   end
 
@@ -71,7 +64,7 @@ class UsersController < ApplicationController
       user.address.destroy
       user.address = new_address
     end
-    
+
     if user.save
       render json: user
     else
