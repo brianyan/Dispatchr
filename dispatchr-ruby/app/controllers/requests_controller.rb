@@ -27,6 +27,7 @@ class RequestsController < ApplicationController
 	def accept_request
 		@request.hero_id = @current_user.id
 		@request.status = 1
+		Notification.create(user_id: @request.user_id, message: "Your request has been accepted by #{@current_user.name}!")
 		if @request.save
 			render json: @request
 		else
