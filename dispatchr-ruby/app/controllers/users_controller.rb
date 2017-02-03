@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     else
       render status: 404, json: @user
     end
+  end
  # '/users/reputation/:id/:score'
   def update_reputation
     if (params[:score].to_f < 0 or params[:score].to_f > 5)
