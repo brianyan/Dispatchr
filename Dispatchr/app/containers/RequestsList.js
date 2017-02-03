@@ -9,6 +9,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import TextField from 'react-native-md-textinput';
 import Button from 'apsl-react-native-button';
 import RequestListCell from '../components/RequestListCell';
+import ListFilterButton from '../components/ListFilterButton';
+import { firebaseApp } from '../../firebaseWrapper.js';
 
 import {
   View,
@@ -21,7 +23,7 @@ import {
   LayoutAnimation,
   ScrollView
 } from 'react-native';
-import ListFilterButton from '../components/ListFilterButton';
+
 
 class RequestsList extends Component {
   constructor(props){
