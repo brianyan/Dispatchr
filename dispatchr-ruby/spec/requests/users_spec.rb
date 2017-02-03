@@ -20,8 +20,25 @@ RSpec.describe "Users", :type => :request do
 		        user = User.last
 		        get '/users/', {id: user.id}
 		        expect(response).to have_http_status(200)
+		        expect(user.reputation).to eq(0.0)
+		        expect(user.numReviews).to eq(0)
 	  		end
 		end
+  	end
+
+  	describe 'POST #update_reputation' do
+  		it 'correctly updates average reputation' do
+  			create_valid_user
+  			user = User.last
+  			post "/users/reputation/#{user.id}/5"
+  			user = User.last
+  			expect(user.reputation).to eq(5.0)
+  			expect(user.numReviews).to eq(1)
+  			post "/users/reputation/#{user.id}/3"
+  			user = User.last
+  			expect(user.reputation).to eq(4.0)
+  			expect(user.numReviews).to eq(2)
+  		end
   	end
 
   	describe 'PATCH/PUT #update' do
