@@ -30,7 +30,13 @@ app.get('/', function(req, res){
   })
 });
 
+function socketFormat(messageMongoose){
+  var message = {
+
+  }
+}
 app.get('/chatroom', function(req, res) {
+  // updating the chat when user sends a message
   Message.findOne({users: {id1:'Alok', id2: 'Spencer'}}, function(err, message){
     console.log(message);
     message.user_msgs.push({is_sender: "Alok", msg_body: "testing2", timestamp: new Date()});
@@ -40,6 +46,10 @@ app.get('/chatroom', function(req, res) {
       }
     });
   });
+
+  // loading previous messages
+
+  //
 });
 // app.get('/sendMessage', function())
 

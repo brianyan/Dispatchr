@@ -1,5 +1,6 @@
 import { GiftedChat } from 'react-native-gifted-chat';
 import React, { Component } from 'react';
+import {AsyncStorage} from 'react-native';
 import SocketIOClient from 'socket.io-client';
 
 const USER_ID = '@userId';
@@ -12,8 +13,8 @@ export default class ChatView extends Component {
       userId: null
     };
 
-    this.determineUser = this.determineUser.bind(this);
-    this.onReceivedMessage = this.onReceivedMessage.bind(this);
+    // this.determineUser = this.determineUser.bind(this);
+    // this.onReceivedMessage = this.onReceivedMessage.bind(this);
     this.onSend = this.onSend.bind(this);
     this._storeMessages = this._storeMessages.bind(this);
 
@@ -28,21 +29,22 @@ export default class ChatView extends Component {
    * Set the userId to the component's state.
    */
   determineUser() {
-    AsyncStorage.getItem(USER_ID)
-      .then((userId) => {
-        // If there isn't a stored userId, then fetch one from the server.
-        if (!userId) {
-          this.socket.emit('userJoined', null);
-          this.socket.on('userJoined', (userId) => {
-            AsyncStorage.setItem(USER_ID, userId);
-            this.setState({ userId });
-          });
-        } else {
-          this.socket.emit('userJoined', userId);
-          this.setState({ userId });
-        }
-      })
-      .catch((e) => alert(e));
+      this.setState({ userId });
+    // AsyncStorage.getItem(USER_ID)
+    //   .then((userId) => {
+    //     // If there isn't a stored userId, then fetch one from the server.
+    //     if (!userId) {
+    //       this.socket.emit('userJoined', null);
+    //       this.socket.on('userJoined', (userId) => {
+    //         AsyncStorage.setItem(USER_ID, userId);
+    //         this.setState({ userId });
+    //       });
+    //     } else {
+    //       this.socket.emit('userJoined', userId);
+    //       this.setState({ userId });
+    //     }
+    //   })
+    //   .catch((e) => alert(e));
   }
 
   // Event listeners
