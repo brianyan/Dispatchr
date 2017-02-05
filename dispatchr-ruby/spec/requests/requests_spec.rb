@@ -25,7 +25,12 @@ RSpec.describe "Requests", :type => :request do
 
      		updated_request = Request.last
      		expect(updated_request.hero_id).to eq(User.last.id)
-     		expect(updated_request.status).to eq(1)     
+     		expect(updated_request.status).to eq(1) 
+
+        user = User.last
+        notification = Notification.where(user_id: updated_request.user_id).order(created_at: :desc)[0]
+        expect(notification.message).to eq("Your request has been accepted by #{user.name}!")
+        expect(notification.user_id).to eq(1)
     	end
   	end
 
@@ -39,7 +44,12 @@ RSpec.describe "Requests", :type => :request do
      		expect(response).to have_http_status(200)
 
      		updated_request = Request.last
-     		expect(updated_request.status).to eq(2)     
+     		expect(updated_request.status).to eq(2) 
+
+        user = User.last
+        notification = Notification.where(user_id: updated_request.user_id).order(created_at: :desc)[0]
+        expect(notification.message).to eq("Your request has been completed by #{user.name}!")
+        expect(notification.user_id).to eq(1)    
     	end
   	end	
 

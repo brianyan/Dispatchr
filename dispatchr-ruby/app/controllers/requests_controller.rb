@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
-	before_action :set_request, only: [:show, :update, :destroy, :accept_request, :complete_request]
-	before_filter :authenticate_request!
+	before_action :authenticate_request!, :set_request, only: [:show, :update, :destroy, :accept_request, :complete_request]
+	# before_filter 
 
 	#GET /requests
 	def index
@@ -38,6 +38,7 @@ class RequestsController < ApplicationController
 	#POST /requests/complete/1
 	def complete_request
 		@request.status = 2
+		Notification.create(user_id: @request.user_id, message: "Your request has been completed by #{@current_user.name}!")
 		if @request.save
 			render json: @request
 		else
