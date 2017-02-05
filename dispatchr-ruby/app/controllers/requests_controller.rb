@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
-	before_action :authenticate_request!, :set_request, only: [:show, :update, :destroy, :accept_request, :complete_request]
+	before_action :authenticate_request! 
+	before_action :set_request, only: [:show, :update, :destroy, :accept_request, :complete_request]
 	# before_filter 
 
 	#GET /requests
