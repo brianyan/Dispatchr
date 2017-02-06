@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  before_filter :authenticate_request!
+  before_action :authenticate_request!
 
   def bad_name
     error_str = 'No item name entered or name is invalid. Please try a valid name and try again'
