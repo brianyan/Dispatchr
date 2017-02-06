@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/users/username/', to: 'users#show_by_email'
+  get '/users/email/', to: 'users#show_by_username'
   # match '/users/login/' => 'users#login', :via => :get
   get '/requests/user/:id' => 'requests#search_user'
   get '/request_items/request/' => 'request_items#search_request'

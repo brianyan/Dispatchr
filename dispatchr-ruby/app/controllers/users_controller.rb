@@ -9,6 +9,28 @@ class UsersController < ApplicationController
     render json: user
   end
 
+  def show_by_email
+    user = User.find_by_email(params[:email])
+    render json: user
+  end
+
+  def show_by_username
+    user = User.find_by(username: params[:username])
+    render json: user
+  end
+
+  def login
+    if params[:username].present?
+      @user = User.find_by(username: params[:username])
+      if @user
+        render json: @user
+      else
+        render status: 404, json: @user  
+      end
+    else
+      render status: 404, json: @user
+    end
+  end
  # '/users/reputation/:id/:score'
   def update_reputation
     if (params[:score].to_f < 0 or params[:score].to_f > 5)
