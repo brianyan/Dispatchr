@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import { KeyboardAvoidingView, LayoutAnimation, Platform, StyleSheet, UIManager } from 'react-native'
 import { Image, View } from 'react-native-animatable'
 
-import imgLogo from '../../images/logo.jpg'
+import imgLogo from '../../images/newlogo.png'
 import metrics from '../../config/metrics'
 
 import Opening from './Opening'
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
 
-const IMAGE_WIDTH = metrics.DEVICE_WIDTH * 0.8
+const IMAGE_WIDTH = metrics.DEVICE_WIDTH * 1.2;
 
 if (Platform.OS === 'android') UIManager.setLayoutAnimationEnabledExperimental(true)
 
@@ -143,7 +143,6 @@ const styles = StyleSheet.create({
     height: null,
     width: IMAGE_WIDTH,
     alignSelf: 'center',
-    resizeMode: 'contain',
     marginVertical: 30
   },
   bottom: {
