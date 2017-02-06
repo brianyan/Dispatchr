@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :items, :requests, :users, :request_items, :addresses, :notifications
+  get '/users/username/', to: 'users#show_by_email'
+  get '/users/email/', to: 'users#show_by_username'
   get '/requests/user/:id' => 'requests#search_user'
   get '/request_items/request/' => 'request_items#search_request'
   post '/users' => 'users#create'
