@@ -1,4 +1,7 @@
+require "authentication/json_web_token"
+
 class RegistrationsController < ApplicationController
+  include Authentication::JsonWebToken
   # /sign_up
   def create
     if User.find_by(email: params[:email]).present?

@@ -1,4 +1,8 @@
+require "authentication/json_web_token"
+
 class SessionsController < ApplicationController
+  include Authentication::JsonWebToken
+
   def create
     @user = User.find_by_email(params[:email])
     if @user && @user.authenticate(params[:password])
