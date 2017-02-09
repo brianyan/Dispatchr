@@ -1,7 +1,8 @@
 import { fork } from 'redux-saga/effects';
 import requests from './requests';
-import newRequests from './newRequests.js';
+import newRequests from './newRequests';
 import items from './items'
+import userAccounts from './userAccounts'
 
 
 export default function* root() {
@@ -9,5 +10,6 @@ export default function* root() {
     fork(requests),
     fork(newRequests),
     fork(items),
+    fork(userAccounts),
   ]
 }
