@@ -6,6 +6,7 @@ import RequestsList from './RequestsList'
 import NewRequestView from '../components/NewRequestView';
 import NewItemForm from '../components/NewItemForm';
 import EditItemForm from '../components/EditItemForm';
+import NotificationsList from './NotificationsList';
 import {StyleSheet, StatusBar} from 'react-native';
 
 /* Stylesheet */
@@ -37,6 +38,7 @@ class App extends Component {
           <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
           <Scene key = {"NewItemForm"} component = {NewItemForm} title = 'Add Item' />
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
+          <Scene key = {"NotificationsList"} component = {NotificationsList} title = 'Notifications' />
         </Scene>
       </Router>
     );
