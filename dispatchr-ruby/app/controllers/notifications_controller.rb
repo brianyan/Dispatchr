@@ -16,7 +16,7 @@ class NotificationsController < ApplicationController
   #GET /notifications/get/:user_id
   def get_notifications
     if params[:user_id].present?
-      @notifications = Request.where(user_id: params[:user_id]).order(created_at: :desc)
+      @notifications = Notification.where(user_id: params[:user_id]).order(created_at: :desc)
       render json: @notifications
     else
       render status: 404, json: @notifications
