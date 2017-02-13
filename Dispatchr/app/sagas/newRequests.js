@@ -2,6 +2,7 @@ import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
 import { Actions } from 'react-native-router-flux';
+import BASE_URL from '../config/url';
 
 function* createRequest(requestData) {
   var convertedDate = requestData.request.expirationDate.split('-');
@@ -16,8 +17,8 @@ function* createRequest(requestData) {
     'Content-Type': 'application/json',
   };
   const response = yield call(
-    fetch, 
-    'https://dispatchr-api.herokuapp.com/requests',
+    fetch,
+    BASE_URL + '/requests',
     { method: 'POST', headers: headers, body: requestItemJSON }
   );
   const json =  yield call(response.json.bind(response)) // better option
