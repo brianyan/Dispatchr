@@ -17,6 +17,9 @@ function* userLogin(data) {
     'https://dispatchr-api.herokuapp.com/login',
     { method: 'POST', headers: headers, body: userCredentialsJSON }
   );
+  const json =  yield call(response.json.bind(response)) // better option
+
+  yield put({ type: types.SUCCESSFUL_LOGIN })
 }
 
 export default function* root() {

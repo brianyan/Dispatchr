@@ -6,3 +6,6 @@ export const ADD_ITEM = 'ADD_ITEM';
 export const EDIT_ITEM = 'EDIT_ITEM';
 export const SHOW_ITEM_LIST = 'SHOW_ITEM_LIST';
 export const USER_LOGIN = 'USER_LOGIN';
+export const SUCCESSFUL_LOGIN = 'SUCCESSFUL_LOGIN';
+export const INVALID_LOGIN = 'INVALID_LOGIN';
+

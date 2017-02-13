@@ -43,8 +43,8 @@ class LoginView extends Component {
         <AuthScreen
           login={this._simulateLogin}
           signup={this._simulateSignup}
-          isLoggedIn={this.state.isLoggedIn}
-          isLoading={this.state.isLoading}
+          isLoggedIn={this.props.isLoggedIn}
+          isLoading={this.props.isLoading}
           onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
         />
       )
@@ -59,7 +59,9 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state) {
   return {
-
+      isLoggedIn: state.isLoggedIn,
+      isLoading: state.isAppReady,
+      isAppReady: state.isAppReady
   }
 }
 
