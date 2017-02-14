@@ -2,20 +2,23 @@ import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
 import { Actions } from 'react-native-router-flux';
+import { AsyncStorage } from 'react-native';
 import BASE_URL from '../config/url';
 
 function* createRequest(requestData) {
+  const currentUserId = yield call(AsyncStorage.getItem, 'currentUserId');
+  const authToken = yield call(AsyncStorage.getItem, 'authToken');
   var convertedDate = requestData.request.expirationDate.split('-');
   convertedDate = convertedDate[2] + "-" + convertedDate[1] + "-" + convertedDate[0];
   const requestItemJSON = JSON.stringify({request : {
     expiration_date: convertedDate,
-    user_id: 2,
+    user_id: currentUserId,
     request_items: requestData.request.items
   }});
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    //'Authorization': /// fill me in
+    'Authorization': authToken
   };
   const response = yield call(
     fetch,

@@ -7,7 +7,6 @@ import { AsyncStorage } from 'react-native';
 import { Alert } from 'react-native';
 
 function* userLogin(data) {
-  console.log(data);
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -25,9 +24,8 @@ function* userLogin(data) {
   const json =  yield call(response.json.bind(response)) // better option
   if (json['auth_token'] && json['user']) {
     try {
-      console.log(json['user'].username);
-      console.log(json['auth_token']);
       yield call(AsyncStorage.setItem, 'currentUser', json['user'].username);
+      yield call(AsyncStorage.setItem, 'currentUserId', json['user'].id.toString());
       yield call(AsyncStorage.setItem, 'authToken', json['auth_token']);
       Actions.RequestsList();
     } catch (error) {
