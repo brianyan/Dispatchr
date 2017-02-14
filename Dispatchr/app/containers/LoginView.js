@@ -13,7 +13,7 @@ class LoginView extends Component {
   }
 
   _login = (username, password) => {
-    this.props.login({ user: username, pass: password });
+    this.props.authenticate({ username: username, password: password });
   }
 
   _signup = (username, password, fullName) => {

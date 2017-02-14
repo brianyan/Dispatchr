@@ -7,6 +7,7 @@ import { AsyncStorage } from 'react-native';
 import { Alert } from 'react-native';
 
 function* userLogin(data) {
+  console.log(data);
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',

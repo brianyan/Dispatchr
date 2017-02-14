@@ -1,6 +1,6 @@
 import * as types from './types'
 
-export function login(credentials) {
+export function authenticate(credentials) {
   return {
     type: types.USER_LOGIN,
     credentials
