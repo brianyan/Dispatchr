@@ -25,7 +25,9 @@ function* userLogin(data) {
   const json =  yield call(response.json.bind(response)) // better option
   if (json['auth_token'] && json['user']) {
     try {
-      yield call(AsyncStorage.setItem, 'currentUser', json['user']);
+      console.log(json['user'].username);
+      console.log(json['auth_token']);
+      yield call(AsyncStorage.setItem, 'currentUser', json['user'].username);
       yield call(AsyncStorage.setItem, 'authToken', json['auth_token']);
       Actions.RequestsList();
     } catch (error) {
