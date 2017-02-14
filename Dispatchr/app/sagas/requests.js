@@ -16,12 +16,12 @@ function* requestsRequested(data) {
 }
 
 function* requestAccepted(data) {
-  // url = BASE_URL + '/requests/' + data.id;
-  // const response = yield call(fetch, url, { method: 'POST' });
-  // const json = yield call(response.json.bind(response));
+  var url = BASE_URL + '/requests/accept/' + data.id;
+  const response = yield call(fetch, url, { method: 'POST' });
+  const json = yield call(response.json.bind(response));
   Alert.alert(
-    'Request Accepted',
-    "You're a hero!",
+    response.status == 200 ? 'Request Accepted' : 'Unable to Accept Request',
+    response.status == 200 ? 'You\'re a hero!' : 'Please try again later',
     [
       {text: 'OK', onPress: () => {Actions.pop()}},
     ]
