@@ -1,6 +1,7 @@
 import * as NewRequestActions from './newRequests'
 import * as requestActions from './requests'
 import * as itemActions from './items'
+import * as notificationActions from './notifications'
 
 /* This mergers all the actions we might have in our application and returning
    them as one object. Useful when our application is getting big. Essentially
@@ -9,4 +10,5 @@ export const ActionCreators = Object.assign({},
   NewRequestActions,
   requestActions,
   itemActions,
+  notificationActions
 )
