@@ -12,7 +12,7 @@ import BackgroundTimer from 'react-native-background-timer';
 import * as firebase from 'firebase';
 // Initialize Firebase
 
-export default class FireBaseChat extends Component {
+export default class FirebaseChat extends Component {
   constructor(props){
     super(props);
     this.database = firebase.database();
