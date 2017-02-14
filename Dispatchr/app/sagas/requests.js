@@ -3,14 +3,28 @@ import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
 import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { AsyncStorage } from 'react-native';
 import BASE_URL from '../config/url';
 
 function* requestsRequested(data) {
+  const currentUserId = yield call(AsyncStorage.getItem, 'currentUserId');
+  const authToken = yield call(AsyncStorage.getItem, 'authToken');
+  
   url = BASE_URL + '/requests';
   if (data.selection == 'User'){
-    url += '/user/?user_id=2';
+    url += '/user/' + currentUserId;
+    console.log(url);
   }
-  const response = yield call(fetch, url, { method: 'GET'} );
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': authToken
+  };
+  const response = yield call(
+    fetch,
+    url,
+    { method: 'GET', headers: headers }
+  );
   const json =  yield call(response.json.bind(response)) // better option
   yield put({ type: types.REQUEST_RECEIVED, payload: json})
 }
