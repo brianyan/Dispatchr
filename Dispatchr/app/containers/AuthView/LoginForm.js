@@ -127,7 +127,7 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state) {
   return {
-      isLoading: state.isLoading,
+      isLoading: state.userAuth.isLoading,
   }
 }
 

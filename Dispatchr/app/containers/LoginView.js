@@ -12,17 +12,11 @@ class LoginView extends Component {
     super(props);
   }
 
-  _simulateLogin = (username, password) => {
-
-    this.setState({ isLoading: true })
-    this.props.login({
-      username: username,
-      password: password
-    });
-    setTimeout(() => this.setState({ isLoggedIn: true, isLoading: false }), 1000)
+  _login = (username, password) => {
+    this.props.login({ user: username, pass: password });
   }
 
-  _simulateSignup = (username, password, fullName) => {
+  _signup = (username, password, fullName) => {
     this.setState({ isLoading: true })
     setTimeout(() => this.setState({ isLoggedIn: true, isLoading: false }), 1000)
   }
@@ -37,8 +31,8 @@ class LoginView extends Component {
     } else {
       return (
         <AuthScreen
-          login={this._simulateLogin}
-          signup={this._simulateSignup}
+          login={this._login}
+          signup={this._signup}
           isLoggedIn={this.props.isLoggedIn}
           isLoading={this.props.isLoading}
           onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}

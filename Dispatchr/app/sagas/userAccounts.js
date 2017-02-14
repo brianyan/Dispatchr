@@ -30,6 +30,7 @@ function* userLogin(data) {
     } catch (error) {
       yield call(console.log, error);
     }
+    yield put({ type: types.SUCCESSFUL_LOGIN })
   } else {
     Alert.alert(
       'Sign In Failed',
@@ -38,8 +39,8 @@ function* userLogin(data) {
         {text: 'OK', onPress: () => {}},
       ]
     )
+    yield put({ type: types.INVALID_LOGIN })
   }
-  yield put({ type: types.SUCCESSFUL_LOGIN })
 }
 
 export default function* root() {

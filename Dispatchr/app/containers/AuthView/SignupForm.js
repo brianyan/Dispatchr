@@ -2,13 +2,16 @@ import React, { Component, PropTypes } from 'react'
 import { StyleSheet } from 'react-native'
 import { Text, View } from 'react-native-animatable'
 
+import { connect } from 'react-redux';
+import { ActionCreators } from '../../actions';
+import { bindActionCreators } from 'redux';
+
 import CustomButton from '../../components/CustomButton'
 import CustomTextInput from '../../components/CustomTextInput'
 import metrics from '../../config/metrics'
 
-export default class SignupForm extends Component {
+class SignupForm extends Component {
   static propTypes = {
-    isLoading: PropTypes.bool.isRequired,
     onSignupPress: PropTypes.func.isRequired,
     onLoginLinkPress: PropTypes.func.isRequired
   }
@@ -31,7 +34,7 @@ export default class SignupForm extends Component {
 
   render () {
     const { email, password, fullName } = this.state
-    const { isLoading, onLoginLinkPress, onSignupPress } = this.props
+    const { onLoginLinkPress, onSignupPress } = this.props
     const isValid = email !== '' && password !== '' && fullName !== ''
     return (
       <View style={styles.container}>
@@ -39,35 +42,35 @@ export default class SignupForm extends Component {
           <CustomTextInput
             ref={(ref) => this.mobileInputRef = ref}
             placeholder={'Full name'}
-            editable={!isLoading}
+            editable={!this.props.isLoading}
             returnKeyType={'next'}
             blurOnSubmit={false}
             withRef={true}
             onSubmitEditing={() => this.emailInputRef.focus()}
             onChangeText={(value) => this.setState({ fullName: value })}
-            isEnabled={!isLoading}
+            isEnabled={!this.props.isLoading}
           />
           <CustomTextInput
             ref={(ref) => this.emailInputRef = ref}
             placeholder={'Email'}
             keyboardType={'email-address'}
-            editable={!isLoading}
+            editable={!this.props.isLoading}
             returnKeyType={'next'}
             blurOnSubmit={false}
             withRef={true}
             onSubmitEditing={() => this.passwordInputRef.focus()}
             onChangeText={(value) => this.setState({ email: value })}
-            isEnabled={!isLoading}
+            isEnabled={!this.props.isLoading}
           />
           <CustomTextInput
             ref={(ref) => this.passwordInputRef = ref}
             placeholder={'Password'}
-            editable={!isLoading}
+            editable={!this.props.isLoading}
             returnKeyType={'done'}
             secureTextEntry={true}
             withRef={true}
             onChangeText={(value) => this.setState({ password: value })}
-            isEnabled={!isLoading}
+            isEnabled={!this.props.isLoading}
           />
         </View>
         <View style={styles.footer}>
@@ -75,7 +78,7 @@ export default class SignupForm extends Component {
             <CustomButton
               onPress={() => onSignupPress(email, password, fullName)}
               isEnabled={isValid}
-              isLoading={isLoading}
+              isLoading={this.props.isLoading}
               buttonStyle={styles.createAccountButton}
               textStyle={styles.createAccountButtonText}
               text={'Create Account'}
@@ -121,3 +124,15 @@ const styles = StyleSheet.create({
     padding: 20
   }
 })
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+      isLoading: state.userAuth.isLoading,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);

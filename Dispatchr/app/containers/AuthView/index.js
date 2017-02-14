@@ -160,8 +160,8 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state) {
   return {
-      isLoggedIn: state.isLoggedIn,
-      isLoading: state.isLoading,
+      isLoggedIn: state.userAuth.isLoggedIn,
+      isLoading: state.userAuth.isLoading,
   }
 }
 
