@@ -15,6 +15,7 @@ function* createRequest(requestData) {
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    //'Authorization': /// fill me in
   };
   const response = yield call(
     fetch,

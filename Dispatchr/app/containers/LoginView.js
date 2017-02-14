@@ -10,14 +10,10 @@ import HomeScreen from './HomeView'
 class LoginView extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      isLoggedIn: false, // Is the user authenticated?
-      isLoading: false, // Is the user loggingIn/signinUp?
-      isAppReady: false // Has the app completed the login animation?
-    };
   }
 
   _simulateLogin = (username, password) => {
+
     this.setState({ isLoading: true })
     this.props.login({
       username: username,
@@ -36,7 +32,7 @@ class LoginView extends Component {
    * If the user is authenticated (isAppReady) show the HomeScreen, otherwise show the AuthScreen
    */
   render () {
-    if (this.state.isAppReady) {
+    if (this.props.isAppReady) {
       Actions.RequestsList();
     } else {
       return (
@@ -59,9 +55,9 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state) {
   return {
-      isLoggedIn: state.isLoggedIn,
-      isLoading: state.isAppReady,
-      isAppReady: state.isAppReady
+      isLoggedIn: state.userAuth.isLoggedIn,
+      isLoading: state.userAuth.isLoading,
+      isAppReady: state.userAuth.isAppReady
   }
 }
 

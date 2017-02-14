@@ -9,6 +9,11 @@ import Opening from './Opening'
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
 
+import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux';
+import { ActionCreators } from '../../actions';
+import { bindActionCreators } from 'redux';
+
 const IMAGE_WIDTH = metrics.DEVICE_WIDTH * 1.2;
 
 if (Platform.OS === 'android') UIManager.setLayoutAnimationEnabledExperimental(true)
@@ -41,10 +46,8 @@ if (Platform.OS === 'android') UIManager.setLayoutAnimationEnabledExperimental(t
  *   _hideAuthScreen then 1. calls the SignupForm.hideForm(), that hides the form buttons (zoomOut) and the form itself (fadeOut),
  *   2. fadeOut the logo, 3. tells the container that the login animation has completed and that the app is ready to show the next screen (HomeScreen).
  */
-export default class AuthScreen extends Component {
+class AuthScreen extends Component {
   static propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired,
     signup: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
     onLoginAnimationCompleted: PropTypes.func.isRequired // Called at the end of a succesfull login/signup animation
@@ -82,7 +85,7 @@ export default class AuthScreen extends Component {
   }
 
   render () {
-    const { isLoggedIn, isLoading, signup, login } = this.props
+    const { signup, login } = this.props
     const { visibleForm } = this.state
     // The following style is responsible of the "bounce-up from bottom" animation of the form
     const formStyle = (!visibleForm) ? { height: 0 } : { marginTop: 40 }
@@ -96,7 +99,7 @@ export default class AuthScreen extends Component {
           style={styles.logoImg}
           source={imgLogo}
         />
-        {(!visibleForm && !isLoggedIn) && (
+        {(!visibleForm && !this.props.isLoggedIn) && (
           <Opening
             onCreateAccountPress={() => this._setVisibleForm('SIGNUP')}
             onSignInPress={() => this._setVisibleForm('LOGIN')}
@@ -112,7 +115,7 @@ export default class AuthScreen extends Component {
               ref={(ref) => this.formRef = ref}
               onLoginLinkPress={() => this._setVisibleForm('LOGIN')}
               onSignupPress={signup}
-              isLoading={isLoading}
+              isLoading={this.props.isLoading}
             />
           )}
           {(visibleForm === 'LOGIN') && (
@@ -120,7 +123,7 @@ export default class AuthScreen extends Component {
               ref={(ref) => this.formRef = ref}
               onSignupLinkPress={() => this._setVisibleForm('SIGNUP')}
               onLoginPress={login}
-              isLoading={isLoading}
+              isLoading={this.props.isLoading}
             />
           )}
         </KeyboardAvoidingView>
@@ -149,3 +152,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#1976D2'
   }
 })
+
+/* Connects to the actions, so we can do stuff! Boilerplate!!! */
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+      isLoggedIn: state.isLoggedIn,
+      isLoading: state.isLoading,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthScreen);

@@ -13,7 +13,7 @@ function* userLogin(data) {
   };
 
   const userCredentialsJSON = JSON.stringify(
-    {email: data.credentials.username, password: data.credentials.password }
+    { email: data.credentials.username, password: data.credentials.password }
   );
 
   const response = yield call(

@@ -6,9 +6,13 @@ import CustomButton from '../../components/CustomButton'
 import CustomTextInput from '../../components/CustomTextInput'
 import metrics from '../../config/metrics'
 
-export default class LoginForm extends Component {
+import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux';
+import { ActionCreators } from '../../actions';
+import { bindActionCreators } from 'redux';
+
+class LoginForm extends Component {
   static propTypes = {
-    isLoading: PropTypes.bool.isRequired,
     onLoginPress: PropTypes.func.isRequired,
     onSignupLinkPress: PropTypes.func.isRequired
   }
@@ -31,7 +35,7 @@ export default class LoginForm extends Component {
 
   render () {
     const { email, password } = this.state
-    const { isLoading, onSignupLinkPress, onLoginPress } = this.props
+    const { onSignupLinkPress, onLoginPress } = this.props
     const isValid = email !== '' && password !== ''
     return (
       <View style={styles.container}>
@@ -41,24 +45,24 @@ export default class LoginForm extends Component {
             ref={(ref) => this.emailInputRef = ref}
             placeholder={'Email'}
             keyboardType={'email-address'}
-            editable={!isLoading}
+            editable={!this.props.isLoading}
             returnKeyType={'next'}
             blurOnSubmit={false}
             withRef={true}
             onSubmitEditing={() => this.passwordInputRef.focus()}
             onChangeText={(value) => this.setState({ email: value })}
-            isEnabled={!isLoading}
+            isEnabled={!this.props.isLoading}
           />
           <CustomTextInput
             name={'password'}
             ref={(ref) => this.passwordInputRef = ref}
             placeholder={'Password'}
-            editable={!isLoading}
+            editable={!this.props.isLoading}
             returnKeyType={'done'}
             secureTextEntry={true}
             withRef={true}
             onChangeText={(value) => this.setState({ password: value })}
-            isEnabled={!isLoading}
+            isEnabled={!this.props.isLoading}
           />
         </View>
         <View style={styles.footer}>
@@ -66,7 +70,7 @@ export default class LoginForm extends Component {
             <CustomButton
               onPress={() => onLoginPress(email, password)}
               isEnabled={isValid}
-              isLoading={isLoading}
+              isLoading={this.props.isLoading}
               buttonStyle={styles.loginButton}
               textStyle={styles.loginButtonText}
               text={'Log In'}
@@ -87,6 +91,8 @@ export default class LoginForm extends Component {
     )
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -112,3 +118,17 @@ const styles = StyleSheet.create({
     padding: 20
   }
 })
+
+
+/* Connects to the actions, so we can do stuff! Boilerplate!!! */
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+      isLoading: state.isLoading,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
