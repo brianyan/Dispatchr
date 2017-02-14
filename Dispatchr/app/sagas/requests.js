@@ -12,8 +12,10 @@ function* requestsRequested(data) {
 
   url = BASE_URL + '/requests';
   if (data.selection == 'User'){
-    url += '/user/?user_id=' + currentUserId;
+    url += '/user/' + currentUserId;
+    console.log(url);
   }
+
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
