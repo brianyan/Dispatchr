@@ -1,32 +1,22 @@
 import React, { Component } from 'react'
 import { Actions } from 'react-native-router-flux'
-
+import { connect } from 'react-redux';
+import { ActionCreators } from '../actions';
+import { bindActionCreators } from 'redux';
 
 import AuthScreen from './AuthView'
 import HomeScreen from './HomeView'
 
-/**
- * The root component of the application.
- * In this component I am handling the entire application state, but in a real app you should
- * probably use a state management library like Redux or MobX to handle the state (if your app gets bigger).
- */
 class LoginView extends Component {
-  state = {
-    isLoggedIn: false, // Is the user authenticated?
-    isLoading: false, // Is the user loggingIn/signinUp?
-    isAppReady: false // Has the app completed the login animation?
+  constructor(props){
+    super(props);
   }
 
-  /**
-   * Two login function that waits 1000 ms and then authenticates the user succesfully.
-   * In your real app they should be replaced with an API call to you backend.
-   */
-  _simulateLogin = (username, password) => {
-    this.setState({ isLoading: true })
-    setTimeout(() => this.setState({ isLoggedIn: true, isLoading: false }), 1000)
+  _login = (username, password) => {
+    this.props.authenticate({ username: username, password: password });
   }
 
-  _simulateSignup = (username, password, fullName) => {
+  _signup = (username, password, fullName) => {
     this.setState({ isLoading: true })
     setTimeout(() => this.setState({ isLoggedIn: true, isLoading: false }), 1000)
   }
@@ -36,15 +26,15 @@ class LoginView extends Component {
    * If the user is authenticated (isAppReady) show the HomeScreen, otherwise show the AuthScreen
    */
   render () {
-    if (this.state.isAppReady) {
+    if (this.props.isAppReady) {
       Actions.RequestsList();
     } else {
       return (
         <AuthScreen
-          login={this._simulateLogin}
-          signup={this._simulateSignup}
-          isLoggedIn={this.state.isLoggedIn}
-          isLoading={this.state.isLoading}
+          login={this._login}
+          signup={this._signup}
+          isLoggedIn={this.props.isLoggedIn}
+          isLoading={this.props.isLoading}
           onLoginAnimationCompleted={() => this.setState({ isAppReady: true })}
         />
       )
@@ -52,4 +42,17 @@ class LoginView extends Component {
   }
 }
 
-export default LoginView
+/* Connects to the actions, so we can do stuff! Boilerplate!!! */
+function mapDispatchToProps(dispatch){
+  return bindActionCreators(ActionCreators, dispatch);
+}
+
+function mapStateToProps(state) {
+  return {
+      isLoggedIn: state.userAuth.isLoggedIn,
+      isLoading: state.userAuth.isLoading,
+      isAppReady: state.userAuth.isAppReady
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

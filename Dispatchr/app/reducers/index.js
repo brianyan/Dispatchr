@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import * as newRequestReducer from './newRequests';
 import * as requestsReducer from './requests';
 import * as itemsReducer from './items';
+import * as userReducer from './userAccounts.js';
 import * as notificationsReducer from './notifications';
 
 
@@ -12,5 +13,6 @@ export default combineReducers(Object.assign(
   newRequestReducer,
   requestsReducer,
   itemsReducer,
+  userReducer,
   notificationsReducer
 ))
