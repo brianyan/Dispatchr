@@ -1,6 +1,10 @@
 import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
+import BASE_URL from '../config/url';
+import { Actions } from 'react-native-router-flux';
+import { AsyncStorage } from 'react-native';
+import { Alert } from 'react-native';
 
 function* userLogin(data) {
   const headers = {
@@ -14,11 +18,27 @@ function* userLogin(data) {
 
   const response = yield call(
     fetch,
-    'https://dispatchr-api.herokuapp.com/login',
+    BASE_URL + '/login',
     { method: 'POST', headers: headers, body: userCredentialsJSON }
   );
   const json =  yield call(response.json.bind(response)) // better option
-
+  if (json['auth_token'] && json['user']) {
+    try {
+      yield call(AsyncStorage.setItem, 'currentUser', json['user']);
+      yield call(AsyncStorage.setItem, 'authToken', json['auth_token']);
+      Actions.RequestsList();
+    } catch (error) {
+      yield call(console.log, error);
+    }
+  } else {
+    Alert.alert(
+      'Sign In Failed',
+      "Invalid username or password",
+      [
+        {text: 'OK', onPress: () => {}},
+      ]
+    )
+  }
   yield put({ type: types.SUCCESSFUL_LOGIN })
 }
 
