@@ -30,8 +30,17 @@ function* requestsRequested(data) {
 }
 
 function* requestAccepted(data) {
-  var url = BASE_URL + '/requests/accept/' + data.id;
-  const response = yield call(fetch, url, { method: 'POST' });
+  const currentUserId = yield call(AsyncStorage.getItem, 'currentUserId');
+  const authToken = yield call(AsyncStorage.getItem, 'authToken');
+
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': authToken
+  };
+
+  var url = BASE_URL + '/requests/accept/' + data.request.id;
+  const response = yield call(fetch, url, { method: 'POST', headers: headers });
   const json = yield call(response.json.bind(response));
   Alert.alert(
     response.status == 200 ? 'Request Accepted' : 'Unable to Accept Request',

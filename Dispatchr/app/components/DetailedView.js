@@ -10,7 +10,6 @@ import DetailedViewRequestProfile from './DetailedViewRequestProfile';
 class DetailedView extends Component {
   _acceptRequest() {
     this.props.acceptRequest(this.props.request);
-    console.log(this.props.request)
   }
 
   _alertHide() {
