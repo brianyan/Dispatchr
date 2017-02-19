@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Image, Text, TouchableHighlight, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux'
-import FirebaseChat from '../containers/FirebaseChat'
+import FireBaseChat from '../containers/FireBaseChat'
 var moment = require('moment');
 
 var options = {
@@ -14,19 +14,11 @@ export default class DetailedViewRequestProfile extends Component {
   _renderDate() {
     var date_string = this.props.request.expiration_date
     var date = new Date(date_string)
-    console.log("date", date)
-    console.log(date_string);
-    console.log(moment(date_string).format('MMM Mo YYYY'));;
-    // console.log(this.props.request.expiration_date)
-    // console.log(date.toLocaleTimeString("en-us", options))
-    //
-    // console.log(moment(date).for)
     return moment(date).format('MMM Mo YYYY')
-    // return date.toLocaleTimeString("en-us", options)
   }
 
   _onChatPress(){
-    Actions.FirebaseChat();
+    Actions.FireBaseChat();
   }
 
   _onPhonePress(){
