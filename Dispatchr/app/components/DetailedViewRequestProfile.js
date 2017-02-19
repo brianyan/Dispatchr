@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Image, Text, TouchableHighlight, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux'
-import FirebaseChat from '../containers/FirebaseChat'
+import FireBaseChat from '../containers/FireBaseChat'
 var moment = require('moment');
 
 var options = {
@@ -26,7 +26,7 @@ export default class DetailedViewRequestProfile extends Component {
   }
 
   _onChatPress(){
-    Actions.FirebaseChat();
+    Actions.FireBaseChat();
   }
 
   _onPhonePress(){
