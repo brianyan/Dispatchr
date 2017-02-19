@@ -3,10 +3,12 @@ import { Scene, Router, Reducer, ActionConst } from 'react-native-router-flux';
 import DetailedView from '../components/DetailedView';
 import LoginView from './LoginView';
 import RequestsList from './RequestsList'
+import ChatView from './Chat'
 import NewRequestView from '../components/NewRequestView';
 import NewItemForm from '../components/NewItemForm';
 import EditItemForm from '../components/EditItemForm';
 import NotificationsList from './NotificationsList';
+import FirebaseChat from './FirebaseChat'
 import {StyleSheet, StatusBar} from 'react-native';
 
 /* Stylesheet */
@@ -34,10 +36,11 @@ class App extends Component {
         <Scene key="root">
           <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE}/>
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
-          <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' initial={true} />
+          <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' initial={true}/>
           <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
           <Scene key = {"NewItemForm"} component = {NewItemForm} title = 'Add Item' />
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
+          <Scene key = {"FirebaseChat"} component = {FirebaseChat} title = 'Chat'/>
           <Scene key = {"NotificationsList"} component = {NotificationsList} title = 'Notifications' />
         </Scene>
       </Router>
