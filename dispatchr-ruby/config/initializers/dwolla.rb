@@ -5,7 +5,7 @@ $dwolla = DwollaV2::Client.new(key: "JeXCrq3oN7ELpIWyAnB7TQqvfZWUU8hnOkLRvERr8B7
   config.environment = :sandbox
   # config.on_grant do |token|
   # 	TokenData.create! token
-  end
+  # end
 end
 
 # create an application token if one doesn't already exist
@@ -15,7 +15,7 @@ end
 #   $dwolla.auths.client # this gets saved in our on_grant callback
 # end
 
-# create an account token if one doesn't already exist
+# # create an account token if one doesn't already exist
 # begin
 #   TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
 # rescue ActiveRecord::RecordNotFound => e
