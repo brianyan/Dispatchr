@@ -11,10 +11,13 @@ var options = {
 };
 
 export default class DetailedViewRequestProfile extends Component {
+  constructor(props){
+    super(props);
+  }
   _renderDate() {
-    var date_string = this.props.request.expiration_date
-    var date = new Date(date_string)
-    return moment(date).format('MMM Mo YYYY')
+    var date_string = this.props.request.expiration_date;
+    var date = new Date(date_string);
+    return moment(date).format('MMM DD YYYY');
   }
 
   _onChatPress(){

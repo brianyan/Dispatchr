@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, StyleSheet, Alert, TouchableHighlight} from 'react-native';
+import { ScrollView, Text, View, StyleSheet, Alert, TouchableHighlight, AsyncStorage} from 'react-native';
 import { Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import DetailedViewRequestProfile from './DetailedViewRequestProfile';
-
+import renderIf from '../lib/renderif'
 
 class DetailedView extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      showCancelOption: this.props.userInfo === this.props.request.user.username ? true : false,
+    }
+  }
   _acceptRequest() {
     this.props.acceptRequest(this.props.request);
   }
-
+  _alertCancel(){
+    Alert.alert(
+      'Request Cancelled',
+      [
+        {text: 'OK', onPress: () => {Actions.pop()}},
+      ]
+    )
+  }
   _alertHide() {
     Alert.alert(
       'Request Declined',
@@ -21,7 +34,6 @@ class DetailedView extends Component {
       ]
     )
   }
-
   render() {
     return (
       <View style = {{flex: 1}}>
@@ -36,9 +48,16 @@ class DetailedView extends Component {
               <Text> Accept </Text>
             </TouchableHighlight>
             <View style={styles.divider}></View>
-            <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
-              <Text> Hide </Text>
-            </TouchableHighlight>
+           {renderIf(this.state.showCancelOption)(
+             <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertCancel() } }>
+               <Text> Cancel </Text>
+             </TouchableHighlight>
+           )}
+           {renderIf(!(this.state.showCancelOption))(
+             <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
+               <Text> Hide </Text>
+             </TouchableHighlight>
+           )}
           </View>
       </View>
     );
@@ -76,7 +95,8 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state) {
   return {
-    acceptRequest: state.acceptRequest
+    acceptRequest: state.acceptRequest,
+    userInfo: state.userInfo,
   }
 }
 
