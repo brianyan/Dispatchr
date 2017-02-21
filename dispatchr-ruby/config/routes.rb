@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   post '/requests/complete/:id' => 'requests#complete_request'
   post '/users/reputation/:id/:score' => 'users#update_reputation'
   get '/notifications/get/:user_id' => 'notifications#get_notifications'
-  resources :items, :requests, :users, :request_items, :addresses, :notifications
+  resources :items, :requests, :users, :request_items, :addresses, :notifications, :payments
 end

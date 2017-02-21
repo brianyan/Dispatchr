@@ -18,10 +18,10 @@ class RegistrationsController < ApplicationController
         address: address
     )
     if @user
-      token = Authentication::JsonWebToken.encode(@user.id)
+      # token = Authentication::JsonWebToken.encode(@user.id)
 
-      customer_url = Payment.create_dwolla_customer(@user)
-      funding_url = Payment.link_funding_source(customer_url)
+      # customer_url = Payment.create_dwolla_customer(@user)
+      # funding_url = Payment.link_funding_source(customer_url)
 
       render json: { user: @user, auth_token: token }
     else
