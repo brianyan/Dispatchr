@@ -4,6 +4,7 @@ import * as requestsReducer from './requests';
 import * as itemsReducer from './items';
 import * as userReducer from './userAccounts.js';
 import * as notificationsReducer from './notifications';
+import * as userInfoReducer from './userInfo';
 
 
 /* Combines all reducers into one object. Creates a mechanism for adding different
@@ -14,5 +15,6 @@ export default combineReducers(Object.assign(
   requestsReducer,
   itemsReducer,
   userReducer,
-  notificationsReducer
+  notificationsReducer,
+  userInfoReducer
 ))

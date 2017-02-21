@@ -11,17 +11,9 @@ class DetailedView extends Component {
   constructor(props){
     super(props);
     this.state = {
-      showCancelOption: false
+      showCancelOption: this.props.userInfo === this.props.request.user.username ? true : false,
     }
-    console.log("hello");
-    console.log(AsyncStorage.getItem('currentUserId'));
-    this._determineCancelOrHide = this._determineCancelOrHide.bind(this)
   }
-  componentDidMount(){
-    console.log("reached1");
-    this._determineCancelOrHide();
-  }
-
   _acceptRequest() {
     this.props.acceptRequest(this.props.request);
   }
@@ -42,24 +34,6 @@ class DetailedView extends Component {
       ]
     )
   }
-  async _determineCancelOrHide(){
-    console.log("reached");
-    // find out what the text needs to be , either you are the user who submitted the request, and you can cancel the request
-    // otherwise, you are any other user, therefore you should be able to hide the request if you don't want to see it.
-    this.props.showCancelOption = false;
-    try {
-      const value = await AsyncStorage.getItem('currentUserId');
-      console.log("reached", value);
-      if (value !== null){
-        if(value === this.props.request.user.username){
-          this.state.showCancelOption = true;
-        }
-        // We have data!!
-      }
-    } catch (error) {
-      // Error retrieving data
-    }
-  }
   render() {
     return (
       <View style = {{flex: 1}}>
@@ -74,12 +48,12 @@ class DetailedView extends Component {
               <Text> Accept </Text>
             </TouchableHighlight>
             <View style={styles.divider}></View>
-           {renderIf(this.state.showCancelButton)(
+           {renderIf(this.state.showCancelOption)(
              <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertCancel() } }>
                <Text> Cancel </Text>
              </TouchableHighlight>
            )}
-           {renderIf(!(this.state.showCancelButton))(
+           {renderIf(!(this.state.showCancelOption))(
              <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
                <Text> Hide </Text>
              </TouchableHighlight>
@@ -121,7 +95,8 @@ function mapDispatchToProps(dispatch){
 
 function mapStateToProps(state) {
   return {
-    acceptRequest: state.acceptRequest
+    acceptRequest: state.acceptRequest,
+    userInfo: state.userInfo,
   }
 }
 
