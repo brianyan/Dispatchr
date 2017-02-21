@@ -15,14 +15,47 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-    @payment = Payment.new(payment_params)
 
-    if @payment.save
-      render :show, status: :created, location: @payment
+    @user = User.find_by(id: payment_params[:user_id])
+    # puts @user.name
+    if (@user)
+      #set user entered params
+      @payment = Payment.new
+      @payment.user_id = payment_params[:user_id]
+      @payment.routing_number = payment_params[:routing_number]
+      @payment.account_number = payment_params[:account_number]
+      @payment.account_name = payment_params[:account_name]
+      if (payment_params[:type] != "checking" && payment_params[:type] != "savings")
+        @payment.type = "checking"
+      else
+        @payment.type = payment_params[:type]
+      end
+
+      #set dwolla generated params
+      @payment.customer = Payment.create_dwolla_customer(@user)
+      @payment.funding_source = Payment.link_funding_source(@payment)
+      Payment.verify_customer(@payment.funding_source)
+
+      if @payment.save
+        render :show, status: :created, location: @payment
+      else
+        render json: @payment.errors, status: :unprocessable_entity
+      end  
+
     else
       render json: @payment.errors, status: :unprocessable_entity
     end
+  
   end
+  # def create
+  #   @payment = Payment.new(payment_params)
+
+  #   if @payment.save
+  #     render :show, status: :created, location: @payment
+  #   else
+  #     render json: @payment.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json
@@ -48,6 +81,7 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:user_id, :customer, :funding_source, :routing_number, :account_number, :type, :account_name)
+      # params.require(:payment).permit(:user_id, :customer, :funding_source, :routing_number, :account_number, :type, :account_name)
+      params.require(:payment).permit!
     end
 end

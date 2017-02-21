@@ -19,10 +19,6 @@ class RegistrationsController < ApplicationController
     )
     if @user
       token = Authentication::JsonWebToken.encode(@user.id)
-
-      # customer_url = Payment.create_dwolla_customer(@user)
-      # funding_url = Payment.link_funding_source(customer_url)
-
       render json: { user: @user, auth_token: token }
     else
       render json: @user.errors, status: :bad_request
