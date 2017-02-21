@@ -15,7 +15,6 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
-
     @user = User.find_by(id: payment_params[:user_id])
     # puts @user.name
     if (@user)
@@ -25,10 +24,10 @@ class PaymentsController < ApplicationController
       @payment.routing_number = payment_params[:routing_number]
       @payment.account_number = payment_params[:account_number]
       @payment.account_name = payment_params[:account_name]
-      if (payment_params[:type] != "checking" && payment_params[:type] != "savings")
-        @payment.type = "checking"
+      if (payment_params[:account_type] != "checking" && payment_params[:account_type] != "savings")
+        @payment.account_type = "checking"
       else
-        @payment.type = payment_params[:type]
+        @payment.acount_type = payment_params[:acount_type]
       end
 
       #set dwolla generated params
@@ -45,17 +44,19 @@ class PaymentsController < ApplicationController
     else
       render json: @payment.errors, status: :unprocessable_entity
     end
-  
   end
-  # def create
-  #   @payment = Payment.new(payment_params)
 
-  #   if @payment.save
-  #     render :show, status: :created, location: @payment
-  #   else
-  #     render json: @payment.errors, status: :unprocessable_entity
-  #   end
-  # end
+  # POST /payments/transfer/:src_id/:dest_id/:amount
+  def transfer
+    user1 = Payment.find_by(user_id: params[:src_id])
+    user2 = Payment.find_by(user_id: params[:dest_id])
+    if (user1 && user2)
+      Payment.transfer(user1, user2, params[:amount])
+      render :nothing => true, status: :created
+    else
+      render json: @payment.errors, status: :unprocessable_entity
+    end
+  end
 
   # PATCH/PUT /payments/1
   # PATCH/PUT /payments/1.json

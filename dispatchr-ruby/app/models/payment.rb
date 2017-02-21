@@ -5,7 +5,7 @@ class Payment < ApplicationRecord
 	validates :user_id, presence: true
 	validates :routing_number, presence: true
 	validates :account_number, presence: true
-	validates :type, presence: true
+	validates :account_type, presence: true
 	validates :account_name, presence: true
 
 	def account_token
@@ -39,7 +39,7 @@ class Payment < ApplicationRecord
 		request_body = {
   			:routingNumber => "#{payment.routing_number}",
   			:accountNumber => "#{payment.account_number}",
-  			:type => "#{payment.type}",
+  			:type => "#{payment.account_type}",
   			:name => "#{payment.account_name}"
 		}
 
@@ -68,6 +68,30 @@ class Payment < ApplicationRecord
     		}
 		}
 		verify = account_token.post "#{funding_url}/micro-deposits", request_body
+	end
+
+	def self.transfer(source, destination, amount)
+		transfer_request = {
+  			:_links => {
+    			:source => {
+      				:href => "#{source.funding_source}"
+    			},
+    			:destination => {
+      				:href => "#{destination.customer}"
+    			}
+  			},
+  				:amount => {
+    				:currency => "USD",
+    				:value => "#{amount}"
+  				}
+		}
+
+		account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
+		xfer = account_token.post "transfers", transfer_request
+		xfer.headers[:location]
+
+
+
 	end
 
 

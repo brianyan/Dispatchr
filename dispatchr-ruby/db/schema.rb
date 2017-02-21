@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221054800) do
+ActiveRecord::Schema.define(version: 20170221083957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20170221054800) do
     t.string   "funding_source"
     t.string   "routing_number"
     t.string   "account_number"
-    t.string   "type"
+    t.string   "account_type"
     t.string   "account_name"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
