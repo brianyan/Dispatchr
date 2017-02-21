@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
   imageRound: {
     marginLeft: 20,
     marginRight: 20,
-    height: 50,
-    borderRadius: 25,
-    width: 50
+    height: 40,
+    borderRadius: 20,
+    width: 40
   }
 });

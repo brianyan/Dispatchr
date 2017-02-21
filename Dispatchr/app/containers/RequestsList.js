@@ -172,6 +172,7 @@ var styles = StyleSheet.create({
     flex: 1,
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#8E8E8E',
+    borderColor: '#f0f8ff'
   },
   row: {
     flexDirection: 'row',
