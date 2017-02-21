@@ -23,7 +23,14 @@ class Payment < ApplicationRecord
 		request_body = {
   			:firstName => "#{names[0]}",
   			:lastName => "#{names[1]}",
-  			:email => "#{user.email}"
+  			:email => "#{user.email}",
+  			:type => "personal",
+  			:address1 => "123 Test Street"
+  			:city => "Test",
+  			:state => "CA",
+  			:postalCode => "93117",
+  			:dateOfBirth => "1990-1-1",
+  			:ssn => "1234"
 		}
 
 		account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
