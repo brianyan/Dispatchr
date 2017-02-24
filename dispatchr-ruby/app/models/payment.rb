@@ -25,7 +25,7 @@ class Payment < ApplicationRecord
   			:lastName => "#{names[1]}",
   			:email => "#{user.email}",
   			:type => "personal",
-  			:address1 => "123 Test Street"
+  			:address1 => "123 Test Street",
   			:city => "Test",
   			:state => "CA",
   			:postalCode => "93117",

@@ -50,8 +50,13 @@ class PaymentsController < ApplicationController
   def transfer
     user1 = Payment.find_by(user_id: params[:src_id])
     user2 = Payment.find_by(user_id: params[:dest_id])
+
+    username1 = User.find_by(id: params[:src_id])
+    username2 = User.find_by(id: params[:dest_id])
     if (user1 && user2)
       Payment.transfer(user1, user2, params[:amount])
+      Notification.create(user_id: user1.user_id, message: "Your payment of $#{params[:amount]} has been initiated to #{username2.name} via Dwolla!")
+      Notification.create(user_id: user2.user_id, message: "#{username1.name} has initiated a payment of $#{params[:amount]} to you via Dwolla!")
       render :nothing => true, status: :created
     else
       render json: @payment.errors, status: :unprocessable_entity

@@ -1,5 +1,5 @@
 class TokenData < ApplicationRecord
- 	DESIRED_FRESHNESS = 1.minute
+  DESIRED_FRESHNESS = 1.minute
   SECRET_KEY = "yEp8Uu0fOdBLbIPfulBBBZ792jxDJFQae2oWewaT2Ro5W6rist"
 
   attr_encrypted :access_token, key: SECRET_KEY
