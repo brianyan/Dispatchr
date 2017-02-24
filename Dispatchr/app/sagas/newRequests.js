@@ -8,8 +8,7 @@ import BASE_URL from '../config/url';
 function* createRequest(requestData) {
   const currentUserId = yield call(AsyncStorage.getItem, 'currentUserId');
   const authToken = yield call(AsyncStorage.getItem, 'authToken');
-  var convertedDate = requestData.request.expirationDate.split('-');
-  convertedDate = convertedDate[2] + "-" + convertedDate[1] + "-" + convertedDate[0];
+  var convertedDate = requestData.request.expirationDate;
   const requestItemJSON = JSON.stringify({request : {
     expiration_date: convertedDate,
     user_id: currentUserId,

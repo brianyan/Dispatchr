@@ -5,24 +5,16 @@ import ItemList from './ItemList'
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
+var moment = require('moment');
 
 class NewRequestView extends Component {
   constructor(props){
     super(props);
     var today = new Date();
-    var day = today.getDate();
-    var month = today.getMonth()+1;
-    var year = today.getFullYear();
-
-    if(day<10) {
-        day='0'+day
+    moment(today).format('MMM Do YYYY')
+    this.state = {
+      date: today
     }
-    if(month<10) {
-        month='0'+month
-    }
-
-    today = year + '-' + month + '-' + day;
-    this.state = { date: today }
   }
 
   _newRequest() {
@@ -42,7 +34,7 @@ class NewRequestView extends Component {
               date={this.state.date}
               mode="date"
               placeholder="placeholder"
-              format="YYYY-MM-DD"
+              format="MMM DD YYYY"
               confirmBtnText="Confirm"
               showIcon={false}
               cancelBtnText="Cancel"

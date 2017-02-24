@@ -4,6 +4,7 @@ import newRequests from './newRequests';
 import items from './items'
 import userAccounts from './userAccounts'
 import notifications from './notifications';
+import userInfo from './userInfo';
 
 export default function* root() {
   yield [
@@ -11,6 +12,7 @@ export default function* root() {
     fork(newRequests),
     fork(items),
     fork(userAccounts),
-    fork(notifications)
+    fork(notifications),
+    fork(userInfo)
   ]
 }

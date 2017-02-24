@@ -37,6 +37,8 @@ class RequestsList extends Component {
       selection: 'Global'
     };
     this.props.getRequests(this.state.selection);
+    // getting the currentUser
+    this.props.getUserInfo();
   }
 
   componentWillReceiveProps (nextProps) {
