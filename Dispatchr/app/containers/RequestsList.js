@@ -178,6 +178,7 @@ var styles = StyleSheet.create({
     flex: 1,
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#8E8E8E',
+    borderColor: '#f0f8ff'
   },
   row: {
     flexDirection: 'row',
@@ -201,7 +202,7 @@ var styles = StyleSheet.create({
       borderColor: '#8E8E8E',
       borderWidth: StyleSheet.hairlineWidth,
       paddingHorizontal: 20,
-      paddingVertical: 10,
+      paddingVertical: 7,
       borderRadius: 5,
   },
   buttonText: {
