@@ -29,7 +29,7 @@ export default class DetailedViewCell extends Component {
           <View style={styles.containerRow}>
             <View style={styles.itemDescription}>
               <Text style={styles.boldTextAttribute}> {this.props.requestItem.item.name}</Text>
-              <Text> {this.props.requestItem.quantity_description} ct </Text>
+              <Text> {this.props.requestItem.quantity_description} </Text>
             </View>
             <View style={styles.itemPrice}>
               <Text style={styles.itemPriceText}>${this.props.requestItem.max_price} </Text>
@@ -59,9 +59,8 @@ const styles = StyleSheet.create({
   },
   itemDescription: {
     flex: 3,
-    // backgroundColor: 'blue',
     flexDirection: 'column',
-    alignItems: 'center',
+    paddingLeft: 5,
     alignSelf: 'center',
   },
   itemPrice: {
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
   containerRow: {
     backgroundColor: 'white',
     flexDirection: 'row',
-    paddingVertical: 5,
+    paddingVertical: 10,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: '#EAEAEA',
     // marginLeft: 20,

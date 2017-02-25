@@ -196,7 +196,7 @@ var styles = StyleSheet.create({
       borderColor: '#8E8E8E',
       borderWidth: StyleSheet.hairlineWidth,
       paddingHorizontal: 20,
-      paddingVertical: 10,
+      paddingVertical: 7,
       borderRadius: 5,
   },
   buttonText: {

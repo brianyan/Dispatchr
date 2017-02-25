@@ -53,7 +53,6 @@ export default class RequestListCell extends Component {
           </View>
 
           <View style={styles.colorCodingBox}>
-            { /* <View style={this._assignBackgroundColor()}> */ }
             <View style={styles.dateFormat}>
               <Text>
               {this._getDateFromNow()}
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-    paddingVertical: 5,
+    paddingVertical: 10,
   },
   imageRound: {
     marginLeft: 20,

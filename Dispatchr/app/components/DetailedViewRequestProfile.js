@@ -43,13 +43,13 @@ export default class DetailedViewRequestProfile extends Component {
             </Text>
           </Text>
         </View>
-        <View style = {{flexDirection: 'row'}}>
+        <View style = {styles.chatIconstyle}>
           <TouchableHighlight onPress={this._onChatPress}>
             <Icon name="ios-chatboxes" marginLeft = {20} size={25} color="black" />
           </TouchableHighlight>
-          <TouchableHighlight onPress={this._onPhonePress}>
-            <Icon name="ios-call" marginLeft = {20} size={25} color="black" />
-          </TouchableHighlight>
+          {/*// <TouchableHighlight onPress={this._onPhonePress}>
+          //   <Icon name="ios-call" marginLeft = {20} size={25} color="black" />
+          // </TouchableHighlight>*/}
         </View>
       </View>
     )
@@ -57,6 +57,13 @@ export default class DetailedViewRequestProfile extends Component {
 }
 
 const styles = StyleSheet.create({
+  chatIconstyle: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginRight: 10,
+  },
   bigblue: {
     color: 'blue',
     fontWeight: 'bold',

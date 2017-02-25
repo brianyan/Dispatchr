@@ -46,21 +46,25 @@ class DetailedView extends Component {
             })}
             </ScrollView>
           <View style={styles.content}>
-            <View style={styles.acceptButtonView}>
-              <TouchableHighlight style={{flex: 1, backgroundColor: 'green', justifyContent: 'center'}} onPress = {() => { this._acceptRequest() }}>
+            <View style={styles.ButtonView}>
+              <TouchableHighlight style={{flex: 1, backgroundColor: '#4CAF50', justifyContent: 'center'}} onPress = {() => { this._acceptRequest() }}>
                 <Text style={styles.acceptText}> Accept </Text>
               </TouchableHighlight>
             </View>
             <View style={styles.divider}></View>
            {renderIf(this.state.showCancelOption)(
-             <TouchableHighlight style={{flex: 1, alignItems: 'center', backgroundColor: 'red'}} onPress = {() => { this._alertCancel() } }>
-               <Text> Cancel </Text>
-             </TouchableHighlight>
+             <View style={styles.ButtonView}>
+               <TouchableHighlight style={{flex: 1, justifyContent: 'center', backgroundColor: 'red'}} onPress = {() => { this._alertCancel() } }>
+                 <Text style={styles.cancelText}> Cancel </Text>
+               </TouchableHighlight>
+             </View>
            )}
            {renderIf(!(this.state.showCancelOption))(
-             <TouchableHighlight style={{flex: 1, alignItems: 'center', backgroundColor: 'red'}} onPress = {() => { this._alertHide() } }>
-               <Text> Hide </Text>
-             </TouchableHighlight>
+             <View style={styles.ButtonView}>
+               <TouchableHighlight style={{flex: 1, justifyContent: 'center', backgroundColor: 'gray'}} onPress = {() => { this._alertHide() } }>
+                 <Text style={styles.hideText}> Hide </Text>
+               </TouchableHighlight>
+             </View>
            )}
           </View>
       </View>
@@ -70,13 +74,20 @@ class DetailedView extends Component {
 }
 
 const styles = StyleSheet.create({
+    hideText: {
+      color: 'white',
+      textAlign: 'center',
+    },
+    cancelText: {
+      textAlign: 'center',
+      color: 'white',
+    },
     acceptText: {
       textAlign: 'center',
       color: 'white',
     },
-    acceptButtonView: {
+    ButtonView: {
       flex: 1,
-      backgroundColor: 'green',
     },
     scrollView: {
       backgroundColor: '#f0f8ff',
@@ -103,7 +114,6 @@ const styles = StyleSheet.create({
     },
     divider: {
       backgroundColor: '#EAEAEA',
-      width: 1,
       height: 35,
       marginTop: 5,
       marginBottom: 5
