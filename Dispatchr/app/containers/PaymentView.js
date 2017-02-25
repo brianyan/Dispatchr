@@ -16,12 +16,23 @@ import {
   TouchableOpacity,
   LayoutAnimation,
   ScrollView,
-  TextInput
+  TextInput,
+  Alert
 } from 'react-native';
 
 class PaymentView extends Component {
   constructor(props){
     super(props);
+  }
+
+  _alertRequestPayment(){
+    Alert.alert(
+      'Payment Request Sent!',
+      "WOOO!",
+      [
+        {text: 'OK', onPress: () => {Actions.pop()}},
+      ]
+    )
   }
 
   render() {
@@ -45,9 +56,9 @@ class PaymentView extends Component {
             placeholder="Description"
           />
         </View>
-        <View style={{flex: 1, backgroundColor: 'steelblue'}} >
-          <TouchableHighlight style={styles.sendPaymentButton} onPress = {() =>  { console.log('test') } }>
-            <Text style={styles.sendPaymentButtonText}>Pay</Text>
+        <View style={{flex: 1, backgroundColor: 'steelblue', justifyContent: 'center', alignItems: 'center'}} >
+          <TouchableHighlight style={styles.sendPaymentButton} onPress = {() =>  { this._alertRequestPayment() } }>
+            <Text style={styles.sendPaymentButtonText}> Payment</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -69,17 +80,9 @@ function mapStateToProps(state) {
 }
 
 var styles = StyleSheet.create({
-  expirationButton: {
-    height: 50,
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
   sendPaymentButton: {
     flex: 0,
-    backgroundColor : '#77c2e5',
+    backgroundColor : 'steelblue',
     justifyContent: 'center',
     alignItems: 'center',
     borderTopWidth: 1,

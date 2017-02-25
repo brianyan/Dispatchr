@@ -21,8 +21,9 @@ class DetailedView extends Component {
   _alertCancel(){
     Alert.alert(
       'Request Cancelled',
+      "Nooooooooo!",
       [
-        {text: 'OK', onPress: () => {Actions.pop()}},
+        { text: 'OK', onPress: () => { Actions.pop() } },
       ]
     )
   }
