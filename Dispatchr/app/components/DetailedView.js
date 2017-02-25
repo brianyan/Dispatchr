@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import DetailedViewRequestProfile from './DetailedViewRequestProfile';
+import DetailedViewCell from './DetailedViewCell';
 import renderIf from '../lib/renderif'
 
 class DetailedView extends Component {
@@ -38,25 +39,31 @@ class DetailedView extends Component {
     return (
       <View style = {{flex: 1}}>
           <DetailedViewRequestProfile request = {this.props.request}></DetailedViewRequestProfile>
-          <ScrollView>
+          <ScrollView style={styles.scrollView}>
             {this.props.request.request_items.map((requestItem) => {
-              return <View style = {styles.seperator}><Text>{requestItem.quantity_description} {requestItem.item.name} {/*}{requestItem.max_price}*/} {"\n"}</Text></View>
+              return <DetailedViewCell requestItem = {requestItem}/>
             })}
             </ScrollView>
           <View style={styles.content}>
-            <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._acceptRequest() }}>
-              <Text> Accept </Text>
-            </TouchableHighlight>
+            <View style={styles.ButtonView}>
+              <TouchableHighlight style={{flex: 1, backgroundColor: '#4CAF50', justifyContent: 'center'}} onPress = {() => { this._acceptRequest() }}>
+                <Text style={styles.acceptText}> Accept </Text>
+              </TouchableHighlight>
+            </View>
             <View style={styles.divider}></View>
            {renderIf(this.state.showCancelOption)(
-             <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertCancel() } }>
-               <Text> Cancel </Text>
-             </TouchableHighlight>
+             <View style={styles.ButtonView}>
+               <TouchableHighlight style={{flex: 1, justifyContent: 'center', backgroundColor: 'red'}} onPress = {() => { this._alertCancel() } }>
+                 <Text style={styles.cancelText}> Cancel </Text>
+               </TouchableHighlight>
+             </View>
            )}
            {renderIf(!(this.state.showCancelOption))(
-             <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
-               <Text> Hide </Text>
-             </TouchableHighlight>
+             <View style={styles.ButtonView}>
+               <TouchableHighlight style={{flex: 1, justifyContent: 'center', backgroundColor: 'gray'}} onPress = {() => { this._alertHide() } }>
+                 <Text style={styles.hideText}> Hide </Text>
+               </TouchableHighlight>
+             </View>
            )}
           </View>
       </View>
@@ -66,12 +73,36 @@ class DetailedView extends Component {
 }
 
 const styles = StyleSheet.create({
+    hideText: {
+      color: 'white',
+      textAlign: 'center',
+    },
+    cancelText: {
+      textAlign: 'center',
+      color: 'white',
+    },
+    acceptText: {
+      textAlign: 'center',
+      color: 'white',
+    },
+    ButtonView: {
+      flex: 1,
+    },
+    scrollView: {
+      backgroundColor: '#f0f8ff',
+    },
     content: {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
-        borderColor: '#EAEAEA',
-        borderWidth: 1,
+        // borderColor: '#EAEAEA',
+        // borderWidth: 1,
+    },
+    separator: {
+      flex: 1,
+      height: StyleSheet.hairlineWidth,
+      backgroundColor: '#8E8E8E',
+      borderColor: '#f0f8ff'
     },
     seperator: {
       borderBottomWidth: 1,
@@ -82,7 +113,6 @@ const styles = StyleSheet.create({
     },
     divider: {
       backgroundColor: '#EAEAEA',
-      width: 1,
       height: 35,
       marginTop: 5,
       marginBottom: 5

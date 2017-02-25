@@ -5,12 +5,13 @@ import { bindActionCreators } from 'redux';
 import renderIf from '../lib/renderif'
 import { Actions } from 'react-native-router-flux'
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import TextField from 'react-native-md-textinput';
 import Button from 'apsl-react-native-button';
 import RequestListCell from '../components/RequestListCell';
 import ListFilterButton from '../components/ListFilterButton';
 import { firebaseApp } from '../../firebaseWrapper.js';
+import { AsyncStorage } from 'react-native';
 
 import {
   View,
@@ -37,8 +38,14 @@ class RequestsList extends Component {
       selection: 'Global'
     };
     this.props.getRequests(this.state.selection);
-    // getting the currentUser
-    this.props.getUserInfo();
+  }
+
+  componentWillMount () {
+    Actions.refresh({
+      rightTitle: "Profile",
+      rightButtonTextStyle: {color: 'white'},
+      onRight: this.props.showCurrentUserProfile
+    })
   }
 
   componentWillReceiveProps (nextProps) {
@@ -50,7 +57,6 @@ class RequestsList extends Component {
       })
     }
   }
-
 
   _leftSideSelected() {
     this.state.selection = 'Global';
@@ -172,6 +178,7 @@ var styles = StyleSheet.create({
     flex: 1,
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#8E8E8E',
+    borderColor: '#f0f8ff'
   },
   row: {
     flexDirection: 'row',
@@ -195,7 +202,7 @@ var styles = StyleSheet.create({
       borderColor: '#8E8E8E',
       borderWidth: StyleSheet.hairlineWidth,
       paddingHorizontal: 20,
-      paddingVertical: 10,
+      paddingVertical: 7,
       borderRadius: 5,
   },
   buttonText: {
