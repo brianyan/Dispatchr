@@ -39,10 +39,10 @@ class PaymentView extends Component {
     return (
       <View style = {{flex: 1, padding: 10}}>
         <View style={{flex: 1, flexDirection: 'row'}} >
-          <View style={{flex: 1, padding: 5, backgroundColor: 'powderblue', justifyContent: 'center', alignItems: 'center'}}>
-            <Text> {this.props.username} </Text>
+          <View style={{flex: 1, padding: 5, backgroundColor: 'white', justifyContent: 'center'}}>
+            <Text style={styles.usernameText}> {this.props.username} </Text>
           </View>
-          <View style={{flex: 1, padding: 5, backgroundColor: 'steelblue', justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{flex: 1, padding: 5, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
             <TextInput
               style={{height: 30}}
               keyboardType='numeric'
@@ -50,7 +50,8 @@ class PaymentView extends Component {
             />
           </View>
         </View>
-        <View style={{flex: 8, padding: 10, backgroundColor: 'skyblue'}} >
+        <View style={styles.divider}></View>
+        <View style={{flex: 10, padding: 10, backgroundColor: 'white'}} >
           <TextInput
             style={{height: 30}}
             placeholder="Description"
@@ -58,7 +59,7 @@ class PaymentView extends Component {
         </View>
         <View style={{flex: 1, backgroundColor: 'steelblue', justifyContent: 'center', alignItems: 'center'}} >
           <TouchableHighlight style={styles.sendPaymentButton} onPress = {() =>  { this._alertRequestPayment() } }>
-            <Text style={styles.sendPaymentButtonText}> Payment</Text>
+            <Text style={styles.sendPaymentButtonText}>Request Payment</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -81,17 +82,26 @@ function mapStateToProps(state) {
 
 var styles = StyleSheet.create({
   sendPaymentButton: {
-    flex: 0,
-    backgroundColor : 'steelblue',
     justifyContent: 'center',
     alignItems: 'center',
-    borderTopWidth: 1,
-    height: 50
+    height: 50,
   },
   sendPaymentButtonText: {
     fontSize: 16,
     color: 'white',
     fontFamily: 'Helvetica Neue'
+  },
+  usernameText:{
+    fontSize: 16,
+    color: 'steelblue',
+    fontWeight: '500'
+
+  },
+  divider: {
+    backgroundColor: '#EAEAEA',
+    height: 1,
+    marginTop: 5,
+    marginBottom: 5
   }
 });
 
