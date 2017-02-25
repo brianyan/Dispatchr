@@ -8,12 +8,38 @@ class Payment < ApplicationRecord
 	validates :account_type, presence: true
 	validates :account_name, presence: true
 
-	def account_token
+	def self.manual_create(user_id, routing_number, account_number, account_name, 
+		account_type)
+
+		@user = User.find_by(id: user_id)
+    	if (@user)
+	      	#set user entered params     	
+	      	@payment = Payment.new
+	      	@payment.user_id = user_id
+	      	@payment.routing_number = routing_number
+	      	@payment.account_number = account_number
+	      	@payment.account_name = account_name
+	      	if (account_type != "checking" && account_type != "savings")
+	        	@payment.account_type = "checking"
+	      	else
+	        	@payment.account_type = account_type
+	      	end
+
+	      	#set dwolla generated params
+	      	@payment.customer = Payment.create_dwolla_customer(@user)
+	      	@payment.funding_source = Payment.link_funding_source(@payment)
+	      	Payment.verify_customer(@payment.funding_source)
+	      	@payment.save
+	      	@payment
+      	end
+	end
+
+	def self.account_token
     	@account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
     	#usage: account_token.get "customers"
   	end
 
-  	def app_token
+  	def self.app_token
     	@app_token ||= TokenData.fresh_token_by! account_id: nil
   	end
 
@@ -96,8 +122,6 @@ class Payment < ApplicationRecord
 		account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
 		xfer = account_token.post "transfers", transfer_request
 		xfer.headers[:location]
-
-
 
 	end
 
