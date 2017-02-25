@@ -7,7 +7,6 @@ var moment = require('moment');
 
 var options = {
     month: "short", day: "numeric", year: "numeric"
-    //day: "numeric", hour: "2-digit", minute: "2-digit", weekday: "long"
 };
 
 export default class DetailedViewRequestProfile extends Component {
@@ -73,10 +72,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   viewContainer: {
-    borderBottomWidth: 1,
-    height: 75,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    backgroundColor: '#f0f8ff',
     flexDirection: 'row',
-    marginTop:10,
+    paddingVertical:10,
   },
   imageRound: {
     marginLeft: 20,
