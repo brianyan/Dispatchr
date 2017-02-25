@@ -17,7 +17,7 @@ class RequestsController < ApplicationController
 	def search_user
 
 		if params[:id].present?
-			@requests = Request.where(user_id: params[:id]).order(created_at: :desc)
+			@requests = Request.where("user_id= ? OR hero_id=?", params[:id], params[:id]).order(created_at: :desc)
 			render json: @requests
 		else
 			render status: 404, json: @request

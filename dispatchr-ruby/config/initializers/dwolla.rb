@@ -26,7 +26,7 @@ if ActiveRecord::Base.connection.table_exists? 'token_data'
     TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
   rescue ActiveRecord::RecordNotFound => e
     TokenData.create! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164",
-                      refresh_token: "PEXmPrX1LixnGNn8khtS86UGQgRBbUNUpGiUQogd05l8FZl86X",
+                      refresh_token: "Yn4VubepvKw7LYHv0riF0y9KO7uyCWlqM6hKtFKn8BXqUDHKDq",
                       expires_in: -1
   end
 end
