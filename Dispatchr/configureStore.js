@@ -8,6 +8,8 @@ function configureStore() {
   // Logger should only be used when developing
   const isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 
+  console.disableYellowBox = true;
+
   // Set up logger
   const loggerMiddleware = createLogger({
     predicate: (getState, action) => isDebuggingInChrome,
