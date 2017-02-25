@@ -14,6 +14,7 @@ import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
+import { Actions } from 'react-native-router-flux';
 
 const storage = firebase.storage();
 
@@ -27,7 +28,6 @@ const uploadImage = (uri, userId, mime = 'application/octet-stream') => {
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
     const sessionId = new Date().getTime()
     let uploadBlob = null
-    // TODO: When auth works use the current user_id
     const imageRef = storage.ref('users').child(userId);
 
     fs.readFile(uploadUri, 'base64')
@@ -75,21 +75,37 @@ class ProfileView extends Component {
           <Image style={styles.imageRound} source = {{uri: this.state.uri}}/>
         </TouchableHighlight>
         <Text style={styles.nameLabel}>{user == undefined ? '' : user.name}</Text>
+        {this.renderNotificationsButton()}
         {this.renderReputationStars()}
       </View>
     );
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+  renderNotificationsButton() {
+    if (this.props.isCurrentUser) {
+      return (
+        <TouchableHighlight onPress={this._showNotificationsView} style={styles.notificationButton}>
+          <Text style={styles.notificationButtonText}>View Notifications</Text>
+        </TouchableHighlight>
+      );
+    } else {
+      return <View></View>
+    }
   }
 
   renderReputationStars() {
     var stars = [];
+    if (this.props.user == undefined) {
+      return <View></View>
+    }
     for (var i = 0; i < this.props.user.reputation; i++) {
       stars.push(<Icon name="star" size={20} color="gold" key={"s" + i}/>);
     }
     return <View style={styles.reputation}>{stars}</View>;
+  }
+
+  _showNotificationsView() {
+    Actions.NotificationsList();
   }
 
   _showUploadPrompt() {
@@ -124,8 +140,17 @@ const styles = StyleSheet.create({
     width: 120,
     borderRadius: 60
   },
+  notificationButton: {
+    backgroundColor: '#48BBEC',
+    borderRadius: 3.0
+  },
+  notificationButtonText: {
+    color: 'white',
+    padding: 10
+  },
   nameLabel: {
-    fontSize: 20
+    fontSize: 20,
+    paddingBottom: 5
   },
   reputation: {
     marginTop: 5,
