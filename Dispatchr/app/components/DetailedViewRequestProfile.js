@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Text, TouchableHighlight, View, StyleSheet} from 'react-native';
+import { Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux'
 import FireBaseChat from '../containers/FireBaseChat'
@@ -45,13 +45,9 @@ export default class DetailedViewRequestProfile extends Component {
           </Text>
         </View>
         <View style = {styles.chatIconstyle}>
-          <TouchableHighlight onPress={this._onChatPress}>
-            {/*<Icon name="ios-chatboxes" marginLeft = {20} size={25} color="black" />*/}
+          <TouchableOpacity underlayColor="transparent" onPress={this._onChatPress}>
             <FontAwesomeIcon name="comment" size={25} color='#48BBEC'/>
-          </TouchableHighlight>
-          {/*// <TouchableHighlight onPress={this._onPhonePress}>
-          //   <Icon name="ios-call" marginLeft = {20} size={25} color="black" />
-          // </TouchableHighlight>*/}
+          </TouchableOpacity>
         </View>
       </View>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableHighlight, View, StyleSheet, Image } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 var moment = require('moment');
 var colorDictionary = {};
 colorDictionary[1] = "yellow";
@@ -40,7 +40,7 @@ export default class RequestListCell extends Component {
   }
   render() {
     return (
-      <TouchableHighlight onPress={this.props.onSelect}>
+      <TouchableOpacity onPress={this.props.onSelect} >
         <View style={styles.container}>
           <Image style={styles.imageRound} source = {{uri: 'https://capstone.cs.ucsb.edu/team_docs_17/pics/appfolio/2.jpg'}}/>
           <View style={{flex: 5}}>
@@ -61,7 +61,7 @@ export default class RequestListCell extends Component {
 
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     );
   }
 }

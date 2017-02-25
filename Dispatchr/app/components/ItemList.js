@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, ListView, TouchableHighlight, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, ListView, TouchableOpacity} from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
@@ -43,7 +43,7 @@ class ItemList extends Component {
       Actions.EditItemForm({rowData});
     };
     return (
-      <TouchableHighlight onPress={rowAction}>
+      <TouchableOpacity underlayColor="transparent" onPress={rowAction}>
          <View>
            <View style={styles.rowContainer}>
              <Text style={styles.text}>
@@ -51,7 +51,7 @@ class ItemList extends Component {
              </Text>
            </View>
          </View>
-       </TouchableHighlight>
+       </TouchableOpacity>
     );
   }
 

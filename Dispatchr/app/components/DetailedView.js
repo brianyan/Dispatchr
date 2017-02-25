@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, StyleSheet, Alert, TouchableHighlight, AsyncStorage} from 'react-native';
+import { ScrollView, Text, View, StyleSheet, Alert, TouchableOpacity, AsyncStorage} from 'react-native';
 import { Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
@@ -46,23 +46,23 @@ class DetailedView extends Component {
             </ScrollView>
           <View style={styles.content}>
             <View style={styles.ButtonView}>
-              <TouchableHighlight style={{flex: 1, backgroundColor: '#4CAF50', justifyContent: 'center'}} onPress = {() => { this._acceptRequest() }}>
+              <TouchableOpacity underlayColor="transparent" style={{flex: 1, backgroundColor: '#4CAF50', justifyContent: 'center'}} onPress = {() => { this._acceptRequest() }}>
                 <Text style={styles.acceptText}> Accept </Text>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
             <View style={styles.divider}></View>
            {renderIf(this.state.showCancelOption)(
              <View style={styles.ButtonView}>
-               <TouchableHighlight style={{flex: 1, justifyContent: 'center', backgroundColor: 'red'}} onPress = {() => { this._alertCancel() } }>
+               <TouchableOpacity underlayColor="transparent" style={{flex: 1, justifyContent: 'center', backgroundColor: 'red'}} onPress = {() => { this._alertCancel() } }>
                  <Text style={styles.cancelText}> Cancel </Text>
-               </TouchableHighlight>
+               </TouchableOpacity>
              </View>
            )}
            {renderIf(!(this.state.showCancelOption))(
              <View style={styles.ButtonView}>
-               <TouchableHighlight style={{flex: 1, justifyContent: 'center', backgroundColor: 'gray'}} onPress = {() => { this._alertHide() } }>
+               <TouchableOpacity underlayColor="transparent" style={{flex: 1, justifyContent: 'center', backgroundColor: 'gray'}} onPress = {() => { this._alertHide() } }>
                  <Text style={styles.hideText}> Hide </Text>
-               </TouchableHighlight>
+               </TouchableOpacity>
              </View>
            )}
           </View>

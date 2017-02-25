@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableHighlight, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
 var moment = require('moment');
 
 export default class DetailedViewCell extends Component {
@@ -35,20 +35,6 @@ export default class DetailedViewCell extends Component {
               <Text style={styles.itemPriceText}>${this.props.requestItem.max_price} </Text>
             </View>
         </View>
-        // <View style={styles.container}>
-        //   <Image style={styles.imageRound} source = {{uri: 'https://capstone.cs.ucsb.edu/team_docs_17/pics/appfolio/2.jpg'}}/>
-        //   <View style={{flex: 5}}>
-        //     <Text style={{fontWeight: 'bold'}}>
-        //       {this.props.request.user.name} wants
-        //     </Text>
-        //     {this.props.request.request_items.map((requestItem) => {
-        //       return <Text>{requestItem.item.name}</Text>
-        //     })}
-        //   </View>
-        //
-        //   </View>
-        // </View>
-
     );
   }
 }

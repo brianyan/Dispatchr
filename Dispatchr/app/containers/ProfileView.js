@@ -5,7 +5,7 @@ import {
   Image,
   StyleSheet,
   Platform,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob'
 import ImagePicker from 'react-native-image-picker';
@@ -71,9 +71,9 @@ class ProfileView extends Component {
     const {user} = this.props;
     return (
       <View style={styles.viewContainer}>
-        <TouchableHighlight onPress={this._showUploadPrompt.bind(this)}>
+        <TouchableOpacity underlayColor="transparent" onPress={this._showUploadPrompt.bind(this)}>
           <Image style={styles.imageRound} source = {{uri: this.state.uri}}/>
-        </TouchableHighlight>
+        </TouchableOpacity>
         <Text style={styles.nameLabel}>{user == undefined ? '' : user.name}</Text>
         {this.renderNotificationsButton()}
         {this.renderReputationStars()}
@@ -84,9 +84,9 @@ class ProfileView extends Component {
   renderNotificationsButton() {
     if (this.props.isCurrentUser) {
       return (
-        <TouchableHighlight onPress={this._showNotificationsView} style={styles.notificationButton}>
+        <TouchableOpacity underlayColor="transparent" onPress={this._showNotificationsView} style={styles.notificationButton}>
           <Text style={styles.notificationButtonText}>View Notifications</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       );
     } else {
       return <View></View>

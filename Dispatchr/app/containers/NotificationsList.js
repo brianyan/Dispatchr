@@ -7,7 +7,6 @@ import {
   View,
   Text,
   ListView,
-  TouchableHighlight,
   RefreshControl,
   StyleSheet,
   TouchableOpacity,

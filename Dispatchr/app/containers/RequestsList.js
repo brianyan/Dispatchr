@@ -73,11 +73,11 @@ class RequestsList extends Component {
       <View style={{flex: 1}}>
         <ListFilterButton style={{flex: 1}} leftSideSelected={this._leftSideSelected.bind(this)} rightSideSelected={this._rightSideSelected.bind(this)}></ListFilterButton>
         {renderIf(this.state.showFetchButton)(
-          <TouchableHighlight onPress = {() =>  {this.props.getRequests(this.state.selection)} }>
+          <TouchableOpacity onPress = {() =>  {this.props.getRequests(this.state.selection)} }>
             <View style={styles.button}>
               <Text style={styles.buttonText}>Press me to Refresh!</Text>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
        )}
 
        {renderIf(!this.state.showFetchButton)(

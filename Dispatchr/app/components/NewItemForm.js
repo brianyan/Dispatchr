@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput,  View, StyleSheet, TouchableHighlight} from 'react-native';
+import { Text, TextInput,  View, StyleSheet, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
@@ -49,9 +49,9 @@ class NewItemForm extends Component {
           type={Item}
           options={options}
         />
-        <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
+        <TouchableOpacity style={styles.button} onPress={this.onPress.bind(this)} underlayColor="transparent">
           <Text style={styles.buttonText}>Save</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     );
   }
