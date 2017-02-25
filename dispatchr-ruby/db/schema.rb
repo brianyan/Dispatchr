@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203045243) do
+ActiveRecord::Schema.define(version: 20170221083957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 20170203045243) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "customer"
+    t.string   "funding_source"
+    t.string   "routing_number"
+    t.string   "account_number"
+    t.string   "account_type"
+    t.string   "account_name"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "request_items", force: :cascade do |t|
     t.integer  "request_id"
     t.integer  "item_id"
@@ -72,6 +84,18 @@ ActiveRecord::Schema.define(version: 20170203045243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_stores_on_address_id", using: :btree
+  end
+
+  create_table "token_data", force: :cascade do |t|
+    t.string   "encrypted_access_token"
+    t.string   "encrypted_access_token_iv"
+    t.string   "encrypted_refresh_token"
+    t.string   "encrypted_refresh_token_iv"
+    t.integer  "expires_in"
+    t.string   "scope"
+    t.string   "account_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "users", force: :cascade do |t|

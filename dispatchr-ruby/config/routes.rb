@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :payments
   get '/users/username/', to: 'users#show_by_username'
   get '/users/email/', to: 'users#show_by_email'
   get '/requests/user/:id' => 'requests#search_user'
@@ -11,5 +12,6 @@ Rails.application.routes.draw do
   post '/requests/complete/:id' => 'requests#complete_request'
   post '/users/reputation/:id/:score' => 'users#update_reputation'
   get '/notifications/get/:user_id' => 'notifications#get_notifications'
-  resources :items, :requests, :users, :request_items, :addresses, :notifications
+  post '/payments/transfer/:src_id/:dest_id/:amount' => 'payments#transfer'
+  resources :items, :requests, :users, :request_items, :addresses, :notifications, :payments
 end
