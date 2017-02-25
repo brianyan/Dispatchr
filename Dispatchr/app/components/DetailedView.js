@@ -8,7 +8,6 @@ import DetailedViewRequestProfile from './DetailedViewRequestProfile';
 import DetailedViewCell from './DetailedViewCell';
 import renderIf from '../lib/renderif'
 
-
 class DetailedView extends Component {
   constructor(props){
     super(props);

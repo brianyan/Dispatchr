@@ -3,6 +3,7 @@ import { Image, Text, TouchableHighlight, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux'
 import FireBaseChat from '../containers/FireBaseChat'
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 var moment = require('moment');
 
 var options = {
@@ -45,7 +46,8 @@ export default class DetailedViewRequestProfile extends Component {
         </View>
         <View style = {styles.chatIconstyle}>
           <TouchableHighlight onPress={this._onChatPress}>
-            <Icon name="ios-chatboxes" marginLeft = {20} size={25} color="black" />
+            {/*<Icon name="ios-chatboxes" marginLeft = {20} size={25} color="black" />*/}
+            <FontAwesomeIcon name="comment" size={25} color='#48BBEC'/>
           </TouchableHighlight>
           {/*// <TouchableHighlight onPress={this._onPhonePress}>
           //   <Icon name="ios-call" marginLeft = {20} size={25} color="black" />
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
     marginRight: 10,
+    marginBottom: 5,
   },
   bigblue: {
     color: 'blue',
