@@ -9,6 +9,7 @@ import EditItemForm from '../components/EditItemForm';
 import NotificationsList from './NotificationsList';
 import FireBaseChat from './FireBaseChat'
 import {StyleSheet, StatusBar} from 'react-native';
+import ProfileView from './ProfileView';
 
 /* Stylesheet */
 const getSceneStyle = (props, computedProps) => {
@@ -26,6 +27,7 @@ const getSceneStyle = (props, computedProps) => {
   return style;
 };
 
+
 class App extends Component {
   render() {
     StatusBar.setBarStyle('light-content', true);
@@ -33,7 +35,7 @@ class App extends Component {
     return (
       <Router navigationBarStyle = {styles.navBar} titleStyle = {styles.title} getSceneStyle={getSceneStyle} barButtonIconStyle = {styles.backButtonStyle}>
         <Scene key="root">
-          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE}/>
+          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE} />
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
           <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' initial={true}/>
           <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
@@ -41,6 +43,7 @@ class App extends Component {
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
           <Scene key = {"FireBaseChat"} component = {FireBaseChat} title = 'Chat'/>
           <Scene key = {"NotificationsList"} component = {NotificationsList} title = 'Notifications' />
+          <Scene key = {"ProfileView"} component = {ProfileView} title = 'Profile' />
         </Scene>
       </Router>
     );
