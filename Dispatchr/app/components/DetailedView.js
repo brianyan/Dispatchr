@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, StyleSheet, Alert, TouchableHighlight, AsyncStorage} from 'react-native';
-import { Actions} from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
@@ -12,6 +12,7 @@ class DetailedView extends Component {
     super(props);
     this.state = {
       showCancelOption: this.props.userInfo === this.props.request.user.username ? true : false,
+      username: this.props.request.user.username
     }
   }
   _acceptRequest() {
@@ -25,12 +26,12 @@ class DetailedView extends Component {
       ]
     )
   }
-  _alertHide() {
+  _alertHide(username) {
     Alert.alert(
       'Request Declined',
       "You'll get them next time!",
       [
-        {text: 'OK', onPress: () => {Actions.pop()}},
+        {text: 'OK', onPress: () => { Actions.PaymentView({username}) }},
       ]
     )
   }
@@ -54,7 +55,7 @@ class DetailedView extends Component {
              </TouchableHighlight>
            )}
            {renderIf(!(this.state.showCancelOption))(
-             <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide() } }>
+             <TouchableHighlight style={{flex: 1, alignItems: 'center'}} onPress = {() => { this._alertHide(this.state.username) } }>
                <Text> Hide </Text>
              </TouchableHighlight>
            )}

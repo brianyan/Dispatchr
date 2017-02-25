@@ -8,6 +8,7 @@ import NewItemForm from '../components/NewItemForm';
 import EditItemForm from '../components/EditItemForm';
 import NotificationsList from './NotificationsList';
 import FireBaseChat from './FireBaseChat'
+import PaymentView from './PaymentView'
 import {StyleSheet, StatusBar} from 'react-native';
 
 /* Stylesheet */
@@ -41,6 +42,7 @@ class App extends Component {
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
           <Scene key = {"FireBaseChat"} component = {FireBaseChat} title = 'Chat'/>
           <Scene key = {"NotificationsList"} component = {NotificationsList} title = 'Notifications' />
+          <Scene key = {"PaymentView"} component = {PaymentView} title = 'Payment' />
         </Scene>
       </Router>
     );
