@@ -16,7 +16,7 @@ function* getUserId() {
 
 function* showCurrentUserProfile() {
   const id = yield call(AsyncStorage.getItem, 'currentUserId');
-  Actions.ProfileView({userId: id});
+  Actions.ProfileView({userId: id, isCurrentUser: true});
 }
 
 export default function* root() {

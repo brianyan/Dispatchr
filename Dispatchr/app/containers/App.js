@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, View, Text } from 'react';
 import { Scene, Router, Reducer, ActionConst } from 'react-native-router-flux';
 import DetailedView from '../components/DetailedView';
 import LoginView from './LoginView';
@@ -10,6 +10,7 @@ import NotificationsList from './NotificationsList';
 import FireBaseChat from './FireBaseChat'
 import {StyleSheet, StatusBar} from 'react-native';
 import ProfileView from './ProfileView';
+import { AsyncStorage } from 'react-native';
 
 /* Stylesheet */
 const getSceneStyle = (props, computedProps) => {
@@ -29,15 +30,39 @@ const getSceneStyle = (props, computedProps) => {
 
 
 class App extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      logged: false,
+      loading: true,
+    };
+  };
+
+  componentWillMount() {
+    AsyncStorage.getItem('authToken')
+    .then( (value) =>{
+        if (value != null) {
+          this.setState({
+            logged: true,
+            loading: false,
+          });
+        } else {
+          this.setState({
+            loading: false,
+          })
+        }
+      }
+    );
+  };
+
   render() {
     StatusBar.setBarStyle('light-content', true);
-
     return (
       <Router navigationBarStyle = {styles.navBar} titleStyle = {styles.title} getSceneStyle={getSceneStyle} barButtonIconStyle = {styles.backButtonStyle}>
         <Scene key="root">
-          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE} />
+          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE} initial={this.state.logged} />
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
-          <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' initial={true}/>
+          <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' initial={!this.state.logged}/>
           <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
           <Scene key = {"NewItemForm"} component = {NewItemForm} title = 'Add Item' />
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
