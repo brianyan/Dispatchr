@@ -59,8 +59,8 @@ class Payment < ApplicationRecord
   			:ssn => "1234"
 		}
 
-		account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
-		customer = account_token.post "customers", request_body
+		# account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
+		customer = Payment.account_token.post "customers", request_body
 		customer.headers[:location]
 	end
 
@@ -76,8 +76,8 @@ class Payment < ApplicationRecord
   			:name => "#{payment.account_name}"
 		}
 
-		account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
-		funding_source = account_token.post	"#{customer_url}/funding-sources", request_body
+		# account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
+		funding_source = Payment.account_token.post "#{customer_url}/funding-sources", request_body
 		# puts funding_source.headers[:location]
 		funding_source.headers[:location]
 
@@ -100,7 +100,7 @@ class Payment < ApplicationRecord
         		:currency => "USD"
     		}
 		}
-		verify = account_token.post "#{funding_url}/micro-deposits", request_body
+		verify = Payment.account_token.post "#{funding_url}/micro-deposits", request_body
 	end
 
 	def self.transfer(source, destination, amount)
@@ -119,8 +119,7 @@ class Payment < ApplicationRecord
   				}
 		}
 
-		account_token ||= TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
-		xfer = account_token.post "transfers", transfer_request
+		xfer = Payment.account_token.post "transfers", transfer_request
 		xfer.headers[:location]
 
 	end
