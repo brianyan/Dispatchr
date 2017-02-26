@@ -17,7 +17,8 @@ import {
   LayoutAnimation,
   ScrollView,
   TextInput,
-  Alert
+  Alert,
+  KeyboardAvoidingView
 } from 'react-native';
 
 class PaymentView extends Component {
@@ -57,11 +58,11 @@ class PaymentView extends Component {
             placeholder="Description"
           />
         </View>
-        <View style={{flex: 1, backgroundColor: 'steelblue', justifyContent: 'center', alignItems: 'center'}} >
-          <TouchableHighlight style={styles.sendPaymentButton} onPress = {() =>  { this._alertRequestPayment() } }>
-            <Text style={styles.sendPaymentButtonText}>Request Payment</Text>
-          </TouchableHighlight>
-        </View>
+          <View style={{flex: 1, backgroundColor: 'steelblue', justifyContent: 'center', alignItems: 'center'}} >
+            <TouchableHighlight style={styles.sendPaymentButton} onPress = {() =>  { this._alertRequestPayment() } }>
+              <Text style={styles.sendPaymentButtonText}>Request Payment</Text>
+            </TouchableHighlight>
+          </View>
       </View>
     );
   }
