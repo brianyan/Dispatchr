@@ -31,7 +31,7 @@ class PaymentView extends Component {
       'Payment Request Sent!',
       "WOOO!",
       [
-        {text: 'OK', onPress: () => {Actions.pop()}},
+        {text: 'OK', onPress: () => {Actions.pop(); Actions.pop()}},
       ]
     )
   }
