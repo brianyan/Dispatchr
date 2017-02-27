@@ -37,6 +37,17 @@ class DetailedView extends Component {
       ]
     )
   }
+  _getCompleteOrAccept(status){
+    var text = "";
+    if(status === 1) {
+      text = "Accept";
+    } else {
+      text = "Complete";
+    }
+    console.log(status);
+    console.log(text);
+    return <Text style={styles.acceptText}> {text} </Text>
+  }
   render() {
     return (
       <View style = {{flex: 1}}>
@@ -49,14 +60,14 @@ class DetailedView extends Component {
           <View style={styles.content}>
             <View style={styles.ButtonView}>
               <TouchableOpacity underlayColor="transparent" style={{flex: 1, backgroundColor: '#4CAF50', justifyContent: 'center'}} onPress = {() => { this._acceptRequest() }}>
-                <Text style={styles.acceptText}> Accept </Text>
+                {this._getCompleteOrAccept(this.props.request.status)}
               </TouchableOpacity>
             </View>
             <View style={styles.divider}></View>
            {renderIf(this.state.showCancelOption)(
              <View style={styles.ButtonView}>
                <TouchableOpacity underlayColor="transparent" style={{flex: 1, justifyContent: 'center', backgroundColor: 'red'}} onPress = {() => { this._alertCancel() } }>
-                 <Text style={styles.cancelText}> Cancel </Text>
+                <Text style={styles.cancelText}> Cancel </Text>
                </TouchableOpacity>
              </View>
            )}
