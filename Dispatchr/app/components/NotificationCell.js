@@ -11,7 +11,7 @@ export default class NotificationCell extends Component {
             {this.props.notification.message}
           </Text>
           <Text style={styles.date}>
-            {moment(Date(this.props.notification.created_at)).format('[Received on] MMMM Do YYYY [at] h:mm a')}
+            {moment(this.props.notification.created_at).format('[Received on] MMMM Do YYYY [at] h:mm a')}
           </Text>
         </View>
       </TouchableHighlight>
