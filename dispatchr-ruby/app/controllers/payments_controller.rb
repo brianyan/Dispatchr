@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
       if (payment_params[:account_type] != "checking" && payment_params[:account_type] != "savings")
         @payment.account_type = "checking"
       else
-        @payment.acount_type = payment_params[:acount_type]
+        @payment.account_type = payment_params[:account_type]
       end
 
       #set dwolla generated params

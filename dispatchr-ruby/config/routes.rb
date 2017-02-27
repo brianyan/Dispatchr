@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   resources :items, :requests, :users, :request_items, :addresses, :notifications
   get '/users/:id', to: 'users#show'
   post '/payments/transfer/:src_id/:dest_id/:amount' => 'payments#transfer'
+  post '/requests/hero_complete/:id' => 'requests#hero_complete'
   resources :items, :requests, :users, :request_items, :addresses, :notifications, :payments
 end
