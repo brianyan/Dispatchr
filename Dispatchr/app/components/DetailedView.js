@@ -16,8 +16,13 @@ class DetailedView extends Component {
       username: this.props.request.user.username
     }
   }
-  _acceptRequest() {
-    this.props.acceptRequest(this.props.request);
+  _acceptRequest(username, status) {
+    if(status === 0){
+      this.props.acceptRequest(this.props.request);
+    } else {
+      Actions.PaymentView({username})
+    }
+    this.props.getRequests;
   }
   _alertCancel(){
     Alert.alert(
@@ -39,7 +44,7 @@ class DetailedView extends Component {
   }
   _getCompleteOrAccept(status){
     var text = "";
-    if(status === 1) {
+    if(status === 0) {
       text = "Accept";
     } else {
       text = "Complete";
@@ -59,7 +64,7 @@ class DetailedView extends Component {
             </ScrollView>
           <View style={styles.content}>
             <View style={styles.ButtonView}>
-              <TouchableOpacity underlayColor="transparent" style={{flex: 1, backgroundColor: '#4CAF50', justifyContent: 'center'}} onPress = {() => { this._acceptRequest() }}>
+              <TouchableOpacity underlayColor="transparent" style={{flex: 1, backgroundColor: '#4CAF50', justifyContent: 'center'}} onPress = {() => { this._acceptRequest(this.state.username, this.props.request.status) }}>
                 {this._getCompleteOrAccept(this.props.request.status)}
               </TouchableOpacity>
             </View>
@@ -73,7 +78,7 @@ class DetailedView extends Component {
            )}
            {renderIf(!(this.state.showCancelOption))(
              <View style={styles.ButtonView}>
-               <TouchableOpacity underlayColor="transparent" style={{flex: 1, justifyContent: 'center', backgroundColor: 'gray'}} onPress = {() => { this._alertHide() } }>
+               <TouchableOpacity underlayColor="transparent" style={{flex: 1, justifyContent: 'center', backgroundColor: 'gray'}} onPress = {() => { this._alertHide(this.state.username) } }>
                  <Text style={styles.hideText}> Hide </Text>
                </TouchableOpacity>
              </View>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 import NotificationCell from '../components/NotificationCell';
 import {
   View,
@@ -49,8 +50,8 @@ class NotificationsList extends Component {
  _renderRow(notification, sectionId, rowId, highlightRow) {
    const rowAction = () => {
     highlightRow(sectionId, rowId);
-     //Actions.DetailedView({request});
    };
+
    return (
      <NotificationCell notification={notification} onSelect={rowAction}/>
    );
