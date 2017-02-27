@@ -62,7 +62,7 @@ class DetailedView extends Component {
            )}
            {renderIf(!(this.state.showCancelOption))(
              <View style={styles.ButtonView}>
-               <TouchableOpacity underlayColor="transparent" style={{flex: 1, justifyContent: 'center', backgroundColor: 'gray'}} onPress = {() => { this._alertHide() } }>
+               <TouchableOpacity underlayColor="transparent" style={{flex: 1, justifyContent: 'center', backgroundColor: 'gray'}} onPress = {() => { this._alertHide(this.state.username) } }>
                  <Text style={styles.hideText}> Hide </Text>
                </TouchableOpacity>
              </View>
