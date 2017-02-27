@@ -44,7 +44,13 @@ export default class RequestListCell extends Component {
     users["alok"] = 1;
     users["brian"] = 2;
     users["spence"] = 4;
-    var uri = "https://capstone.cs.ucsb.edu/team_docs_17/pics/appfolio/" + users[user.toLowerCase()] + ".jpg";
+
+    if(user === "Drake"){
+      var uri = "https://s3.amazonaws.com/filepicker-images-rapgenius/aIFhO1NSQK1KcbpRtvgQ_drake.jpg"
+    } else {
+      var uri = "https://capstone.cs.ucsb.edu/team_docs_17/pics/appfolio/" + users[user.toLowerCase()] + ".jpg";
+    }
+
     return uri;
   }
   render() {
