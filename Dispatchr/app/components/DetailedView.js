@@ -13,6 +13,7 @@ class DetailedView extends Component {
     super(props);
     this.state = {
       showCancelOption: this.props.userInfo === this.props.request.user.username ? true : false,
+      username: this.props.request.user.username
     }
   }
   _acceptRequest() {
@@ -21,17 +22,18 @@ class DetailedView extends Component {
   _alertCancel(){
     Alert.alert(
       'Request Cancelled',
+      "Nooooooooo!",
       [
-        {text: 'OK', onPress: () => {Actions.pop()}},
+        { text: 'OK', onPress: () => { Actions.pop() } },
       ]
     )
   }
-  _alertHide() {
+  _alertHide(username) {
     Alert.alert(
       'Request Declined',
       "You'll get them next time!",
       [
-        {text: 'OK', onPress: () => {Actions.pop()}},
+        {text: 'OK', onPress: () => { Actions.PaymentView({username}) }},
       ]
     )
   }
