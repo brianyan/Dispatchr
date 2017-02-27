@@ -10,5 +10,8 @@ export const requests = createReducer([], {
   },
   [types.REQUEST_ACCEPTED](state, action) {
     return state;
+  },
+  [types.REQUEST_DELETED](state, action) {
+    return state;
   }
 });

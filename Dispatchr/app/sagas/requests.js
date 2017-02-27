@@ -51,9 +51,33 @@ function* requestAccepted(data) {
   )
 }
 
+function* requestDeleted(data) {
+  const currentUserId = yield call(AsyncStorage.getItem, 'currentUserId');
+  const authToken = yield call(AsyncStorage.getItem, 'authToken');
+
+  const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'Authorization': authToken
+  };
+
+  var url = BASE_URL + '/requests/' + data.request.id;
+  const response = yield call(fetch, url, { method: 'DELETE', headers: headers });
+  const json = yield call(response.json.bind(response));
+  Alert.alert(
+    response.status == 200 ? 'Request Deleted' : 'Unable to delete Request',
+    response.status == 200 ? 'Request Deleted' : 'Please try again later',
+    [
+      {text: 'OK', onPress: () => {Actions.pop()}},
+    ]
+  )
+  console.log(response.status)
+}
+
 export default function* root() {
   yield [
     takeLatest(types.REQUEST_REQUESTED, requestsRequested),
-    takeLatest(types.REQUEST_ACCEPTED, requestAccepted)
+    takeLatest(types.REQUEST_ACCEPTED, requestAccepted),
+    takeLatest(types.REQUEST_DELETED, requestDeleted)
   ];
 }
