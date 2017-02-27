@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Image, Text, TouchableHighlight, View, StyleSheet} from 'react-native';
+import { Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux'
 import FireBaseChat from '../containers/FireBaseChat'
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 var moment = require('moment');
 
 var options = {
     month: "short", day: "numeric", year: "numeric"
-    //day: "numeric", hour: "2-digit", minute: "2-digit", weekday: "long"
 };
 
 export default class DetailedViewRequestProfile extends Component {
@@ -44,13 +44,10 @@ export default class DetailedViewRequestProfile extends Component {
             </Text>
           </Text>
         </View>
-        <View style = {{flexDirection: 'row'}}>
-          <TouchableHighlight onPress={this._onChatPress}>
-            <Icon name="ios-chatboxes" marginLeft = {20} size={25} color="black" />
-          </TouchableHighlight>
-          <TouchableHighlight onPress={this._onPhonePress}>
-            <Icon name="ios-call" marginLeft = {20} size={25} color="black" />
-          </TouchableHighlight>
+        <View style = {styles.chatIconstyle}>
+          <TouchableOpacity underlayColor="transparent" onPress={this._onChatPress}>
+            <FontAwesomeIcon name="comment" size={25} color='#48BBEC'/>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -58,6 +55,14 @@ export default class DetailedViewRequestProfile extends Component {
 }
 
 const styles = StyleSheet.create({
+  chatIconstyle: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginRight: 10,
+    marginBottom: 5,
+  },
   bigblue: {
     color: 'blue',
     fontWeight: 'bold',
@@ -73,16 +78,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   viewContainer: {
-    borderBottomWidth: 1,
-    height: 75,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    backgroundColor: '#f0f8ff',
     flexDirection: 'row',
-    marginTop:10,
+    paddingVertical:10,
   },
   imageRound: {
     marginLeft: 20,
     marginRight: 20,
-    height: 50,
-    borderRadius: 25,
-    width: 50
+    height: 40,
+    borderRadius: 20,
+    width: 40
   }
 });

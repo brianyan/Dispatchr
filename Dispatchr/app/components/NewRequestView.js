@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableHighlight} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import ItemList from './ItemList'
 import { connect } from 'react-redux';
@@ -50,9 +50,9 @@ class NewRequestView extends Component {
             />
           </View>
           <ItemList onAddItem={this._itemAdded} />
-          <TouchableHighlight style={styles.publishRequestButton} onPress = {() =>  { this._newRequest() } }>
+          <TouchableOpacity underlayColor="transparent" style={styles.publishRequestButton} onPress = {() =>  { this._newRequest() } }>
             <Text style={styles.publishRequestButtonText}>Publish my Request</Text>
-          </TouchableHighlight>
+          </TouchableOpacity>
       </View>
     );
   }

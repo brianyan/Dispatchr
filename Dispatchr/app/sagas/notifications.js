@@ -2,9 +2,11 @@ import { takeLatest } from 'redux-saga';
 import { call, put } from 'redux-saga/effects';
 import * as types from '../actions/types';
 import BASE_URL from '../config/url';
+import { AsyncStorage } from 'react-native';
 
 function* getNotifications() {
-  url = BASE_URL + "/notifications/get/1"
+  const id = yield call(AsyncStorage.getItem, 'currentUserId');
+  url = BASE_URL + "/notifications/get/" + id
   yield call(console.log, url);
   const response = yield call(fetch, url, { method: 'GET'} );
   const json =  yield call(response.json.bind(response))
