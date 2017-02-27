@@ -11,22 +11,20 @@ export default class RequestListCell extends Component {
     relativeTime : {
         future: "in %s",
         past: "%s",
-        s:  "s",
-        m:  "m",
-        mm: "%dm",
-        h:  "1hr",
-        hh: "%dhrs",
-        d:  "1day",
-        dd: "%dd",
-        M:  "1m",
-        MM: "%dm",
-        y:  "1y",
-        yy: "%dy"
+        s:  " s",
+        m:  " m",
+        mm: "%d m",
+        h:  "1 hr",
+        hh: "%d hrs",
+        d:  "1 d",
+        dd: "%d d",
+        M:  "1 m",
+        MM: "%d m",
+        y:  "1 y",
+        yy: "%d y"
       }
     });
-    var dateFromNow = moment(this.props.request.expiration_date, "YYYYMMDD").fromNow(true)
-    return dateFromNow
-
+    var dateFromNow = moment(this.props.request.expiration_date, "YYYYMMDD").fromNow(true);
     return dateFromNow;
   }
   _assignBackgroundColor() {
@@ -38,11 +36,23 @@ export default class RequestListCell extends Component {
       borderRadius: 15,
     }
   }
+  _getImageForUser(user) {
+    var user_tag = 0;
+    users = {}
+    users["sal"] = 3;
+    users["jordan"] = 5;
+    users["alok"] = 1;
+    users["brian"] = 2;
+    users["spence"] = 4;
+    var uri = "https://capstone.cs.ucsb.edu/team_docs_17/pics/appfolio/" + users[user.toLowerCase()] + ".jpg";
+    console.log(uri);
+    return uri;
+  }
   render() {
     return (
       <TouchableOpacity onPress={this.props.onSelect} >
         <View style={styles.container}>
-          <Image style={styles.imageRound} source = {{uri: 'https://capstone.cs.ucsb.edu/team_docs_17/pics/appfolio/2.jpg'}}/>
+          <Image style={styles.imageRound} source = {{ uri: this._getImageForUser(this.props.request.user.username)}}/>
           <View style={{flex: 5}}>
             <Text style={{fontWeight: 'bold'}}>
               {this.props.request.user.name} wants
@@ -51,14 +61,21 @@ export default class RequestListCell extends Component {
               return <Text>{requestItem.item.name}</Text>
             })}
           </View>
-
-          <View style={styles.colorCodingBox}>
-            <View style={styles.dateFormat}>
-              <Text>
-              {this._getDateFromNow()}
-              </Text>
+          <View style={styles.flexColumn}>
+            <View style={styles.dateTopFlexBox}>
+              <View style={styles.dateFormat}>
+                <Text style={styles.dateText}>
+                expires in
+                </Text>
+              </View>
             </View>
-
+            <View style={styles.dateBotFlexBox}>
+              <View style={styles.dateFormat}>
+                <Text style={styles.dateText}>
+                {this._getDateFromNow()}
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -67,16 +84,43 @@ export default class RequestListCell extends Component {
 }
 
 const styles = StyleSheet.create({
-  colorCodingBox: {
+  flexColumn: {
+    // backgroundColor: 'red',
+    flexDirection: 'column',
     flex: 1,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
+    alignSelf: 'flex-start',
+    alignItems: 'flex-start',
+    // justifyContent: 'flex-start',
+  },
+  dateText: {
+    fontSize: 9,
+    fontFamily: 'Helvetica',
+    fontWeight: "300",
+
+  },
+  dateTopFlexBox: {
+    paddingVertical: 0,
+    marginTop: 0,
+    flex: 1,
+    // backgroundColor: "blue",
+    alignItems: 'flex-start',
+    alignSelf: 'flex-end',
+    // justifyContent: 'flex-end',
+  },
+  dateBotFlexBox: {
+    paddingVertical: 0,
+    marginTop: 0,
+    flex: 15,
+    // backgroundColor: "blue",
+    alignItems: 'flex-start',
+    alignSelf: 'flex-end',
+    // justifyContent: 'flex-end',
   },
   dateFormat: {
     paddingHorizontal: 5,
-    fontSize: 8,
-    fontFamily: 'Helvetica Neue',
-    fontWeight: "200"
+    fontSize: 9,
+    fontFamily: 'Helvetica',
+    fontWeight: "400",
   },
   container: {
     flexDirection: 'row',

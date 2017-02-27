@@ -32,7 +32,7 @@ export default class DetailedViewCell extends Component {
               <Text> {this.props.requestItem.quantity_description} </Text>
             </View>
             <View style={styles.itemPrice}>
-              <Text style={styles.itemPriceText}>${this.props.requestItem.max_price} </Text>
+              <Text style={styles.itemPriceText}>${this.props.requestItem.max_price}0 </Text>
             </View>
         </View>
     );

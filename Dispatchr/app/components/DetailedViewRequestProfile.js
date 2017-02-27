@@ -27,10 +27,21 @@ export default class DetailedViewRequestProfile extends Component {
   _onPhonePress(){
   }
 
+  _getImageForUser(user) {
+    var user_tag = 0;
+    users = {}
+    users["sal"] = 3;
+    users["jordan"] = 5;
+    users["alok"] = 1;
+    users["brian"] = 2;
+    users["spence"] = 4;
+    var uri = "https://capstone.cs.ucsb.edu/team_docs_17/pics/appfolio/" + users[user.toLowerCase()] + ".jpg";
+    return uri;
+  }
   render() {
     return (
       <View style={styles.viewContainer}>
-        <Image style={styles.imageRound} source = {{uri: 'https://capstone.cs.ucsb.edu/team_docs_17/pics/appfolio/2.jpg'}}/>
+        <Image style={styles.imageRound} source = {{ uri: this._getImageForUser(this.props.request.user.username)}}/>
         <View style= {{flexDirection: 'column'}}>
           <Text style = {styles.boldTextAttribute}>
             {this.props.request.user.name}
