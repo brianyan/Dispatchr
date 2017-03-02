@@ -1,7 +1,7 @@
 # config/initializers/dwolla.rb
 require 'dwolla_v2'
 
-if ActiveRecord::Base.connection.table_exists? 'token_data'
+if ActiveRecord::Base.connection.data_source_exists? 'token_data'
   $dwolla = DwollaV2::Client.new(key: "JeXCrq3oN7ELpIWyAnB7TQqvfZWUU8hnOkLRvERr8B76vqJqsr", secret: "yEp8Uu0fOdBLbIPfulBBBZ792jxDJFQae2oWewaT2Ro5W6rist") do |config|
     config.environment = :sandbox
     config.on_grant do |token|
@@ -12,7 +12,7 @@ end
 
 
 # create an application token if one doesn't already exist
-if ActiveRecord::Base.connection.table_exists? 'token_data'
+if ActiveRecord::Base.connection.data_source_exists? 'token_data'
   begin
     TokenData.fresh_token_by! account_id: nil
   rescue ActiveRecord::RecordNotFound => e
@@ -21,7 +21,7 @@ if ActiveRecord::Base.connection.table_exists? 'token_data'
 end
 
 # create an account token if one doesn't already exist
-if ActiveRecord::Base.connection.table_exists? 'token_data'
+if ActiveRecord::Base.connection.data_source_exists? 'token_data'
   begin
     TokenData.fresh_token_by! account_id: "4661e311-a4ff-46ee-8e51-baf725f67164"
   rescue ActiveRecord::RecordNotFound => e
