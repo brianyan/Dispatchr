@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import renderIf from '../lib/renderif'
 import { Actions } from 'react-native-router-flux'
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import TextField from 'react-native-md-textinput';
 import Button from 'apsl-react-native-button';
 import RequestListCell from '../components/RequestListCell';
@@ -95,7 +95,16 @@ class RequestsList extends Component {
         />
         )}
 
-        {this.state.showNewRequestButton ? <ActionButton buttonColor="#0288D1" onPress={() => Actions.NewRequestView() } /> : null}
+        {this.state.showNewRequestButton ?
+          <ActionButton buttonColor="#0288D1" >
+            <ActionButton.Item buttonColor='#9b59b6' title="New Request" onPress={() => Actions.NewRequestView()}>
+              <Icon name="md-create" style={styles.actionButtonIcon}/>
+            </ActionButton.Item>
+            <ActionButton.Item buttonColor='#3498db' title="Find Nearby Requests" onPress={() => {console.log("git")}}>
+              <Icon name="md-navigate" style={styles.actionButtonIcon} />
+            </ActionButton.Item>
+          </ActionButton>
+          : null}
     </View>
     );
   }
