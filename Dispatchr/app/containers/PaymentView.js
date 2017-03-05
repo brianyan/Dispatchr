@@ -31,7 +31,7 @@ class PaymentView extends Component {
       'Payment Request Sent!',
       "WOOO!",
       [
-        {text: 'OK', onPress: () => {Actions.pop(); Actions.pop()}},
+        {text: 'OK', onPress: () => {Actions.RateUserView({user: this.props.user});}},
       ]
     )
   }
@@ -41,7 +41,7 @@ class PaymentView extends Component {
       <View style = {{flex: 1, padding: 10}}>
         <View style={{flex: 1, flexDirection: 'row'}} >
           <View style={{flex: 1, padding: 5, backgroundColor: 'white', justifyContent: 'center'}}>
-            <Text style={styles.usernameText}> {this.props.username} </Text>
+            <Text style={styles.usernameText}> {this.props.user.username} </Text>
           </View>
           <View style={{flex: 1, padding: 5, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center'}}>
             <TextInput

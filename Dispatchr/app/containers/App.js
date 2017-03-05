@@ -12,7 +12,8 @@ import PaymentView from './PaymentView'
 import {StyleSheet, StatusBar} from 'react-native';
 import ProfileView from './ProfileView';
 import { AsyncStorage } from 'react-native';
-
+import Recommendations from './Recommendations';
+import RateUserView from './RateUserView';
 /* Stylesheet */
 const getSceneStyle = (props, computedProps) => {
   const style = {
@@ -31,39 +32,14 @@ const getSceneStyle = (props, computedProps) => {
 
 
 class App extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      logged: false,
-      loading: true,
-    };
-  };
-
-  componentWillMount() {
-    AsyncStorage.getItem('authToken')
-    .then( (value) =>{
-        if (value != null) {
-          this.setState({
-            logged: true,
-            loading: false,
-          });
-        } else {
-          this.setState({
-            loading: false,
-          })
-        }
-      }
-    );
-  };
-
   render() {
     StatusBar.setBarStyle('light-content', true);
     return (
       <Router navigationBarStyle = {styles.navBar} titleStyle = {styles.title} getSceneStyle={getSceneStyle} barButtonIconStyle = {styles.backButtonStyle}>
         <Scene key="root">
-          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE} initial={this.state.logged} />
+          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE} />
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
-          <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' initial={!this.state.logged}/>
+          <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' initial={true} />
           <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
           <Scene key = {"NewItemForm"} component = {NewItemForm} title = 'Add Item' />
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />
@@ -71,6 +47,8 @@ class App extends Component {
           <Scene key = {"NotificationsList"} component = {NotificationsList} title = 'Notifications' />
           <Scene key = {"PaymentView"} component = {PaymentView} title = 'Payment' />
           <Scene key = {"ProfileView"} component = {ProfileView} title = 'Profile' />
+          <Scene key = {"Recommendations"} component = {Recommendations} title = 'Recommendations' />
+          <Scene key = {"RateUserView"} component = {RateUserView} title = 'Rate' />
         </Scene>
       </Router>
     );

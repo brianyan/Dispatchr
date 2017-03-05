@@ -30,10 +30,10 @@
 		4F0B66285A864CBE894B63CF /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A918DC7FF66C4EB49B0F20B2 /* EvilIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6DF5BAE4A10041E5BE9C7D28 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC53873B5AE845CB81ACD30E /* FontAwesome.ttf */; };
-		7A93E250EEA047C38E1450BD /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D312727190341D9B72B5CB6 /* libAirMaps.a */; };
 		7C1C2CE29E7A4F1AA5CBA662 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB6FA5108370486D81D68E63 /* Entypo.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8BB494E21E56E90E00AA96B1 /* libRCTAutoComplete.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BB494E11E56E8D700AA96B1 /* libRCTAutoComplete.a */; };
+		8BED56B81E6A7E9D004E6FCA /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFB82311E297BDE003435B2 /* libAirMaps.a */; };
 		8EF74D174DFA4E3A9767143F /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8C9948671E84D009ADA2603 /* SimpleLineIcons.ttf */; };
 		96C48893E310416BA90BA320 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 61E107933EDF440F823E086F /* Foundation.ttf */; };
 		B02209C097564BC3AAAB6C4C /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CADCA2D32D4F0A98612E73 /* libRNFetchBlob.a */; };
@@ -291,7 +291,6 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		28FBBC84CCF64EE192CC8532 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		29BEAC6B4BD14150A8EB7E5D /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundTimer.a; sourceTree = "<group>"; };
-		2D312727190341D9B72B5CB6 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		30A58FC5DE944FB2B5E8BEFB /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		3DA9FCC5AA1845A69CC46ED4 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		50CADCA2D32D4F0A98612E73 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
@@ -301,6 +300,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8383EBC74F684B9893DEA408 /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundTimer.xcodeproj; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; };
+		8B5764A71E6A62E3003617BD /* Dispatchr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Dispatchr.entitlements; path = Dispatchr/Dispatchr.entitlements; sourceTree = "<group>"; };
 		8BB494DC1E56E8D700AA96B1 /* RCTAutoComplete.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAutoComplete.xcodeproj; path = "../node_modules/react-native-autocomplete/RCTAutoComplete.xcodeproj"; sourceTree = "<group>"; };
 		969E852C1F244079AF2708C6 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		9F13498D61C747FF8A44D542 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -328,6 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BED56B81E6A7E9D004E6FCA /* libAirMaps.a in Frameworks */,
 				8BB494E21E56E90E00AA96B1 /* libRCTAutoComplete.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -340,7 +341,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				7A93E250EEA047C38E1450BD /* libAirMaps.a in Frameworks */,
 				0B3EB9B3E4C842A6AD42CBF6 /* libRNVectorIcons.a in Frameworks */,
 				41724A90FAD64E85A1D2E197 /* libRNBackgroundTimer.a in Frameworks */,
 				1644EA6F272D4324B77C3612 /* libRNImagePicker.a in Frameworks */,
@@ -431,6 +431,7 @@
 		13B07FAE1A68108700A75B9A /* Dispatchr */ = {
 			isa = PBXGroup;
 			children = (
+				8B5764A71E6A62E3003617BD /* Dispatchr.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -645,11 +646,20 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = 397XK4DWTQ;
+						DevelopmentTeam = 2B6C4R464U;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 397XK4DWTQ;
+						DevelopmentTeam = 2B6C4R464U;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Siri = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -1053,7 +1063,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 397XK4DWTQ;
+				DEVELOPMENT_TEAM = 2B6C4R464U;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1078,7 +1088,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 397XK4DWTQ;
+				DEVELOPMENT_TEAM = 2B6C4R464U;
 				INFOPLIST_FILE = DispatchrTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1098,9 +1108,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 397XK4DWTQ;
+				DEVELOPMENT_TEAM = 2B6C4R464U;
 				INFOPLIST_FILE = Dispatchr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1108,6 +1119,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.brianyan.Dispatchr;
 				PRODUCT_NAME = Dispatchr;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1117,8 +1129,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 397XK4DWTQ;
+				DEVELOPMENT_TEAM = 2B6C4R464U;
 				INFOPLIST_FILE = Dispatchr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1126,6 +1139,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.brianyan.Dispatchr;
 				PRODUCT_NAME = Dispatchr;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1150,6 +1164,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 2B6C4R464U;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1191,6 +1206,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 2B6C4R464U;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
