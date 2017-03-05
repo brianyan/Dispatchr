@@ -36,7 +36,7 @@ class RateUserView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Submit a review for  </Text>
+        <Text style={styles.header}>Submit a review for { this.props.user.username } </Text>
         <StarRating
           disabled={false}
           maxStars={5}
