@@ -6,6 +6,7 @@ import userAccounts from './userAccounts'
 import notifications from './notifications';
 import userInfo from './userInfo';
 import users from './users';
+import recommendations from './recommendations';
 import rating from './rating';
 
 export default function* root() {
@@ -17,6 +18,7 @@ export default function* root() {
     fork(notifications),
     fork(userInfo),
     fork(users),
+    fork(recommendations),
     fork(rating)
   ]
 }

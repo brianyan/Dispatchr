@@ -5,6 +5,7 @@ import * as userActions from './userAccounts'
 import * as notificationActions from './notifications'
 import * as userInfoActions from './userInfo'
 import * as usersActions from './users'
+import * as recommendationActions from './recommendations'
 import * as ratingActions from './rating';
 
 /* This mergers all the actions we might have in our application and returning
@@ -18,5 +19,6 @@ export const ActionCreators = Object.assign({},
   notificationActions,
   userInfoActions,
   usersActions,
+  recommendationActions,
   ratingActions
 )

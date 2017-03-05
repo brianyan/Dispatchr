@@ -11,8 +11,9 @@ import FireBaseChat from './FireBaseChat'
 import PaymentView from './PaymentView'
 import {StyleSheet, StatusBar} from 'react-native';
 import ProfileView from './ProfileView';
+import { AsyncStorage } from 'react-native';
+import Recommendations from './Recommendations';
 import RateUserView from './RateUserView';
-
 /* Stylesheet */
 const getSceneStyle = (props, computedProps) => {
   const style = {
@@ -46,6 +47,7 @@ class App extends Component {
           <Scene key = {"NotificationsList"} component = {NotificationsList} title = 'Notifications' />
           <Scene key = {"PaymentView"} component = {PaymentView} title = 'Payment' />
           <Scene key = {"ProfileView"} component = {ProfileView} title = 'Profile' />
+          <Scene key = {"Recommendations"} component = {Recommendations} title = 'Recommendations' />
           <Scene key = {"RateUserView"} component = {RateUserView} title = 'Rate' />
         </Scene>
       </Router>
