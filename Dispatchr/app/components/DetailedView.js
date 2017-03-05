@@ -20,7 +20,7 @@ class DetailedView extends Component {
     if(status === 0){
       this.props.acceptRequest(this.props.request);
     } else {
-      Actions.PaymentView({username})
+      Actions.PaymentView({user: this.props.request.user})
     }
     this.props.getRequests;
   }

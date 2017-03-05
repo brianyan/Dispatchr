@@ -25,6 +25,7 @@
     "react-native-md-textinput": "^2.0.4",
     "react-native-popup-dialog": "^0.3.14",
     "react-native-router-flux": "^3.36.0",
+    "react-native-star-rating": "^1.0.6",
     "react-native-textinput-effects": "^0.2.0",
     "react-native-vector-icons": "^4.0.0",
     "react-redux": "^4.4.5",

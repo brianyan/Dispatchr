@@ -7,6 +7,7 @@ import notifications from './notifications';
 import userInfo from './userInfo';
 import users from './users';
 import recommendations from './recommendations';
+import rating from './rating';
 
 export default function* root() {
   yield [
@@ -18,5 +19,6 @@ export default function* root() {
     fork(userInfo),
     fork(users),
     fork(recommendations),
+    fork(rating)
   ]
 }
