@@ -61,9 +61,9 @@ class App extends Component {
     return (
       <Router navigationBarStyle = {styles.navBar} titleStyle = {styles.title} getSceneStyle={getSceneStyle} barButtonIconStyle = {styles.backButtonStyle}>
         <Scene key="root">
-          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE} />
+          <Scene key = {"RequestsList"} component={RequestsList} title='Requests' type={ActionConst.REPLACE} initial={this.state.logged} />
           <Scene key = {"DetailedView"} component = {DetailedView} title = 'Detailed View For Request' />
-          <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' />
+          <Scene key = {"LoginView"} component = {LoginView} hideNavBar title = 'User Login' initial={!this.state.logged}/>
           <Scene key = {"NewRequestView"} component = {NewRequestView} title = 'New Request' />
           <Scene key = {"NewItemForm"} component = {NewItemForm} title = 'Add Item' />
           <Scene key = {"EditItemForm"} component = {EditItemForm} title = 'Edit Item' />

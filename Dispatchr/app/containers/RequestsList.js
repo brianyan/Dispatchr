@@ -13,6 +13,7 @@ import ListFilterButton from '../components/ListFilterButton';
 import { firebaseApp } from '../../firebaseWrapper.js';
 import { AsyncStorage } from 'react-native';
 
+
 import {
   View,
   Text,
@@ -100,7 +101,7 @@ class RequestsList extends Component {
             <ActionButton.Item buttonColor='#9b59b6' title="New Request" onPress={() => Actions.NewRequestView()}>
               <Icon name="md-create" style={styles.actionButtonIcon}/>
             </ActionButton.Item>
-            <ActionButton.Item buttonColor='#3498db' title="Find Nearby Requests" onPress={() => {console.log("git")}}>
+            <ActionButton.Item buttonColor='#3498db' title="Find Nearby Requests" onPress={() => Actions.Recommendations()}>
               <Icon name="md-navigate" style={styles.actionButtonIcon} />
             </ActionButton.Item>
           </ActionButton>
