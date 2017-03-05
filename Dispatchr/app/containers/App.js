@@ -71,7 +71,7 @@ class App extends Component {
           <Scene key = {"NotificationsList"} component = {NotificationsList} title = 'Notifications' />
           <Scene key = {"PaymentView"} component = {PaymentView} title = 'Payment' />
           <Scene key = {"ProfileView"} component = {ProfileView} title = 'Profile' />
-          <Scene key = {"Recommendations"} component = {Recommendations} title = 'Recommendations' initial={true} />
+          <Scene key = {"Recommendations"} component = {Recommendations} title = 'Recommendations' />
         </Scene>
       </Router>
     );
