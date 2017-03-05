@@ -60,7 +60,7 @@ class PaymentView extends Component {
         </View>
           <View style={{flex: 1, backgroundColor: 'steelblue', justifyContent: 'center', alignItems: 'center'}} >
             <TouchableHighlight style={styles.sendPaymentButton} onPress = {() =>  { this._alertRequestPayment() } }>
-              <Text style={styles.sendPaymentButtonText}>Make Payment</Text>
+              <Text style={styles.sendPaymentButtonText}>Request Payment</Text>
             </TouchableHighlight>
           </View>
       </View>

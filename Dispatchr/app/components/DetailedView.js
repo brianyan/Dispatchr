@@ -24,7 +24,7 @@ class DetailedView extends Component {
     }
     this.props.getRequests;
   }
-  _alertCancel(){
+  _alertCancel(username, status){
     Alert.alert(
       'Request Cancelled',
       "Nooooooooo!",
@@ -32,19 +32,26 @@ class DetailedView extends Component {
         { text: 'OK', onPress: () => { Actions.pop() } },
       ]
     )
+    this.props.getRequests;
   }
   _alertHide(username) {
-    Alert.alert(
-      'Request Declined',
-      "You'll get them next time!",
-      [
-        {text: 'OK', onPress: () => { Actions.PaymentView({username}) }},
-      ]
-    )
+    // Alert.alert(
+    //   'Request Declined',
+    //   "You'll get them next time!",
+    //   [
+    //     // {text: 'OK', onPress: () => { Actions.PaymentView({username}) }},
+    //     {text: 'OK', onPress: () => { Actions.pop() } },
+    //   ]
+    // )
+    this.props.deleteRequest(this.props.request);
+    this.props.getRequests;
   }
   _getCompleteOrAccept(status){
     var text = "";
-    if(status === 0) {
+    if (this.props.request.user.username === "Drake") {
+      text = "Edit";
+    }
+    else if(status === 0) {
       text = "Accept";
     } else {
       text = "Complete";
@@ -145,6 +152,7 @@ function mapStateToProps(state) {
   return {
     acceptRequest: state.acceptRequest,
     userInfo: state.userInfo,
+    deleteRequest: state.deleteRequest,
   }
 }
 

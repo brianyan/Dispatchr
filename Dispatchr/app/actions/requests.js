@@ -13,3 +13,10 @@ export function acceptRequest(request) {
     request
   };
 }
+
+export function deleteRequest(request) {
+  return {
+    type: types.REQUEST_DELETED,
+    request
+  };
+}
